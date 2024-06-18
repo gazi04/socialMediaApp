@@ -13,11 +13,17 @@ class UserController {
     public function register($data) {
         // in the return statement in the create function you can decomment the line below and use a hashed password to saved it in the database
         // $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+
         try{
             return $this->userModel->create($data['username'], $data['email'], $data["password"]);
         }
-        catch(Exception){
-            // throw new Error("test");
+        catch(PDOException $ex){
+            if ($ex->getCode() == 23000) {
+                echo 'Error: The username is already taken. Please choose a different username.';
+            } else {
+                error_log('PDOException: ' . $ex->getMessage());
+                echo 'Database error occurred. Please try again later.';
+            }
             return false;
         }
     }
