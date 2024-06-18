@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . "/src/Database.php";
+require_once "../../Database.php";
 
 class User {
     private $db;

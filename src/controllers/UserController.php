@@ -1,5 +1,5 @@
 <?php
-// require_once '../../config.php';
+require_once '../../config.php';
 require_once BASE_PATH . '/src/models/User.php';
 require_once BASE_PATH . '/src/Database.php';
 
