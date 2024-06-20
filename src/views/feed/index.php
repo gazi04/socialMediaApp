@@ -18,6 +18,7 @@
     <nav>
         <a href="../profile/index.php">Profile</a>
         <a href="../auth/logout.php">Logout</a>
+        <a href="../posts/create.php">Create Post</a>
     </nav>
 </body>
 </html>
