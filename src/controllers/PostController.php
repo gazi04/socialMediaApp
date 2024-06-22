@@ -9,13 +9,46 @@ class PostController {
        $this->postModel = new Post(); 
     }
 
-    public function createPost($data){
-        //TODO: validate the $data, by checking the image size and more
-        try {
-            $this->postModel->create($data["userId"], $data["image"], $data["caption"]);
-        } catch (Exception $ex) {
-            error_log("Error in the proccess of inserting the post in the database");
+    // public function createPost($userId, $image, $caption) {
+    //    // Check file size
+    //     if ($image["size"] > 500000) {
+    //         echo "Sorry, your file is too large.";
+    //         return false;
+    //     }
+
+    //     // Convert image to binary data
+    //     $imageData = file_get_contents($image["tmp_name"]);
+
+    //     // Save post to the database
+    //     if ($this->postModel->create($userId, $imageData, $caption)) {
+    //         echo "The file ". htmlspecialchars(basename($image["name"])) . " has been uploaded.";
+    //         return true;
+    //     } else {
+    //         echo "Sorry, there was an error saving your post.";
+    //     }
+
+    //     return false; 
+    // }
+
+    public function createPost($userId, $image, $caption) {
+        // Check file size
+        if ($image["size"] > 500000) {
+            echo "Sorry, your file is too large.";
+            return false;
         }
+
+        // Convert image to binary data
+        $imageData = file_get_contents($image["tmp_name"]);
+
+        // Save post to the database
+        if ($this->postModel->create($userId, $imageData, $caption)) {
+            echo "The file " . htmlspecialchars(basename($image["name"])) . " has been uploaded.";
+            return true;
+        } else {
+            echo "Sorry, there was an error saving your post.";
+        }
+
+        return false;
     }
 
     public function deletePost($postId){

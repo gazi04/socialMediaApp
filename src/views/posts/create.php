@@ -3,6 +3,8 @@
     require BASE_PATH . "/src/controllers/PostController.php";
     require_once "../auth/check.php";
 
+    $statusMessage = "";
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $postController = new PostController();
         $userId = $_SESSION["userId"];
