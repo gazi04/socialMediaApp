@@ -17,6 +17,7 @@
 
     <nav>
         <a href="../feed/index.php">Feed</a>
+        <a href="profileManagement.php">Edit Profile</a>
         <a href="../auth/logout.php">Logout</a>
     </nav>
 </body>

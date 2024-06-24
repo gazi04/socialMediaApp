@@ -1,14 +1,14 @@
 <?php
 require_once "../../Database.php";
 
-class User {
+class User{
     private $db;
 
-    public function __construct() {
+    public function __construct(){
         $this->db = new Database();
     }
 
-    public function create($username, $email, $password) {
+    public function create($username, $email, $password){
         $this->db->query('INSERT INTO users (username, email, password) VALUES (:username, :email, :password)');
         $this->db->bind(':username', $username);
         $this->db->bind(':email', $email);
@@ -16,9 +16,15 @@ class User {
         return $this->db->execute();
     }
 
-    public function findByUsername($username) {
+    public function findByUsername($username){
         $this->db->query('SELECT * FROM users WHERE username = :username');
         $this->db->bind(':username', $username);
+        return $this->db->single();
+    }
+
+    public function getBioByUserId($userId){
+        $this->db->query('SELECT `Bio` FROM `users` WHERE `UserID` = :userId;');
+        $this->db->bind(":userId", $userId);
         return $this->db->single();
     }
 }

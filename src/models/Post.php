@@ -1,14 +1,14 @@
 <?php
 require_once "../../Database.php";
 
-class Post {
+class Post{
     private $db;
 
     public function __construct(){
         $this->db = new Database(); 
     }
 
-    public function create($userId, $imageData, $caption) {
+    public function create($userId, $imageData, $caption){
         $this->db->query('INSERT INTO posts (UserID, Post, Caption) VALUES (:user_id, :post, :caption)');
         $this->db->bind(':user_id', $userId);
         $this->db->bind(':post', $imageData, PDO::PARAM_LOB);

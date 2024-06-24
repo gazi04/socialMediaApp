@@ -3,14 +3,14 @@ require_once '../../config.php';
 require_once BASE_PATH . '/src/models/User.php';
 require_once BASE_PATH . '/src/Database.php';
 
-class UserController {
+class UserController{
     private $userModel;
 
-    public function __construct() {
+    public function __construct(){
         $this->userModel = new User();
     }
 
-    public function register($data) {
+    public function register($data){
         // in the return statement in the create function you can decomment the line below and use a hashed password to saved it in the database
         // $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
@@ -28,7 +28,7 @@ class UserController {
         }
     }
 
-    public function login($username, $password) {
+    public function login($username, $password){
         $user = $this->userModel->findByUsername($username);
         if ($user && ($password == $user["Password"])) {
             session_start();
@@ -39,16 +39,30 @@ class UserController {
         return false;
     }
 
-    public function logout() {
+    public function logout(){
         session_start();
         session_unset();
         session_destroy();
     }
 
+    // TODO: rename the functions correctly
     public function userExists($username){
         $user = $this->userModel->findByUsername($username);
         if($user){return true;}
         return false;
+    }
+    
+    public function editProfile($userId, $profileImage, $newUsername, $bio){
+
+    }
+
+    public function getUserBio($userId) {
+        try {
+            return $this->userModel->getBioByUserId($userId);
+        } catch (PDOException $ex) {
+            error_log("Error occurred while fetching the user bio.");
+            return false;
+        }
     }
 }
 ?>

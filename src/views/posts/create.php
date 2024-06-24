@@ -3,16 +3,14 @@
     require BASE_PATH . "/src/controllers/PostController.php";
     require_once "../auth/check.php";
 
-    $statusMessage = "";
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
         $postController = new PostController();
         $userId = $_SESSION["userId"];
         $image = $_FILES["image"];
         $caption = $_POST["caption"];
-        if ($postController->createPost($userId, $image, $caption)) {
+        if($postController->createPost($userId, $image, $caption)){
             header("Location: ../feed/index.php");
-        } else {
+        } else{
             echo "Post creation failed.";
         }
     }
