@@ -4,7 +4,7 @@
     require_once "../auth/check.php";
 
     $userController = new UserController();
-    $userBio = $userController->getUserBio($_SESSION["userId"]);
+    $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $userId = $_SESSION["userId"];
@@ -12,7 +12,7 @@
         $newUsername = $_POST["newUsername"];
         $bio = $_POST["bio"];
 
-        if($userController->editProfile($userId, $profileImage, $newUsername, $bio)){
+        if($userController->updateProfile($userId, $profileImage, $newUsername, $bio)){
             header("Location: profile.php");
         } else{
             echo "Editing profile failed";
@@ -33,11 +33,11 @@
         <br>
 
         <label>Change you Username</label>
-        <input type="text" name="newUsername" required>
+        <input type="text" name="newUsername" value="<?php echo $userProfileData["Username"]?>" required>
         <br>
        
         <label>Change Bio</label>
-        <textarea name="bio" required><?php echo $userBio["Bio"]?></textarea>
+        <textarea name="bio" required><?php echo $userProfileData["Bio"]?></textarea>
         <br>
 
         <button type="submit">Change Profile</button>

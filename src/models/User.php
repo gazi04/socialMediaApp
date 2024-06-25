@@ -9,23 +9,46 @@ class User{
     }
 
     public function create($username, $email, $password){
-        $this->db->query('INSERT INTO users (username, email, password) VALUES (:username, :email, :password)');
-        $this->db->bind(':username', $username);
-        $this->db->bind(':email', $email);
-        $this->db->bind(':password', $password);
+        $this->db->query("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+        $this->db->bind(":username", $username);
+        $this->db->bind(":email", $email);
+        $this->db->bind(":password", $password);
         return $this->db->execute();
     }
 
     public function findByUsername($username){
-        $this->db->query('SELECT * FROM users WHERE username = :username');
-        $this->db->bind(':username', $username);
+        $this->db->query("SELECT * FROM users WHERE username = :username");
+        $this->db->bind(":username", $username);
         return $this->db->single();
     }
 
-    public function getBioByUserId($userId){
-        $this->db->query('SELECT `Bio` FROM `users` WHERE `UserID` = :userId;');
-        $this->db->bind(":userId", $userId);
+    public function getProfileDataFromUser($userid){
+        $this->db->query("SELECT `Username`, `Bio` FROM `users` WHERE `UserID` = :userId;");
+        $this->db->bind(":userId", $userid);
         return $this->db->single();
+    }
+
+    public function doesUserExists($username){
+        $this->db->query("SELECT COUNT(*) as count FROM users WHERE username = :username");
+        $this->db->bind(":username", $username);
+        $result = $this->db->single();
+        return $result["count"] > 0;
+    }
+
+    public function update($userId, $username, $imageData = null, $bio){
+        if($imageData){
+            $this->db->query("UPDATE `users` SET `Username`=':username',`imageData`=':imageData',`Bio`=':bio' WHERE `UserID` == :userId");
+            $this->db->bind(":imageData", $imageData);
+        }else {
+            $this->db->query("UPDATE `users` SET `Username`=':username',`Bio`=':bio' WHERE `UserID` == :userId");
+        }
+
+        $this->db->bind(":userId", $userId);
+        $this->db->bind(":username", $username);
+        $this->db->bind(":bio", $bio);
+
+        return $this->db->execute();
+
     }
 }
 ?>

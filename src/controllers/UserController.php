@@ -52,16 +52,32 @@ class UserController{
         return false;
     }
     
-    public function editProfile($userId, $profileImage, $newUsername, $bio){
+    public function updateProfile($userId, $profileImage = null, $newUsername, $bio){
+        if($profileImage == null){
+
+        }
+        if($profileImage["size"] > 500000){
+            echo "Your profile image is too large";
+            return;
+        }    
+
 
     }
 
-    public function getUserBio($userId) {
-        try {
+    public function getUserBio($userId){
+        try{
             return $this->userModel->getBioByUserId($userId);
-        } catch (PDOException $ex) {
+        } catch (PDOException $ex){
             error_log("Error occurred while fetching the user bio.");
             return false;
+        }
+    }
+
+    public function getProfileData($userId){
+        try{
+            return $this->userModel->getProfileDataFromUser($userId);
+        } catch (PDOException $ex){
+            error_log("Error occurred while fetching the profile data from the user.");
         }
     }
 }
