@@ -8,7 +8,7 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $userId = $_SESSION["userId"];
-        $profileImage = $_POST["profileImage"];
+        $profileImage = !isset($_POST["profileImage"])? null: $_POST["profileImage"];
         $newUsername = $_POST["newUsername"];
         $bio = $_POST["bio"];
 

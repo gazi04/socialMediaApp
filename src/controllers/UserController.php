@@ -45,32 +45,24 @@ class UserController{
         session_destroy();
     }
 
-    // TODO: rename the functions correctly
-    public function userExists($username){
+    public function doesUsernameExists($username){
         $user = $this->userModel->findByUsername($username);
         if($user){return true;}
         return false;
     }
     
     public function updateProfile($userId, $profileImage = null, $newUsername, $bio){
-        if($profileImage == null){
+        $imageData = null;
+        if($profileImage && $profileImage["tmp_name"]){
+            $imageData = file_get_contents($profileImage["tmp_name"]);
 
+            if($profileImage["size"] > 500000){
+                echo "Your profile image is too large";
+                return;
+            }       
         }
-        if($profileImage["size"] > 500000){
-            echo "Your profile image is too large";
-            return;
-        }    
 
-
-    }
-
-    public function getUserBio($userId){
-        try{
-            return $this->userModel->getBioByUserId($userId);
-        } catch (PDOException $ex){
-            error_log("Error occurred while fetching the user bio.");
-            return false;
-        }
+        return $this->userModel->update($userId, $newUsername, $imageData, $bio);
     }
 
     public function getProfileData($userId){
