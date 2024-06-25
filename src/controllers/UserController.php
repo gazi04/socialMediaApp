@@ -62,7 +62,13 @@ class UserController{
             }       
         }
 
-        return $this->userModel->update($userId, $newUsername, $imageData, $bio);
+        $result = $this->userModel->update($userId, $newUsername, $imageData, $bio);
+        
+        if($result){
+            $_SESSION["username"] = $newUsername;
+        }
+
+        return $result;
     }
 
     public function getProfileData($userId){

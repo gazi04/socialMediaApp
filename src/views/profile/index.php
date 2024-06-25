@@ -1,3 +1,12 @@
+<?php
+    include_once "../../config.php";
+    include_once BASE_PATH . "/src/controllers/UserController.php";
+    include_once "../auth/check.php";
+
+    $userController = new UserController();
+    $userProfileData = $userController->getProfileData($_SESSION["userId"]);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +16,8 @@
 </head>
 <body>
     <h1>Profile</h1>
-    <h1>
-    <?php
-        include_once "../auth/check.php";
-
-        echo $_SESSION["username"];
-    ?>
-    </h1>
+    <h2>Username: <?php echo $userProfileData["Username"] ?></h2>
+    <h2>Bio: <?php echo $userProfileData["Bio"] ?></h2>
 
     <nav>
         <a href="../feed/index.php">Feed</a>

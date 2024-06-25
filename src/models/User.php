@@ -36,11 +36,11 @@ class User{
     }
 
     public function update($userId, $username, $imageData = null, $bio){
-        if($imageData){
-            $this->db->query("UPDATE `users` SET `Username`=':username',`imageData`=':imageData',`Bio`=':bio' WHERE `UserID` == :userId");
-            $this->db->bind(":imageData", $imageData);
-        }else {
-            $this->db->query("UPDATE `users` SET `Username`=':username',`Bio`=':bio' WHERE `UserID` == :userId");
+        if ($imageData){
+            $this->db->query("UPDATE users SET Username = :username, profile_image = :profile_image, Bio = :bio WHERE UserID = :userId");
+            $this->db->bind(":profile_image", $imageData, PDO::PARAM_LOB);
+        } else{
+            $this->db->query("UPDATE users SET Username = :username, Bio = :bio WHERE UserID = :userId");
         }
 
         $this->db->bind(":userId", $userId);
@@ -48,7 +48,6 @@ class User{
         $this->db->bind(":bio", $bio);
 
         return $this->db->execute();
-
     }
 }
 ?>

@@ -6,15 +6,16 @@
     $userController = new UserController();
     $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userId = $_SESSION["userId"];
-        $profileImage = !isset($_POST["profileImage"])? null: $_POST["profileImage"];
+        $profileImage = isset($_FILES["profileImage"]) ? $_FILES["profileImage"] : null;
         $newUsername = $_POST["newUsername"];
         $bio = $_POST["bio"];
 
-        if($userController->updateProfile($userId, $profileImage, $newUsername, $bio)){
-            header("Location: profile.php");
-        } else{
+        if ($userController->updateProfile($userId, $profileImage, $newUsername, $bio)) {
+            header("Location: index.php");
+        } else {
             echo "Editing profile failed";
         }
     }
@@ -29,7 +30,7 @@
 <body>
     <form method="post" action="profileManagement.php" enctype="multipart/form-data">
         <label>Change Profile Picture:</label>
-        <input type="file" name="profileImage" required>
+        <input type="file" name="profileImage" >
         <br>
 
         <label>Change you Username</label>
