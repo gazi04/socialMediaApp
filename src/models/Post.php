@@ -28,10 +28,10 @@ class Post{
         return $this->db->resultSet();
     }
 
-    public function update($userId, $caption){
-        $this->db->query("UPDATE `posts` SET `Caption`=:caption WHERE `PostID` = :userId");
+    public function update($postId, $caption){
+        $this->db->query("UPDATE `posts` SET `Caption`=:caption WHERE `PostID` = :postId");
         $this->db->bind(":caption", $caption);
-        $this->db->bind(":userId", $userId);
+        $this->db->bind(":postId", $postId);
         return $this->db->execute();
     }
 }
