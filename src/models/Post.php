@@ -34,5 +34,16 @@ class Post{
         $this->db->bind(":postId", $postId);
         return $this->db->execute();
     }
+
+    public function getAllPosts(){
+        $this->db->query("SELECT * FROM posts ORDER BY CreateAt DESC");
+        return $this->db->resultSet();
+    }
+
+    public function getPost($postId){
+        $this->db->query("SELECT `UserID`, `Post`, `Caption`, `CreateAt` FROM posts WHERE `PostID` = :postId");
+        $this->db->bind(":postId", $postId);
+        return $this->db->single();
+    }
 }
 ?>

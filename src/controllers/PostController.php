@@ -45,5 +45,21 @@ class PostController{
             error_log("Error by getting all the posts from the database.");
         }
     }
+
+    public function getAllPosts(){
+            return $this->postModel->getAllPosts();
+        // try{
+        // } catch (PDOException $ex){
+        //     error_log("Error: It seems we can't get the posts from the database.");
+        // }
+    }
+
+    public function getPostById($postId){
+        return $this->postModel->getPost($postId);
+    }
+
+    public function updatePost($postId, $caption){
+        return $this->postModel->update($postId, $caption);
+    }
 }
 ?>
