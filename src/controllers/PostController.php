@@ -59,7 +59,12 @@ class PostController{
     }
 
     public function updatePost($postId, $caption){
-        return $this->postModel->update($postId, $caption);
+        try {
+            return $this->postModel->update($postId, $caption);
+        }
+        catch (PDOException $ex){
+            error_log("Error in the process of updating the post.");
+        }
     }
 }
 ?>

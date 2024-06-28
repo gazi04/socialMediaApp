@@ -8,17 +8,18 @@
     $post = $postController->getPostById($postId);
     
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $caption = $_POST['caption'];
-        if ($postController->updatePost($postId, $caption)) {
-            header('Location: ../feed/index.php');
-        } else {
-            echo 'Post update failed.';
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $caption = $_POST["caption"];
+        $postId = $_GET["postId"];
+        if ($postController->updatePost($postId, $caption)){
+            header("Location: ../feed/index.php");
+        } else{
+            echo "Post update failed.";
         }
     }
 ?>
 
-<form action="edit.php?post_id=<?php echo $postId; ?>" method="POST">
-    <textarea name="caption" required><?php echo htmlspecialchars($post['Caption']); ?></textarea>
+<form action="edit.php?postId=<?php echo $postId; ?>" method="POST">
+    <textarea name="caption" required><?php echo htmlspecialchars($post["Caption"]); ?></textarea>
     <button type="submit">Update Post</button>
 </form>
