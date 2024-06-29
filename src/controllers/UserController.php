@@ -78,5 +78,9 @@ class UserController{
             error_log("Error occurred while fetching the profile data from the user.");
         }
     }
+
+    public function searchUsers($username){
+        return $this->userModel->searchUsers($username);
+    }
 }
 ?>
