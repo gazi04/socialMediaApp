@@ -1,15 +1,15 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/controllers/UserController.php";
-include_once BASE_PATH . "/src/views/auth/check.php";
+    include_once "../../config.php";
+    include_once BASE_PATH . "/src/controllers/UserController.php";
+    include_once BASE_PATH . "/src/views/auth/check.php";
 
-$userController = new UserController();
-$searchResults = [];
+    $userController = new UserController();
+    $searchResults = [];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    $username = $_POST["username"];
-    $searchResults = $userController->searchUsers($username);
-}
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $username = $_POST["username"];
+        $searchResults = $userController->searchUsers($username);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <h1>Search Users</h1>
     <form method="POST" action="search.php">
-        <input type="text" name="username" placeholder="Search by username" required>
+        <input type="text" name="username" placeholder="Search by username" value="%" required>
         <button type="submit">Search</button>
     </form>
     <br><hr>
@@ -46,12 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 <tr>
                     <th>Profile Image</th>
                     <th>Username</th>
-                    <th>Email</th>
-                    <th>Bio</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($searchResults as $user): ?>
+                <?php if($user["UserID"] != $_SESSION["userId"]): ?>
                     <tr>
                         <td>
                             <?php if($user["ProfileImage"]): ?>
@@ -61,9 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                             <?php endif; ?>
                         </td>
                         <td><?php echo htmlspecialchars($user["Username"]); ?></td>
-                        <td><?php echo htmlspecialchars($user["Email"]); ?></td>
-                        <td><?php echo htmlspecialchars($user["Bio"]); ?></td>
+                        <form method="post" action="profile.php">
+                            <input type="text" name="userId" value="<?php echo $user["UserID"] ?>" hidden/>
+                            <td><input type="submit" value="Look at my profile"></input></td>
+                        </form>
                     </tr>
+                <?php endif; ?>
                 <?php endforeach; ?>
             </tbody>
         </table>
