@@ -23,7 +23,7 @@ class User{
     }
 
     public function getProfileDataFromUser($userid){
-        $this->db->query("SELECT `Username`, `Bio` FROM `users` WHERE `UserID` = :userId;");
+        $this->db->query("SELECT `Username`, `Bio`, `ProfileImage`, `Email` FROM `users` WHERE `UserID` = :userId;");
         $this->db->bind(":userId", $userid);
         return $this->db->single();
     }

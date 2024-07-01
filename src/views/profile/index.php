@@ -8,8 +8,7 @@
     $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
     $postController = new PostController();
-    $posts = $postController->getAllPosts();
-    $userId = $_SESSION["userId"];
+    $posts = $postController->getPostsByUserId($_SESSION["userId"]);
 ?>
 
 <!DOCTYPE html>
@@ -36,15 +35,18 @@
     </style>
 </head>
 <body>
+    <nav>
+        <a href="../feed/index.php">Feed</a>
+        <a href="../users/search.php">Search</a>
+        <a href="../auth/logout.php">Logout</a>
+    </nav>
+
     <h1>Profile</h1>
     <h2>Username: <?php echo $userProfileData["Username"] ?></h2>
     <h2>Bio: <?php echo $userProfileData["Bio"] ?></h2>
 
-    <nav>
-        <a href="../feed/index.php">Feed</a>
-        <a href="profileManagement.php">Edit Profile</a>
-        <a href="../auth/logout.php">Logout</a>
-    </nav>
+    <a href="profileManagement.php">Edit Profile</a>
+    <a href="../posts/create.php">Create Post</a>
 
     <br><hr>
     <h2>Posts</h2>
@@ -63,10 +65,8 @@
                         <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image"></td>
                         <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
                         <td>
-                            <?php if ($post["UserID"] == $userId): ?>
-                                <a href="../posts/edit.php?postId=<?php echo $post['PostID']; ?>">Edit</a>
-                                <a href="../posts/delete.php?postId=<?php echo $post['PostID']; ?>">Delete</a>
-                            <?php endif; ?>
+                            <a href="../posts/edit.php?postId=<?php echo $post['PostID']; ?>">Edit</a>
+                            <a href="../posts/delete.php?postId=<?php echo $post['PostID']; ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

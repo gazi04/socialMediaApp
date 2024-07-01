@@ -29,17 +29,19 @@
 </head>
 <body>
     <form method="post" action="profileManagement.php" enctype="multipart/form-data">
+        <img width="300px" src="data:image/jpeg;base64,<?php echo base64_encode($userProfileData["ProfileImage"]); ?>" alt="Post Image">
+        <br>
         <label>Change Profile Picture:</label>
         <input type="file" name="profileImage" >
-        <br>
+        <br><br>
 
         <label>Change you Username</label>
         <input type="text" name="newUsername" value="<?php echo $userProfileData["Username"]?>" required>
-        <br>
+        <br><br>
        
         <label>Change Bio</label>
         <textarea name="bio" required><?php echo $userProfileData["Bio"]?></textarea>
-        <br>
+        <br><br>
 
         <button type="submit">Change Profile</button>
     </form>

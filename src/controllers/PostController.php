@@ -40,7 +40,7 @@ class PostController{
 
     public function getPostsByUserId($userId){
         try {
-            $this->postModel->getPostsByUserId($userId);
+            return $this->postModel->getPostsByUserId($userId);
         } catch (PDOException $ex){
             error_log("Error by getting all the posts from the database.");
         }
