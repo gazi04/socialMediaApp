@@ -9,7 +9,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $postId = $_GET["postId"];
         if ($postController->deletePost($postId)){
-            header("Location: ../feed/index.php");
+            header("Location: ../profile/index.php");
         } else {
             echo "Post deletion failed.";
         }

@@ -28,6 +28,14 @@
     <title>Edit Profile</title>
 </head>
 <body>
+    <nav>
+        <a href="../feed/index.php">Feed</a>
+        <a href="../profile/index.php">Your Profile</a>
+        <a href="../users/search.php">Search</a>
+        <a href="../auth/logout.php">Logout</a>
+    </nav>
+
+    <br><br>
     <form method="post" action="profileManagement.php" enctype="multipart/form-data">
         <img width="300px" src="data:image/jpeg;base64,<?php echo base64_encode($userProfileData["ProfileImage"]); ?>" alt="Post Image">
         <br>

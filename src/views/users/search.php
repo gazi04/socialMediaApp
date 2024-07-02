@@ -34,6 +34,13 @@
     </style>
 </head>
 <body>
+    <nav>
+        <a href="../feed/index.php">Feed</a>
+        <a href="../profile/index.php">Your Profile</a>
+        <a href="../users/search.php">Search</a>
+        <a href="../auth/logout.php">Logout</a>
+    </nav>
+    
     <h1>Search Users</h1>
     <form method="POST" action="search.php">
         <input type="text" name="username" placeholder="Search by username" value="%" required>

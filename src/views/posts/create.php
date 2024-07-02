@@ -9,7 +9,7 @@
         $image = $_FILES["image"];
         $caption = $_POST["caption"];
         if($postController->createPost($userId, $image, $caption)){
-            header("Location: ../feed/index.php");
+            header("Location: ../profile/index.php");
         } else{
             echo "Post creation failed.";
         }

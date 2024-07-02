@@ -68,6 +68,7 @@
                     <tr>
                         <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image"></td>
                         <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
+                        <td><?php //TODO:need to give to users the choice to like the posts from other users  ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

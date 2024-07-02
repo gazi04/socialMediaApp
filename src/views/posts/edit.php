@@ -12,7 +12,7 @@
         $caption = $_POST["caption"];
         $postId = $_GET["postId"];
         if ($postController->updatePost($postId, $caption)){
-            header("Location: ../feed/index.php");
+            header("Location: ../profile/index.php");
         } else{
             echo "Post update failed.";
         }
