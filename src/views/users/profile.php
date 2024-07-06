@@ -2,14 +2,20 @@
     include_once "../../config.php";
     include_once BASE_PATH . "/src/controllers/UserController.php";
     include_once BASE_PATH . "/src/controllers/PostController.php";
+    include_once BASE_PATH . "/src/controllers/FollowController.php"
     include_once BASE_PATH . "/src/views/auth/check.php";
 
     $userController = new UserController();
     $postController = new PostController();
+    $followController = new FollowController();
+    $profileUserId;
+    $isFOllowing;
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $user = $userController->getProfileData($_POST["userId"]);
-        $posts = $postController->getPostsByUserId($_POST["userId"]);
+        $profileUserId = $_POST["userId"];
+        $user = $userController->getProfileData($profileUserId);
+        $posts = $postController->getPostsByUserId($profileUserId);
+        $isFollowing = $followContreller->isFollowing($_SESSION["userId"]);
     }
 ?>
 <!DOCTYPE html>
@@ -46,12 +52,17 @@
     <h2>Username: <?php echo $user["Username"] ?></h2>
     <p>Bio: <?php echo $user["Bio"] ?></p>
 
-    <?php
-        //TODO: give the opportunity to un/follow a user
-    ?>
-    <form method="post" action="#">
-        <input type="submit" value="Follow">
-    </form>
+    <?php if ($isFollowing): ?>
+      <form method="post" action="follow.php">
+        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" />
+        <input type="submit" name="follow" value="Follow">
+      </form>
+    <?php else: ?>
+      <form method="post" action="unfollow.php">
+        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" />
+        <input type="submit" name="unfollow" value="Unfollow">
+      </form>
+    <?php endif; ?>
 
     <br><hr>
     <h2>Posts</h2>
