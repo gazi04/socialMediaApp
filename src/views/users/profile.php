@@ -15,6 +15,13 @@
         $profileUserId = $_POST["userId"];
         $user = $userController->getProfileData($profileUserId);
         $posts = $postController->getPostsByUserId($profileUserId);
+
+        if (isset($_POST['follow'])) {
+          $followController->followUser($_SESSION["userId"], $profileUserId);
+        } elseif (isset($_POST['unfollow'])) {
+          $followController->unfollowUser($_SESSION["userId"], $profileUserId);
+        }
+
         $isFollowing = $followController->isFollowing($_SESSION["userId"], $profileUserId);
     }
 ?>
@@ -52,17 +59,14 @@
     <h2>Username: <?php echo $user["Username"] ?></h2>
     <p>Bio: <?php echo $user["Bio"] ?></p>
 
-    <?php if ($isFollowing): ?>
-      <form method="post" action="follow.php">
-        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" hidden />
-        <input type="submit" name="follow" value="Follow">
-      </form>
-    <?php else: ?>
-      <form method="post" action="unfollow.php">
-        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" hidden />
-        <input type="submit" name="unfollow" value="Unfollow">
-      </form>
-    <?php endif; ?>
+    <form method="post" action="profile.php">
+      <input type="hidden" name="userId" value="<?php echo $profileUserId; ?>"/>
+      <?php if ($isFollowing): ?>
+          <input type="submit" name="unfollow" value="Unfollow">
+      <?php else: ?>
+          <input type="submit" name="follow" value="Follow">
+      <?php endif; ?>
+    </form>
 
     <br><hr>
     <h2>Posts</h2>
