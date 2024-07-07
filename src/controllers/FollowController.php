@@ -1,6 +1,6 @@
 <?php
 require_once "../../config.php";
-require_once BASE_PATH . "/src/models.Follow.php";
+require_once BASE_PATH . "/src/models/Follow.php";
 
 class FollowController{
   private $followModel;

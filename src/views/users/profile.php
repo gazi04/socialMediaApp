@@ -2,7 +2,7 @@
     include_once "../../config.php";
     include_once BASE_PATH . "/src/controllers/UserController.php";
     include_once BASE_PATH . "/src/controllers/PostController.php";
-    include_once BASE_PATH . "/src/controllers/FollowController.php"
+    include_once BASE_PATH . "/src/controllers/FollowController.php";
     include_once BASE_PATH . "/src/views/auth/check.php";
 
     $userController = new UserController();
@@ -15,7 +15,7 @@
         $profileUserId = $_POST["userId"];
         $user = $userController->getProfileData($profileUserId);
         $posts = $postController->getPostsByUserId($profileUserId);
-        $isFollowing = $followContreller->isFollowing($_SESSION["userId"]);
+        $isFollowing = $followController->isFollowing($_SESSION["userId"], $profileUserId);
     }
 ?>
 <!DOCTYPE html>
