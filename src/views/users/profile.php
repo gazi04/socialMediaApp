@@ -9,7 +9,7 @@
     $postController = new PostController();
     $followController = new FollowController();
     $profileUserId;
-    $isFOllowing;
+    $isFollowing;
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $profileUserId = $_POST["userId"];
@@ -54,12 +54,12 @@
 
     <?php if ($isFollowing): ?>
       <form method="post" action="follow.php">
-        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" />
+        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" hidden />
         <input type="submit" name="follow" value="Follow">
       </form>
     <?php else: ?>
       <form method="post" action="unfollow.php">
-        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" />
+        <input type="input" name="profileUserId" value="<?php echo $profileUserId; ?>" hidden />
         <input type="submit" name="unfollow" value="Unfollow">
       </form>
     <?php endif; ?>
