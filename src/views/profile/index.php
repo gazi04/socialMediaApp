@@ -2,6 +2,7 @@
     include_once "../../config.php";
     include_once BASE_PATH . "/src/controllers/UserController.php";
     include_once BASE_PATH . "/src/controllers/PostController.php";
+    include_once BASE_PATH . "/src/controllers/FollowController.php";
     include_once "../auth/check.php";
 
     $userController = new UserController();
@@ -9,6 +10,11 @@
 
     $postController = new PostController();
     $posts = $postController->getPostsByUserId($_SESSION["userId"]);
+
+    $followController = new FollowController();
+    $numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
+    $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
+
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +50,7 @@
     <h1>Profile</h1>
     <h2>Username: <?php echo $userProfileData["Username"] ?></h2>
     <h2>Bio: <?php echo $userProfileData["Bio"] ?></h2>
+    <h2>Followers: <?php echo $numberOfFollowers; ?> |  Following: <?php echo $numberOfFollowing; ?></h2>
 
     <a href="profileManagement.php">Edit Profile</a>
     <a href="../posts/create.php">Create Post</a>

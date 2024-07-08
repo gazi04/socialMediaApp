@@ -23,6 +23,8 @@
         }
 
         $isFollowing = $followController->isFollowing($_SESSION["userId"], $profileUserId);
+        $followerCount = $followController->getFollowerCount($profileUserId);
+        $followingCount = $followController->getFollowingCount($profileUserId);
     }
 ?>
 <!DOCTYPE html>
@@ -67,6 +69,8 @@
           <input type="submit" name="follow" value="Follow">
       <?php endif; ?>
     </form>
+
+    <h3>Followers:<?php echo $followerCount; ?> | Following:<?php echo $followingCount; ?></h3>
 
     <br><hr>
     <h2>Posts</h2>
