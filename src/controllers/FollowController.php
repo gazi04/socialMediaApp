@@ -20,6 +20,14 @@ class FollowController{
   public function isFollowing($followerUserId, $followingUserId){
      return $this->followModel->isFollowing($followerUserId, $followingUserId); 
   }
+
+  public function getFollowerCount($userId){
+    return $this->followModel->getFollowerCount($userId);
+  }
+
+  public function getFollowingCount($userId){
+    return $this->followModel->getFollowingCount($userId);
+  }
 }
 
 ?>
