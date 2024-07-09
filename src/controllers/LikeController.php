@@ -9,16 +9,20 @@ class LikeController{
     $this->likeModel = new Like();
   }
 
-  public function likePost($userId, $postId) {
-      return $this->postModel->likePost($userId, $postId);
+  public function likePost($userId, $postId){
+      return $this->likeModel->likePost($userId, $postId);
   }
 
-  public function unlikePost($userId, $postId) {
-      return $this->postModel->unlikePost($userId, $postId);
+  public function unlikePost($userId, $postId){
+      return $this->likeModel->unlikePost($userId, $postId);
   }
 
-  public function isLiked($userId, $postId) {
-      return $this->postModel->isLiked($userId, $postId);
+  public function isLiked($userId, $postId){
+      return $this->likeModel->isLiked($userId, $postId);
+  }
+
+  public function getLikeCount($postId){
+    return $this->likeModel->getLikeCount($postId);
   }
 }
 ?>

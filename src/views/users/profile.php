@@ -3,23 +3,32 @@
     include_once BASE_PATH . "/src/controllers/UserController.php";
     include_once BASE_PATH . "/src/controllers/PostController.php";
     include_once BASE_PATH . "/src/controllers/FollowController.php";
+    include_once BASE_PATH . "/src/controllers/LikeController.php";
     include_once BASE_PATH . "/src/views/auth/check.php";
 
     $userController = new UserController();
     $postController = new PostController();
     $followController = new FollowController();
+    $likeController = new LikeController();
     $profileUserId;
     $isFollowing;
+    $isLiked;
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $profileUserId = $_POST["userId"];
         $user = $userController->getProfileData($profileUserId);
         $posts = $postController->getPostsByUserId($profileUserId);
 
-        if (isset($_POST['follow'])) {
+        if(isset($_POST["follow"])){
           $followController->followUser($_SESSION["userId"], $profileUserId);
-        } elseif (isset($_POST['unfollow'])) {
+        } elseif(isset($_POST["unfollow"])){
           $followController->unfollowUser($_SESSION["userId"], $profileUserId);
+        }
+
+        if(isset($_POST["like"])){
+          $likeController->likePost($profileUserId, $_POST["postId"]);
+        } elseif(isset($_POST["unlike"])){
+          $likeController->unlikePost($profileUserId, $_POST["postId"]);
         }
 
         $isFollowing = $followController->isFollowing($_SESSION["userId"], $profileUserId);
@@ -80,14 +89,28 @@
                 <tr>
                     <th>Image</th>
                     <th>Caption</th>
+                    <th>Likes</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($posts as $post): ?>
                     <tr>
-                        <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image"></td>
-                        <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
-                        <td><?php //TODO:need to give to users the choice to like the posts from other users  ?></td>
+                        <form method="POST" action="profile.php">
+                          <input type="hidden" name="userId" value="<?php echo $profileUserId; ?>"/>
+                          <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image"></td>
+                          <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
+                          <td><?php echo $likeController->getLikeCount($post["PostID"]); ?></td>
+                          
+                          <td>
+                            <input type="hidden" name="postId" value="<?php echo $post['PostID']; ?>"/>
+
+                            <?php if ($likeController->isLiked($_SESSION["userId"], $post["PostID"])): ?>
+                                <input type="submit" name="unlike" value="Unlike">
+                            <?php else: ?>
+                                <input type="submit" name="like" value="Like">
+                            <?php endif; ?>
+                          </td>
+                        </form>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
