@@ -4,12 +4,14 @@
     include_once BASE_PATH . "/src/controllers/PostController.php";
     include_once BASE_PATH . "/src/controllers/FollowController.php";
     include_once BASE_PATH . "/src/controllers/LikeController.php";
+    include_once BASE_PATH . "/src/controllers/CommentController.php";
     include_once BASE_PATH . "/src/views/auth/check.php";
 
     $userController = new UserController();
     $postController = new PostController();
     $followController = new FollowController();
     $likeController = new LikeController();
+    $commentController = new CommentController();
     $profileUserId;
     $isFollowing;
 
@@ -28,6 +30,10 @@
           $likeController->likePost($_SESSION["userId"], $_POST["postId"]);
         } elseif(isset($_POST["unlike"])){
           $likeController->unlikePost($_SESSION["userId"], $_POST["postId"]);
+        }
+
+        if(isset($_POST["commentPost"]) && isset($_POST["comment"])){
+          $commentController->commentPostById($_SESSION["userId"], $_POST["postId"], $_POST["comment"]);
         }
 
         $isFollowing = $followController->isFollowing($_SESSION["userId"], $profileUserId);
@@ -89,6 +95,7 @@
                     <th>Image</th>
                     <th>Caption</th>
                     <th>Likes</th>
+                    <th>Comment</th>
                 </tr>
             </thead>
             <tbody>
@@ -98,20 +105,21 @@
                           <input type="hidden" name="userId" value="<?php echo $profileUserId; ?>"/>
                           <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image"></td>
                           <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
-                          <td><?php echo $likeController->getLikeCount($post["PostID"]); ?></td>
                           
                           <td>
                             <input type="hidden" name="postId" value="<?php echo $post["PostID"]; ?>"/>
-                            <?php
-                              echo "UserId: " . $_SESSION["userId"];
-                              echo "PostId: " . $post["PostID"];
-                              echo $likeController->isLiked($_SESSION["userId"], $post["PostID"]); ?>
+                            <?php echo $likeController->getLikeCount($post["PostID"]); ?>
 
                             <?php if ($likeController->isLiked($_SESSION["userId"], $post["PostID"])): ?>
                                 <input type="submit" name="unlike" value="Unlike">
                             <?php else: ?>
                                 <input type="submit" name="like" value="Like">
                             <?php endif; ?>
+                          </td>
+
+                          <td>
+                            <input type="text" name="comment"/> 
+                            <input type="submit" name="commentPost" value="Comment"/>
                           </td>
                         </form>
                     </tr>
