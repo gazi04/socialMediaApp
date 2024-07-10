@@ -12,7 +12,6 @@
     $likeController = new LikeController();
     $profileUserId;
     $isFollowing;
-    $isLiked;
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $profileUserId = $_POST["userId"];
@@ -26,9 +25,9 @@
         }
 
         if(isset($_POST["like"])){
-          $likeController->likePost($profileUserId, $_POST["postId"]);
+          $likeController->likePost($_SESSION["userId"], $_POST["postId"]);
         } elseif(isset($_POST["unlike"])){
-          $likeController->unlikePost($profileUserId, $_POST["postId"]);
+          $likeController->unlikePost($_SESSION["userId"], $_POST["postId"]);
         }
 
         $isFollowing = $followController->isFollowing($_SESSION["userId"], $profileUserId);
@@ -102,7 +101,11 @@
                           <td><?php echo $likeController->getLikeCount($post["PostID"]); ?></td>
                           
                           <td>
-                            <input type="hidden" name="postId" value="<?php echo $post['PostID']; ?>"/>
+                            <input type="hidden" name="postId" value="<?php echo $post["PostID"]; ?>"/>
+                            <?php
+                              echo "UserId: " . $_SESSION["userId"];
+                              echo "PostId: " . $post["PostID"];
+                              echo $likeController->isLiked($_SESSION["userId"], $post["PostID"]); ?>
 
                             <?php if ($likeController->isLiked($_SESSION["userId"], $post["PostID"])): ?>
                                 <input type="submit" name="unlike" value="Unlike">
