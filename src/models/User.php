@@ -9,7 +9,7 @@ class User{
     }
 
     public function create($username, $email, $password){
-        $this->db->query("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+        $this->db->query("INSERT INTO users (`Username`, `Password`, `Email`, `Bio`) VALUES (:username, :password, :email, '')");
         $this->db->bind(":username", $username);
         $this->db->bind(":email", $email);
         $this->db->bind(":password", $password);

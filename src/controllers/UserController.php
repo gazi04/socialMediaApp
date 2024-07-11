@@ -1,7 +1,7 @@
 <?php
-require_once '../../config.php';
-require_once BASE_PATH . '/src/models/User.php';
-require_once BASE_PATH . '/src/Database.php';
+require_once "../../config.php";
+require_once BASE_PATH . "/src/models/User.php";
+require_once BASE_PATH . "/src/Database.php";
 
 class UserController{
     private $userModel;
@@ -12,17 +12,17 @@ class UserController{
 
     public function register($data){
         // in the return statement in the create function you can decomment the line below and use a hashed password to saved it in the database
-        // $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+        // $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
 
         try{
-            return $this->userModel->create($data['username'], $data['email'], $data["password"]);
+            return $this->userModel->create($data["username"], $data["email"], $data["password"]);
         }
         catch(PDOException $ex){
             if ($ex->getCode() == 23000) {
-                echo 'Error: The username is already taken. Please choose a different username.';
+                echo "Error: The username is already taken. Please choose a different username.";
             } else {
-                error_log('PDOException: ' . $ex->getMessage());
-                echo 'Database error occurred. Please try again later.';
+                echo "PDOException: " . $ex->getMessage();
+                echo "Database error occurred. Please try again later.";
             }
             return false;
         }
@@ -30,7 +30,8 @@ class UserController{
 
     public function login($username, $password){
         $user = $this->userModel->findByUsername($username);
-        if ($user && ($password == $user["Password"])) {
+
+        if (!empty($user) && ($password == $user["Password"])) {
             session_start();
             $_SESSION["userId"] = $user["UserID"];
             $_SESSION["username"] = $user["Username"];
