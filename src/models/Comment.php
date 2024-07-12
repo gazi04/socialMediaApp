@@ -19,7 +19,7 @@ class Comment{
     public function getCommentByPostId($postId){
       $this->db->query("SELECT postcomments.*, users.Username FROM postcomments JOIN users ON postcomments.UserID = users.UserID WHERE PostID = :postId ORDER BY CreateAt DESC");
       $this->db->bind(":postId", $postId);
-      return $this->db->execute();
+      return $this->db->resultSet();
     }
 
     public function getCommentCountByPost($postId){
