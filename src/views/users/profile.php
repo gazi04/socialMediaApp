@@ -88,7 +88,7 @@
         font-size: 14px;
     }
     .comment-section{
-      max-height: 200px;
+      max-height: 145px;
       overflow-y: auto;
       border: 1px solid #ddd;
       padding: 10px;
@@ -149,6 +149,11 @@
 
                 <?php if ($likeController->isLiked($_SESSION["userId"], $post["PostID"])): ?>
                     <input type="submit" name="unlike" value="Unlike">
+
+￼	ga	
+0 ￼Like
+No comments available.
+
                 <?php else: ?>
                     <input type="submit" name="like" value="Like">
                 <?php endif; ?>
