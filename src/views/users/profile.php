@@ -41,29 +41,15 @@
         $followingCount = $followController->getFollowingCount($profileUserId);
     }
 
-    // Get comments for each post
     $comments = [];
-    if (!empty($posts)) {
-        foreach ($posts as $post) {
+    if(!empty($posts)){
+        foreach($posts as $post){
             $comments[$post['PostID']] = $commentController->getCommentByPostId($post['PostID']);
         }
     }
-
-    $commentIndexes = array_fill_keys(array_keys($comments), 0);
-    echo var_dump($commentIndexes);
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        foreach ($posts as $post) {
-            $postId = $post['PostID'];
-            if (isset($_POST["next_$postId"])) {
-                $commentIndexes[$postId] = min($commentIndexes[$postId] + 1, count($comments[$postId]) - 1);
-            } elseif (isset($_POST["prev_$postId"])) {
-                $commentIndexes[$postId] = max($commentIndexes[$postId] - 1, 0);
-            }
-        }
-      echo var_dump($commentIndexes);
-    }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,19 +57,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo htmlspecialchars($user["Username"]) ?></title>
   <style>
-    table {
+    table{
         width: 100%;
         border-collapse: collapse;
     }
-    table, th, td {
+    table, th, td{
         border: 1px solid black;
     }
-    th, td {
+    th, td{
         padding: 10px;
         text-align: left;
     }
-    img {
+    img{
         max-width: 100px;
+    }
+    .comment-box{
+        width: 90%;
+        border: 1px solid black;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    }
+    .comment-box p{
+        margin: 5px 0;
+    }
+    .comment-box input{
+        width: 100%;
+        border: none;
+        background-color: #f9f9f9;
+        font-size: 14px;
+    }
+    .comment-section{
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background-color: #f9f9f9;
     }
   </style>
 </head>
@@ -125,13 +134,7 @@
         <?php foreach ($posts as $post): ?>
           <?php
             $postId = $post["PostID"];
-            $currentIndex = $commentIndexes[$postId];
-            echo "commentdIndexes[postId] = ".$commentIndexes[$postId];
-            echo "<br>";
-            echo "currentIndex = ".$currentIndex; 
-            echo "<br>";
-            echo "commentIndexes = ".var_dump($commentIndexes);
-            $currentComment = $comments[$postId][$currentIndex] ?? null;
+            $postComments = $comments[$postId] ?? [];
           ?>
           <tr>
             <input type="hidden" name="userId" value="<?php echo $profileUserId; ?>"/>
@@ -141,6 +144,7 @@
             <td>
               <form method="POST" action="profile.php">
                 <input type="hidden" name="postId" value="<?php echo $post["PostID"]; ?>"/>
+                <input type="hidden" name="userId" value="<?php echo $profileUserId; ?>"/>
                 <?php echo $likeController->getLikeCount($post["PostID"]); ?>
 
                 <?php if ($likeController->isLiked($_SESSION["userId"], $post["PostID"])): ?>
@@ -151,23 +155,26 @@
               </form> 
             </td>
 
-            <td colspan="4">
-              <form method="POST" action="profile.php">
-                <?php if ($currentComment): ?>
-                  <input type="hidden" name="userId" value="<?php echo $profileUserId; ?>"/>
-                  <input type="hidden" name="postId" value="<?php echo $postId; ?>"/>
-                  <input type="text" value="<?php echo htmlspecialchars($currentComment["Comment"]); ?>" readonly/>
-                  <p>By: <?php echo htmlspecialchars($currentComment["Username"]); ?> at <?php echo htmlspecialchars($currentComment["CreateAt"]); ?></p>
-                  <button type="submit" name="prev_<?php echo $postId; ?>">Prev</button>
-                  <button type="submit" name="next_<?php echo $postId; ?>">Next</button>
-                <?php else: ?>
+            <td colspan="5">
+            <div class="comment-section">
+               <?php if (!empty($postComments)): ?>
+                  <?php foreach ($postComments as $comment): ?>
+                    <div class="comment-box">
+                        <p><strong><?php echo htmlspecialchars($comment["Username"]); ?>:</strong> <?php echo htmlspecialchars($comment["CreateAt"]); ?></p>
+                        <input type="text" value="<?php echo htmlspecialchars($comment["Comment"]); ?>" readonly/>
+                    </div>
+                  <?php endforeach; ?>
+              <?php else: ?>
                   <p>No comments available.</p>
-                <?php endif; ?>
+              <?php endif; ?>
               </form>
+            </div>
             </td>
 
             <td>
               <form method="POST" action="profile.php">
+                <input type="hidden" name="userId" value="<?php echo $profileUserId; ?>"/>
+                <input type="hidden" name="postId" value="<?php echo $post["PostID"]; ?>"/>
                 <input type="text" name="comment"/> 
                 <input type="submit" name="commentPost" value="Comment"/>
               </form>
