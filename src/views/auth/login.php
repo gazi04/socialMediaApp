@@ -1,26 +1,4 @@
 <?php
-#require_once "../../config.php";
-#require_once BASE_PATH . "/src/controllers/UserController.php";
-#
-#if ($_SERVER["REQUEST_METHOD"] == "POST") {
-#    $userController = new UserController();
-#    if ($userController->login($_POST["username"], $_POST["password"])) {
-#        header("Location: ../feed/index.php");
-#    } else {
-#        echo "Login failed.";
-#    }
-#}
-?>
-
-<!--
-<form action="login.php" method="POST">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit">Login</button>
-</form>
---!>
-
-<?php
 require_once "../../config.php";
 require_once BASE_PATH . "/src/controllers/UserController.php";
 
@@ -39,20 +17,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="post" action="login.php">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-    <a href="register.php">Create an account.</a>
-</body>
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+							<!-- Form -->
+								<section>
+									<h2>Form</h2>
+									<form method="post" action="login.php">
+										<div class="row gtr-uniform">
+											<div class="col-6 col-12-xsmall">
+												<input type="text" name="username" placeholder="Username" required/>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<input type="password" name="password" placeholder="Passord" required/>
+											</div>
+											<div class="col-12">
+												<ul class="actions">
+													<li><input type="submit" value="Login" class="primary" /></li>
+                          <li><a href="register.php" class="button">Create an account</a></li>
+												</ul>
+											</div>
+										</div>
+									</form>
+								</section>
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
