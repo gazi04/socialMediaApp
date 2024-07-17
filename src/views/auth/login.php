@@ -32,29 +32,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-							<!-- Form -->
-								<section>
-									<h2>Form</h2>
-									<form method="post" action="login.php">
-										<div class="row gtr-uniform">
-											<div class="col-6 col-12-xsmall">
-												<input type="text" name="username" placeholder="Username" required/>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<input type="password" name="password" placeholder="Passord" required/>
-											</div>
-											<div class="col-12">
-												<ul class="actions">
-													<li><input type="submit" value="Login" class="primary" /></li>
-                          <li><a href="register.php" class="button">Create an account</a></li>
-												</ul>
-											</div>
-										</div>
-									</form>
-								</section>
+    <header id="header">
+      <a href="#" class="title">Hyperspace</a>
+      <nav>
+        <ul>
+          <li><a href="register.php">Create an account</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="wrapper">
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">Login Form</h1>
+              <form method="post" action="login.php">
+                <div class="row gtr-uniform">
+                  <div class="col-6 col-12-xsmall">
+                    <input type="text" name="username" placeholder="Username" required/>
+                  </div>
+                  <div class="col-6 col-12-xsmall">
+                    <input type="password" name="password" placeholder="Passord" required/>
+                  </div>
+                  <div class="col-12">
+                    <ul class="actions">
+                      <li><input type="submit" value="Login" class="primary" /></li>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+            </div>
+					</section>
+
 			</div>
 
-		<!-- Footer -->
+   		<!-- Footer -->
 			<footer id="footer" class="wrapper alt">
 				<div class="inner">
 					<ul class="menu">
