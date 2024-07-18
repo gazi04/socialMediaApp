@@ -43,5 +43,24 @@ class Follow{
         $result = $this->db->single();
         return $result["following_count"];
     }
+
+    public function getFollowers($userId){
+      $this->db->query("
+        SELECT users.UserID, users.Username 
+        FROM followers JOIN users ON followers.FollowerUserID = users.UserID      WHERE followers.FollowingUserID = :userId");
+      $this->db->bind(":userId", $userId);
+      return $this->db->resultSet();
+    }
+
+
+    public function getFollowings($userId){
+      $this->db->query("
+            SELECT users.UserID, users.Username 
+            FROM followers 
+            JOIN users ON followers.FollowingUserID = users.UserID 
+            WHERE followers.FollowerUserID = :userId");
+      $this->db->bind(":userId", $userId);
+      return $this->db->resultSet();
+    }
 }
 ?>

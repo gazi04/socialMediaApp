@@ -28,6 +28,14 @@ class FollowController{
   public function getFollowingCount($userId){
     return $this->followModel->getFollowingCount($userId);
   }
+
+  public function getFollowers($userId){
+    return $this->followModel->getFollowers($userId);
+  }
+
+  public function getFollowings($userId){
+    return $this->followModel->getFollowings($userId);
+  }
 }
 
 ?>
