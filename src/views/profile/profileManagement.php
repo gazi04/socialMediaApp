@@ -20,38 +20,66 @@
         }
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+  <title>Profile Management</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
 </head>
-<body>
-    <nav>
-        <a href="../feed/index.php">Feed</a>
-        <a href="../profile/index.php">Your Profile</a>
-        <a href="../users/search.php">Search</a>
-        <a href="../auth/logout.php">Logout</a>
-    </nav>
+<body class="is-preload">
+  <header id="header">
+    <a href="#" class="title">Profile Management</a>
+    <?php include(BASE_PATH."/src/components/navbar.php"); ?>
+  </header>
 
-    <br><br>
-    <form method="post" action="profileManagement.php" enctype="multipart/form-data">
-        <img width="300px" src="data:image/jpeg;base64,<?php echo base64_encode($userProfileData["ProfileImage"]); ?>" alt="Post Image">
-        <br>
-        <label>Change Profile Picture:</label>
-        <input type="file" name="profileImage" >
-        <br><br>
+  
 
-        <label>Change you Username</label>
-        <input type="text" name="newUsername" value="<?php echo $userProfileData["Username"]?>" required>
-        <br><br>
-       
-        <label>Change Bio</label>
-        <textarea name="bio" required><?php echo $userProfileData["Bio"]?></textarea>
-        <br><br>
+  <div id="wrapper">
 
-        <button type="submit">Change Profile</button>
-    </form>
+    <div class="row">
+      <div class="col-4 col-12-medium">
+        <div class="image fit">
+          <img width="30%" src="data:image/jpeg;base64,<?php echo base64_encode($userProfileData["ProfileImage"]); ?>" alt="Post Image" style="margin-top: 25%;">
+        </div>
+      </div>
+      <div class="col-6 col-12-medium">
+        <form method="post" action="profileManagement.php" enctype="multipart/form-data">
+          <br>
+          <label>Change Profile Picture:</label>
+          <input type="file" name="profileImage" >
+          <br><br>
+
+          <label>Change you Username</label>
+          <input type="text" name="newUsername" value="<?php echo $userProfileData["Username"]?>" required>
+          <br><br>
+         
+          <label>Change Bio</label>
+          <textarea name="bio" required><?php echo $userProfileData["Bio"]?></textarea>
+          <br><br>
+
+          <button type="submit">Change Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <?php include(BASE_PATH."/src/components/footer.php"); ?>
+
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/jquery.scrollex.min.js"></script>
+  <script src="../assets/js/jquery.scrolly.min.js"></script>
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
