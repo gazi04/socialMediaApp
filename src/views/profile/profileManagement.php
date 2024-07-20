@@ -41,14 +41,11 @@
     <?php include(BASE_PATH."/src/components/navbar.php"); ?>
   </header>
 
-  
-
   <div id="wrapper">
-
     <div class="row">
       <div class="col-4 col-12-medium">
         <div class="image fit">
-          <img width="30%" src="data:image/jpeg;base64,<?php echo base64_encode($userProfileData["ProfileImage"]); ?>" alt="Post Image" style="margin-top: 25%;">
+          <img width="30%" src="data:image/jpeg;base64,<?php echo base64_encode($userProfileData["ProfileImage"]); ?>" alt="Post Image" style="margin-top: 25%; margin-left: 2%;">
         </div>
       </div>
       <div class="col-6 col-12-medium">

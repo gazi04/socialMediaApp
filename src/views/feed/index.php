@@ -7,23 +7,43 @@
     $posts = $postController->getAllPosts();
     $userId = $_SESSION["userId"];
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed</title>
+  <title>Feed</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
 </head>
-<body>
-    <h1>Feed</h1>
-    <h1><?php echo $_SESSION["username"]; ?></h1>
+<body class="is-preload">
+  <header id="header">
+    <a href="#" class="title">Feed</a>
+    <?php include(BASE_PATH."/src/components/navbar.php"); ?>
+  </header>
 
-    <br><hr>
-    <nav>
-        <a href="../profile/index.php">Profile</a>
-        <a href="../users/search.php">Search</a>
-        <a href="../auth/logout.php">Logout</a>
-    </nav>
+  <div id="wrapper">
+    <section id="main" class="wrapper">
+      <div class="inner">
+        <h2>Hello, <?php echo $_SESSION["username"]; ?></h2>
+      </div>
+    </section>
+  </div>
 
+  <?php include(BASE_PATH."/src/components/footer.php"); ?>
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
