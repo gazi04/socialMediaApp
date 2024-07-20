@@ -17,48 +17,63 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        img {
-            max-width: 100px;
-        }
-    </style>
+  <title>Profile</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  <style>
+      /* table { */
+      /*     width: 100%; */
+      /* } */
+  </style>
 </head>
-<body>
-    <nav>
-        <a href="../feed/index.php">Feed</a>
-        <a href="../users/search.php">Search</a>
-        <a href="../auth/logout.php">Logout</a>
-    </nav>
+<body class="is-preload">
+  <header id="header">
+    <a href="#" class="title">Profile</a>
+    <?php include(BASE_PATH."/src/components/navbar.php"); ?>
+  </header>
 
-    <h1>Profile</h1>
-    <h2>Username: <?php echo $userProfileData["Username"] ?></h2>
-    <h2>Bio: <?php echo $userProfileData["Bio"] ?></h2>
-    <h2>Followers: <?php echo $numberOfFollowers; ?> |  Following: <?php echo $numberOfFollowing; ?></h2>
+  <div id="wrapper">
+    <div class="row">
+      <div class="col-4 col-12-medium">
+        <div class="image fit">
+          <img width="30%" src="data:image/jpeg;base64,<?php echo base64_encode($userProfileData["ProfileImage"]); ?>" alt="Post Image" style="margin-top: 9%; margin-left: 2%;">
+        </div>
+      </div>
+      <div class="col-6 col-12-medium" style="padding-top: 5%; padding-left: 3rem;">
+        <div class="row"> 
+           <div class="col-6">
+            <h3>Username: <?php echo $userProfileData["Username"] ?></h3>
+            <h3>Bio: <?php echo $userProfileData["Bio"] ?></h3>
+          </div>
+          <div class="col-6">
+            <ul class="actions">
+              <h3><a href="followers.php">Followers:  <?php echo $numberOfFollowers; ?></a> | <a href="following.php">Following:  <?php echo $numberOfFollowing; ?></a></h3>
+          </ul> 
+          </div>
+        </div>
+        <div class="row">
+          <ul class="actions">
+            <a href="profileManagement.php">Edit Profile</a>
+            <a href="../posts/create.php">Create Post</a>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-    <a href="profileManagement.php">Edit Profile</a>
-    <a href="../posts/create.php">Create Post</a>
-
-    <br><hr>
-    <h2>Posts</h2>
+    <div class="row table-wrapper">
     <?php if (!empty($posts)): ?>
-        <table>
+        <table class="alt">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -69,7 +84,7 @@
             <tbody>
                 <?php foreach ($posts as $post): ?>
                     <tr>
-                        <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image"></td>
+                        <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image" style="max-width: 100px;"></td>
                         <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
                         <td>
                             <a href="../posts/edit.php?postId=<?php echo $post['PostID']; ?>">Edit</a>
@@ -83,6 +98,18 @@
         <p>No posts available.</p>
     <?php endif; ?>
 
+  
+    </div>
+  </div>
 
+  <?php include(BASE_PATH."/src/components/footer.php"); ?>
+
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/jquery.scrollex.min.js"></script>
+  <script src="../assets/js/jquery.scrolly.min.js"></script>
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
