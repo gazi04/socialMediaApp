@@ -31,11 +31,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="../../assets/css/main.css" />
   <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
-  <style>
-      /* table { */
-      /*     width: 100%; */
-      /* } */
-  </style>
 </head>
 <body class="is-preload">
   <header id="header">
@@ -103,13 +98,8 @@
   </div>
 
   <?php include(BASE_PATH."/src/components/footer.php"); ?>
-
-  <script src="../assets/js/jquery.min.js"></script>
-  <script src="../assets/js/jquery.scrollex.min.js"></script>
-  <script src="../assets/js/jquery.scrolly.min.js"></script>
-  <script src="../assets/js/browser.min.js"></script>
-  <script src="../assets/js/breakpoints.min.js"></script>
-  <script src="../assets/js/util.js"></script>
-  <script src="../assets/js/main.js"></script>
+  <?php include(BASE_PATH."/src/components/scripts.php"); ?>
+</body>
+</html>
 </body>
 </html>
