@@ -73,7 +73,7 @@
 
     <div class="row table-wrapper">
     <?php if (!empty($posts)): ?>
-        <table class="alt">
+        <table class="alt" style="margin: 1%;">
             <thead>
                 <tr>
                     <th>Image</th>
