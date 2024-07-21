@@ -7,52 +7,53 @@ $followerController = new FollowController();
 $followers = $followerController->getFollowers($_SESSION["userId"]);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Followers</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-    </style>
+  <title>Hyperspace by HTML5 UP</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
 </head>
-<body>
-    <nav>
-        <a href="../feed/index.php">Feed</a>
-        <a href="../profile/index.php">Your Profile</a>
-        <a href="../users/search.php">Search</a>
-        <a href="../auth/logout.php">Logout</a>
-    </nav>
+<body class="is-preload">
+  <header id="header">
+    <a href="#" class="title">Followers</a>
+    <?php include(BASE_PATH."/src/components/navbar.php"); ?>
+  </header>
 
-    <h2>Followers</h2>
-    <?php if (!empty($followers)): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($followers as $follower): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($follower["Username"]); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>You have no followers.</p>
-    <?php endif; ?>
-</body>
+  <div id="wrapper">
+    <div class="table-wrapper" style="margin: 1%;">
+      <?php if (!empty($followers)): ?>
+      <table>
+        <thead>
+          <tr>
+            <th>Profile Picture</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($followers as $follower): ?>
+            <tr>
+              <td><img src="data:image/jpeg;base64,<?php echo base64_encode($follower["ProfileImage"]); ?>" alt="Post Image" style="max-width: 100px;"></td>
+              <td><?php echo htmlspecialchars($follower["Username"]); ?></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+       </table>
+      <?php else: ?>
+          <p>You have no followers.</p>
+      <?php endif; ?>
+    </div>
+
+   
+  </div>
+
+  <?php include(BASE_PATH."/src/components/footer.php"); ?>
+  <?php include(BASE_PATH."/src/components/scripts.php"); ?></body>
 </html>
