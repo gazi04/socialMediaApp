@@ -46,7 +46,7 @@ class Follow{
 
     public function getFollowers($userId){
       $this->db->query("
-        SELECT users.UserID, users.Username 
+        SELECT users.UserID, users.Username, users.ProfileImage 
         FROM followers JOIN users ON followers.FollowerUserID = users.UserID      WHERE followers.FollowingUserID = :userId");
       $this->db->bind(":userId", $userId);
       return $this->db->resultSet();
@@ -55,7 +55,7 @@ class Follow{
 
     public function getFollowings($userId){
       $this->db->query("
-            SELECT users.UserID, users.Username 
+            SELECT users.UserID, users.Username, users.ProfileImage 
             FROM followers 
             JOIN users ON followers.FollowingUserID = users.UserID 
             WHERE followers.FollowerUserID = :userId");
