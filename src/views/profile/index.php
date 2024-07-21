@@ -62,10 +62,10 @@
           </ul> 
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="padding-top: 5%; padding-left: 5%;">
           <ul class="actions">
-            <a href="profileManagement.php">Edit Profile</a>
-            <a href="../posts/create.php">Create Post</a>
+            <a class="button" href="profileManagement.php">Edit Profile</a>
+            <a  class="button" href="../posts/create.php">Create Post</a>
           </ul>
         </div>
       </div>
@@ -86,9 +86,9 @@
                     <tr>
                         <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image" style="max-width: 100px;"></td>
                         <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
-                        <td>
-                            <a href="../posts/edit.php?postId=<?php echo $post['PostID']; ?>">Edit</a>
-                            <a href="../posts/delete.php?postId=<?php echo $post['PostID']; ?>">Delete</a>
+                        <td style="align-content: center;">
+                            <a class="button primary" href="../posts/edit.php?postId=<?php echo $post['PostID']; ?>">Edit</a>
+                            <a class="button primary" href="../posts/delete.php?postId=<?php echo $post['PostID']; ?>" style="margin-left: 2%;">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
