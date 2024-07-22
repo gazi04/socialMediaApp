@@ -33,14 +33,14 @@
 <body class="is-preload">
 
   <header id="header">
-    <a href="index.html" class="title">Profile</a>
+    <a href="../profile/index.php" class="title">Profile</a>
     <?php include(BASE_PATH."/src/components/navbar.php"); ?>
   </header>
 
   <div id="wrapper">
     <section id="main" class="wrapper">
       <div class="inner">
-        <h1 class="major">Create a Post</h1>
+        <h1 class="major">Create a post</h1>
         <form method="post" action="create.php" enctype="multipart/form-data">
             <input type="file" name="image" required style="margin-bottom: 3%;">
             <textarea name="caption" placeholder="Add a caption..." required style="margin-bottom:3%"></textarea>
