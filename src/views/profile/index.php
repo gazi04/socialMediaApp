@@ -60,7 +60,7 @@
         <div class="row" style="padding-top: 5%; padding-left: 5%;">
           <ul class="actions">
             <a class="button" href="profileManagement.php">Edit Profile</a>
-            <a  class="button" href="../posts/create.php">Create Post</a>
+            <a  class="button" href="../posts/create.php" style="margin-left: 5%;">Create Post</a>
           </ul>
         </div>
       </div>
