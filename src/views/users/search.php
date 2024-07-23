@@ -12,72 +12,70 @@
     }
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 <head>
-    <title>Search Users</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        img {
-            max-width: 100px;
-        }
-    </style>
+  <title>Search</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
 </head>
-<body>
-    <nav>
-        <a href="../feed/index.php">Feed</a>
-        <a href="../profile/index.php">Your Profile</a>
-        <a href="../users/search.php">Search</a>
-        <a href="../auth/logout.php">Logout</a>
-    </nav>
-    
-    <h1>Search Users</h1>
+<body class="is-preload">
+  <header id="header">
+    <a href="#" class="title">Search Users</a>
+    <?php include(BASE_PATH."/src/components/navbar.php"); ?>
+  </header>
+
+  <div id="wrapper">
     <form method="POST" action="search.php">
         <input type="text" name="username" placeholder="Search by username" value="%" required>
         <button type="submit">Search</button>
     </form>
-    <br><hr>
-    <?php if(!empty($searchResults)): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Profile Image</th>
-                    <th>Username</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($searchResults as $user): ?>
-                <?php if($user["UserID"] != $_SESSION["userId"]): ?>
-                    <tr>
-                        <td>
-                            <?php if($user["ProfileImage"]): ?>
-                                <img src="data:image/jpeg;base64,<?php echo base64_encode($user["ProfileImage"]); ?>" alt="Profile Image">
-                            <?php else: ?>
-                                <img src="../default-profile.png" alt="Default Profile Image">
-                            <?php endif; ?>
-                        </td>
-                        <td><?php echo htmlspecialchars($user["Username"]); ?></td>
-                        <form method="post" action="profile.php">
-                            <input type="text" name="userId" value="<?php echo $user["UserID"] ?>" hidden/>
-                            <td><input type="submit" value="Look at my profile"></input></td>
-                        </form>
-                    </tr>
-                <?php endif; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>No users found.</p>
-    <?php endif; ?>
-</body>
+
+    <div class="table-wrapper">
+      <?php if(!empty($searchResults)): ?>
+          <table style="margin:1%;">
+              <thead>
+                  <tr>
+                      <th>Profile Image</th>
+                      <th>Username</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <?php foreach($searchResults as $user): ?>
+                  <?php if($user["UserID"] != $_SESSION["userId"]): ?>
+                      <tr>
+                          <td>
+                              <?php if($user["ProfileImage"]): ?>
+                                  <img src="data:image/jpeg;base64,<?php echo base64_encode($user["ProfileImage"]); ?>" alt="Profile Image" style="max-width: 100px;">
+                              <?php else: ?>
+                                  <img src="../default-profile.png" alt="Default Profile Image">
+                              <?php endif; ?>
+                          </td>
+                          <td><?php echo htmlspecialchars($user["Username"]); ?></td>
+                          <td>
+                            <form method="post" action="profile.php">
+                                <input type="hidden" name="userId" value="<?php echo $user["UserID"] ?>" hidden readonly/>
+                                <input type="submit" value="Look at my profile"></input>
+                            </form>
+                          </td>
+                      </tr>
+                  <?php endif; ?>
+                  <?php endforeach; ?>
+              </tbody>
+          </table>
+      <?php else: ?>
+          <p>No users found.</p>
+      <?php endif; ?>
+    </div>
+  </div>
+
+  <?php include(BASE_PATH."/src/components/footer.php"); ?>
+  <?php include(BASE_PATH."/src/components/scripts.php"); ?></body>
 </html>
