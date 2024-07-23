@@ -33,13 +33,16 @@
   </header>
 
   <div id="wrapper">
-    <form method="POST" action="search.php">
-        <input type="text" name="username" placeholder="Search by username" value="%" required>
-        <button type="submit">Search</button>
-    </form>
+    <section id="main" class="wrapper"> 
+      <div class="inner">
+        <form method="POST" action="search.php">
+            <input type="text" name="username" placeholder="Search by username" value="%" required>
+            <button type="submit" style="margin-top: 1%;" class="button primary">Search</button>
+        </form>
+      </div>
 
-    <div class="table-wrapper">
       <?php if(!empty($searchResults)): ?>
+        <div class="table-wrapper">
           <table style="margin:1%;">
               <thead>
                   <tr>
@@ -70,10 +73,11 @@
                   <?php endforeach; ?>
               </tbody>
           </table>
+        </div>
       <?php else: ?>
-          <p>No users found.</p>
+          <div class="inner"><h3>No users found.</h3></div>
       <?php endif; ?>
-    </div>
+    </section>
   </div>
 
   <?php include(BASE_PATH."/src/components/footer.php"); ?>
