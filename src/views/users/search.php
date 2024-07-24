@@ -1,22 +1,22 @@
 <?php
-    include_once "../../config.php";
-    include_once BASE_PATH . "/src/controllers/UserController.php";
-    include_once BASE_PATH . "/src/views/auth/check.php";
+include_once "../../config.php";
+include_once BASE_PATH . "/src/controllers/UserController.php";
+include_once BASE_PATH . "/src/views/auth/check.php";
 
-    $userController = new UserController();
-    $searchResults = [];
+$userController = new UserController();
+$searchResults = [];
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        $username = $_POST["username"];
-        $searchResults = $userController->searchUsers($username);
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  $username = $_POST["username"];
+  $searchResults = $userController->searchUsers($username);
+}
 ?>
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>
@@ -44,34 +44,34 @@
       <?php if(!empty($searchResults)): ?>
         <div class="table-wrapper">
           <table style="margin:1%;">
-              <thead>
+            <thead>
+              <tr>
+                <th>Profile Image</th>
+                <th>Username</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($searchResults as $user): ?>
+                <?php if($user["UserID"] != $_SESSION["userId"]): ?>
                   <tr>
-                      <th>Profile Image</th>
-                      <th>Username</th>
+                    <td>
+                      <?php if($user["ProfileImage"]): ?>
+                          <img src="data:image/jpeg;base64,<?php echo base64_encode($user["ProfileImage"]); ?>" alt="Profile Image" style="max-width: 100px;">
+                      <?php else: ?>
+                          <img src="../default-profile.png" alt="Default Profile Image">
+                      <?php endif; ?>
+                    </td>
+                    <td><?php echo htmlspecialchars($user["Username"]); ?></td>
+                    <td>
+                      <form method="post" action="profile.php">
+                        <input type="hidden" name="userId" value="<?php echo $user["UserID"] ?>" hidden readonly/>
+                        <input type="submit" value="Look at my profile"></input>
+                      </form>
+                    </td>
                   </tr>
-              </thead>
-              <tbody>
-                  <?php foreach($searchResults as $user): ?>
-                  <?php if($user["UserID"] != $_SESSION["userId"]): ?>
-                      <tr>
-                          <td>
-                              <?php if($user["ProfileImage"]): ?>
-                                  <img src="data:image/jpeg;base64,<?php echo base64_encode($user["ProfileImage"]); ?>" alt="Profile Image" style="max-width: 100px;">
-                              <?php else: ?>
-                                  <img src="../default-profile.png" alt="Default Profile Image">
-                              <?php endif; ?>
-                          </td>
-                          <td><?php echo htmlspecialchars($user["Username"]); ?></td>
-                          <td>
-                            <form method="post" action="profile.php">
-                                <input type="hidden" name="userId" value="<?php echo $user["UserID"] ?>" hidden readonly/>
-                                <input type="submit" value="Look at my profile"></input>
-                            </form>
-                          </td>
-                      </tr>
-                  <?php endif; ?>
-                  <?php endforeach; ?>
-              </tbody>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </tbody>
           </table>
         </div>
       <?php else: ?>

@@ -1,28 +1,28 @@
 <?php
-    include_once "../../config.php";
-    include_once BASE_PATH . "/src/controllers/UserController.php";
-    include_once BASE_PATH . "/src/controllers/PostController.php";
-    include_once BASE_PATH . "/src/controllers/FollowController.php";
-    include_once "../auth/check.php";
+include_once "../../config.php";
+include_once BASE_PATH . "/src/controllers/UserController.php";
+include_once BASE_PATH . "/src/controllers/PostController.php";
+include_once BASE_PATH . "/src/controllers/FollowController.php";
+include_once "../auth/check.php";
 
-    $userController = new UserController();
-    $userProfileData = $userController->getProfileData($_SESSION["userId"]);
+$userController = new UserController();
+$userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
-    $postController = new PostController();
-    $posts = $postController->getPostsByUserId($_SESSION["userId"]);
+$postController = new PostController();
+$posts = $postController->getPostsByUserId($_SESSION["userId"]);
 
-    $followController = new FollowController();
-    $numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
-    $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
+$followController = new FollowController();
+$numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
+$numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
 
 ?>
 
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>
@@ -92,14 +92,10 @@
     <?php else: ?>
         <p>No posts available.</p>
     <?php endif; ?>
-
-  
     </div>
   </div>
 
   <?php include(BASE_PATH."/src/components/footer.php"); ?>
   <?php include(BASE_PATH."/src/components/scripts.php"); ?>
-</body>
-</html>
 </body>
 </html>

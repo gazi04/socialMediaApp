@@ -1,30 +1,30 @@
 <?php
-    include_once "../../config.php";
-    include_once "../auth/check.php";
-    include_once BASE_PATH . "/src/controllers/PostController.php";
+include_once "../../config.php";
+include_once "../auth/check.php";
+include_once BASE_PATH . "/src/controllers/PostController.php";
 
-    $postController = new PostController();
-    $postId = $_GET["postId"];
-    $post = $postController->getPostById($postId);
-    
+$postController = new PostController();
+$postId = $_GET["postId"];
+$post = $postController->getPostById($postId);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        $caption = $_POST["caption"];
-        $postId = $_GET["postId"];
-        if ($postController->updatePost($postId, $caption)){
-            header("Location: ../profile/index.php");
-        } else{
-            echo "Post update failed.";
-        }
-    }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  $caption = $_POST["caption"];
+  $postId = $_GET["postId"];
+  if ($postController->updatePost($postId, $caption)){
+    header("Location: ../profile/index.php");
+  } else{
+    echo "Post update failed.";
+  }
+}
 ?>
 
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>

@@ -9,9 +9,9 @@ $followers = $followerController->getFollowers($_SESSION["userId"]);
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>
@@ -51,7 +51,7 @@ $followers = $followerController->getFollowers($_SESSION["userId"]);
       <?php endif; ?>
     </div>
 
-   
+
   </div>
 
   <?php include(BASE_PATH."/src/components/footer.php"); ?>

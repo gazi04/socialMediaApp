@@ -1,29 +1,29 @@
 <?php
-    include_once "../../config.php";
-    include_once "../auth/check.php";
-    include_once BASE_PATH . "/src/controllers/PostController.php";
+include_once "../../config.php";
+include_once "../auth/check.php";
+include_once BASE_PATH . "/src/controllers/PostController.php";
 
-    $postController = new PostController();
-    $postId = $_GET["postId"];
+$postController = new PostController();
+$postId = $_GET["postId"];
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["yes"])){
-        $postId = $_GET["postId"];
-        if ($postController->deletePost($postId)){
-            header("Location: ../profile/index.php");
-        } else {
-            echo "Post deletion failed.";
-        }
-    }
-    elseif($_SERVER["REQUEST_METHOD"] && isset($_POST["no"])){
-      header("Location: ../profile/index.php");
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["yes"])){
+  $postId = $_GET["postId"];
+  if ($postController->deletePost($postId)){
+    header("Location: ../profile/index.php");
+  } else {
+    echo "Post deletion failed.";
+  }
+}
+elseif($_SERVER["REQUEST_METHOD"] && isset($_POST["no"])){
+  header("Location: ../profile/index.php");
+}
 ?>
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>

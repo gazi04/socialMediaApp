@@ -1,31 +1,31 @@
 <?php
-    require_once "../../config.php";
-    require BASE_PATH . "/src/controllers/UserController.php";
-    require_once "../auth/check.php";
+require_once "../../config.php";
+require BASE_PATH . "/src/controllers/UserController.php";
+require_once "../auth/check.php";
 
-    $userController = new UserController();
-    $userProfileData = $userController->getProfileData($_SESSION["userId"]);
+$userController = new UserController();
+$userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $userId = $_SESSION["userId"];
-        $profileImage = isset($_FILES["profileImage"]) ? $_FILES["profileImage"] : null;
-        $newUsername = $_POST["newUsername"];
-        $bio = $_POST["bio"];
 
-        if ($userController->updateProfile($userId, $profileImage, $newUsername, $bio)) {
-            header("Location: index.php");
-        } else {
-            echo "Editing profile failed";
-        }
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $userId = $_SESSION["userId"];
+  $profileImage = isset($_FILES["profileImage"]) ? $_FILES["profileImage"] : null;
+  $newUsername = $_POST["newUsername"];
+  $bio = $_POST["bio"];
+
+  if ($userController->updateProfile($userId, $profileImage, $newUsername, $bio)) {
+    header("Location: index.php");
+  } else {
+    echo "Editing profile failed";
+  }
+}
 ?>
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>
@@ -58,7 +58,7 @@
           <label>Change you Username</label>
           <input type="text" name="newUsername" value="<?php echo $userProfileData["Username"]?>" required>
           <br><br>
-         
+
           <label>Change Bio</label>
           <textarea name="bio" required><?php echo $userProfileData["Bio"]?></textarea>
           <br><br>

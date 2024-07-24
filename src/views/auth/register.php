@@ -3,25 +3,25 @@ require_once "../../config.php";
 require_once BASE_PATH . "/src/controllers/UserController.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    $userController = new UserController();
-    $data = [
-        "username" => $_POST["username"],
-        "email" => $_POST["email"],
-        "password" => $_POST["password"]
-    ];
-    if($userController->register($data)){
-        header("Location: login.php");
-    } else {
-        echo "Registration failed.";
-    }
+  $userController = new UserController();
+  $data = [
+    "username" => $_POST["username"],
+    "email" => $_POST["email"],
+    "password" => $_POST["password"]
+  ];
+  if($userController->register($data)){
+    header("Location: login.php");
+  } else {
+    echo "Registration failed.";
+  }
 }
 ?>
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>

@@ -5,23 +5,23 @@ require_once BASE_PATH . "/src/controllers/UserController.php";
 $userController = new UserController();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    
-    if ($userController->login($username, $password)) {
-        header("Location: ../feed/index.php");
-        exit;
-    } else {
-        echo "Login failed. Please check your username and password.";
-    }
+  $username = $_POST["username"];
+  $password = $_POST["password"];
+
+  if ($userController->login($username, $password)) {
+    header("Location: ../feed/index.php");
+    exit;
+  } else {
+    echo "Login failed. Please check your username and password.";
+  }
 }
 ?>
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>

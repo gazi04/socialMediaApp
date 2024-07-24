@@ -10,7 +10,7 @@ class FollowController{
   }
 
   public function followUser($followerUserId, $followingUserId){
-     return $this->followModel->followUser($followerUserId, $followingUserId); 
+    return $this->followModel->followUser($followerUserId, $followingUserId); 
   }
 
   public function unfollowUser($followerUserId, $followingUserId){
@@ -18,7 +18,7 @@ class FollowController{
   }
 
   public function isFollowing($followerUserId, $followingUserId){
-     return $this->followModel->isFollowing($followerUserId, $followingUserId); 
+    return $this->followModel->isFollowing($followerUserId, $followingUserId); 
   }
 
   public function getFollowerCount($userId){

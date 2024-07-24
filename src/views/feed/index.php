@@ -1,18 +1,18 @@
 <?php 
-    include_once "../../config.php";
-    include_once "../auth/check.php";
-    include_once BASE_PATH . "/src/controllers/PostController.php";
+include_once "../../config.php";
+include_once "../auth/check.php";
+include_once BASE_PATH . "/src/controllers/PostController.php";
 
-    $postController = new PostController();
-    $posts = $postController->getAllPosts();
-    $userId = $_SESSION["userId"];
+$postController = new PostController();
+$posts = $postController->getAllPosts();
+$userId = $_SESSION["userId"];
 ?>
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>

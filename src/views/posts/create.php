@@ -1,26 +1,26 @@
 <?php
-    require_once "../../config.php";
-    require BASE_PATH . "/src/controllers/PostController.php";
-    require_once "../auth/check.php";
+require_once "../../config.php";
+require BASE_PATH . "/src/controllers/PostController.php";
+require_once "../auth/check.php";
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $postController = new PostController();
-        $userId = $_SESSION["userId"];
-        $image = $_FILES["image"];
-        $caption = $_POST["caption"];
-        if($postController->createPost($userId, $image, $caption)){
-            header("Location: ../profile/index.php");
-        } else{
-            echo "Post creation failed.";
-        }
-    }
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+  $postController = new PostController();
+  $userId = $_SESSION["userId"];
+  $image = $_FILES["image"];
+  $caption = $_POST["caption"];
+  if($postController->createPost($userId, $image, $caption)){
+    header("Location: ../profile/index.php");
+  } else{
+    echo "Post creation failed.";
+  }
+}
 ?>
 
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>
