@@ -9,8 +9,16 @@ class FeedController{
     $this->feedModel = new Feed();
   }
 
-  public function getFeed($userId){
-    return $this->feedModel->getFeed($userId);
+  public function getFeedFromFollowers($userId) {
+    return $this->feedModel->getFeedFromFollowers($userId);
+  }
+
+  public function getFeedFromNonFollowers($userId) {
+    return $this->feedModel->getFeedFromNonFollowers($userId);
+  }
+
+  public function getFeedWithMostLikes($userId) {
+    return $this->feedModel->getFeedWithMostLike($userId);
   }
 }
 ?>
