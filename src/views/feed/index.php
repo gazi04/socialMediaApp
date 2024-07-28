@@ -1,11 +1,51 @@
 <?php 
 include_once "../../config.php";
 include_once "../auth/check.php";
+include_once BASE_PATH . "/src/controllers/UserController.php";
 include_once BASE_PATH . "/src/controllers/PostController.php";
+include_once BASE_PATH . "/src/controllers/FollowController.php";
+include_once BASE_PATH . "/src/controllers/LikeController.php";
+include_once BASE_PATH . "/src/controllers/CommentController.php";
+include_once BASE_PATH . "/src/controllers/FeedController.php";
 
+$userController = new UserController();
+$feedController = new FeedController();
 $postController = new PostController();
-$posts = $postController->getAllPosts();
-$userId = $_SESSION["userId"];
+$followController = new FollowController();
+$likeController = new LikeController();
+$commentController = new CommentController();
+$profileUserId;
+
+$profileUserId = $_SESSION["userId"];
+$posts = $feedController->getFeedFromFollowers($profileUserId);
+
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+  $profileUserId = $_POST["userId"];
+  $posts = $feedController->getFeedFromFollowers($profileUserId);
+
+
+  if(isset($_POST["like"])){
+    $likeController->likePost($_SESSION["userId"], $_POST["postId"]);
+  } elseif(isset($_POST["unlike"])){
+    $likeController->unlikePost($_SESSION["userId"], $_POST["postId"]);
+  }
+
+  if(isset($_POST["commentPost"]) && isset($_POST["comment"])){
+    $commentController->commentPostById($_SESSION["userId"], $_POST["postId"], $_POST["comment"]);
+  }
+
+  $followerCount = $followController->getFollowerCount($profileUserId);
+  $followingCount = $followController->getFollowingCount($profileUserId);
+}
+
+$comments = [];
+if(!empty($posts)){
+  foreach($posts as $post){
+    $comments[$post['PostID']] = $commentController->getCommentByPostId($post['PostID']);
+  }
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -21,18 +61,60 @@ $userId = $_SESSION["userId"];
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="../../assets/css/main.css" />
   <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  <style>
+    .comment-box{
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .comment-box p{
+        margin: 5px 0;
+    }
+    .comment-box input{
+        width: 100%;
+        border: none;
+        font-size: 17px;
+    }
+    .comment-section{
+      max-height: 145px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body class="is-preload">
   <header id="header">
-    <a href="#" class="title">Feed</a>
+    <a href="#" class="title">Welcome <?php echo $_SESSION["username"]; ?></a>
     <?php include(BASE_PATH."/src/components/navbar.php"); ?>
   </header>
 
   <div id="wrapper">
-    <section id="main" class="wrapper">
-      <div class="inner">
-        <h2>Hello, <?php echo $_SESSION["username"]; ?></h2>
-      </div>
+    <section id="one" class="wrapper">
+    <div class="table-wrapper">
+    <?php if (!empty($posts)): ?>
+      <table class="alt" style="padding-left: 2%; padding-right: 2%; padding-top: 2%;">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Caption</th>
+            <th>Likes</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($posts as $post): ?>
+            <?php
+            $postId = $post["PostID"];
+            $postComments = $comments[$postId] ?? [];
+            ?>
+            <?php include BASE_PATH."/src/components/post.php"; ?>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    <?php else: ?>
+      <p>No posts available.</p>
+    <?php endif; ?>
+    </div>
     </section>
   </div>
 
