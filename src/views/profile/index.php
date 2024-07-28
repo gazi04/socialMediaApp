@@ -1,11 +1,18 @@
 <?php
-include_once "../../config.php";
+require_once "../../config.php";
 include_once BASE_PATH . "/src/controllers/UserController.php";
 include_once BASE_PATH . "/src/controllers/PostController.php";
 include_once BASE_PATH . "/src/controllers/FollowController.php";
-include_once "../auth/check.php";
+include_once BASE_PATH . "/src/controllers/LikeController.php";
+include_once BASE_PATH . "/src/controllers/CommentController.php";
+require_once "../auth/check.php";
 
 $userController = new UserController();
+$postController = new PostController();
+$followController = new FollowController();
+$likeController = new LikeController();
+$commentController = new CommentController();
+
 $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
 $postController = new PostController();
@@ -15,6 +22,12 @@ $followController = new FollowController();
 $numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
 $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
 
+$comments = [];
+if(!empty($posts)){
+  foreach($posts as $post){
+    $comments[$post['PostID']] = $commentController->getCommentByPostId($post['PostID']);
+  }
+}
 ?>
 
 
@@ -31,6 +44,26 @@ $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="../../assets/css/main.css" />
   <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  <style>
+    .comment-box{
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .comment-box p{
+        margin: 5px 0;
+    }
+    .comment-box input{
+        width: 100%;
+        border: none;
+        font-size: 17px;
+    }
+    .comment-section{
+      max-height: 145px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body class="is-preload">
   <header id="header">
@@ -55,7 +88,7 @@ $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
             <ul class="actions">
               <h3><a href="followers.php">Followers:  <?php echo $numberOfFollowers; ?></a> | <a href="following.php">Following:  <?php echo $numberOfFollowing; ?></a></h3>
           </ul> 
-          </div>
+        </div>
         </div>
         <div class="row" style="padding-top: 5%; padding-left: 5%;">
           <ul class="actions">
@@ -65,34 +98,26 @@ $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
         </div>
       </div>
     </div>
-
-    <div class="row table-wrapper">
+    <div class="row table-wrapper" style="padding-left: 2%;">
     <?php if (!empty($posts)): ?>
-        <table class="alt" style="margin: 1%;">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Caption</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($posts as $post): ?>
-                    <tr>
-                        <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image" style="max-width: 100px;"></td>
-                        <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
-                        <td style="align-content: center;">
-                            <a class="button primary" href="../posts/edit.php?postId=<?php echo $post['PostID']; ?>">Edit</a>
-                            <a class="button primary" href="../posts/delete.php?postId=<?php echo $post['PostID']; ?>" style="margin-left: 2%;">Delete</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+      <table class="alt" style="padding-left: 2%; padding-right: 2%; padding-top: 2%;">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Caption</th>
+            <th>Likes</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php include BASE_PATH."/src/components/post.php"; ?>
+        </tbody>
+      </table>
     <?php else: ?>
-        <p>No posts available.</p>
+      <p>No posts available.</p>
     <?php endif; ?>
     </div>
+
   </div>
 
   <?php include(BASE_PATH."/src/components/footer.php"); ?>
