@@ -15,19 +15,10 @@ $commentController = new CommentController();
 
 $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
-$postController = new PostController();
 $posts = $postController->getPostsByUserId($_SESSION["userId"]);
-
-$followController = new FollowController();
 $numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
 $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
 
-$comments = [];
-if(!empty($posts)){
-  foreach($posts as $post){
-    $comments[$post['PostID']] = $commentController->getCommentByPostId($post['PostID']);
-  }
-}
 ?>
 
 

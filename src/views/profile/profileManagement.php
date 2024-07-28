@@ -1,11 +1,14 @@
 <?php
 require_once "../../config.php";
-require BASE_PATH . "/src/controllers/UserController.php";
+include_once BASE_PATH . "/src/controllers/UserController.php";
+include_once BASE_PATH . "/src/controllers/PostController.php";
 require_once "../auth/check.php";
 
 $userController = new UserController();
 $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 
+$postController = new PostController();
+$posts = $postController->getPostsByUserId($_SESSION["userId"]);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $userId = $_SESSION["userId"];
@@ -66,6 +69,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <button type="submit">Change Profile</button>
         </form>
       </div>
+    </div>
+    <div class="row table-wrapper">
+      <?php if (!empty($posts)): ?>
+          <table class="alt" style="margin: 1%;">
+              <thead>
+                  <tr>
+                      <th>Image</th>
+                      <th>Caption</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <?php foreach ($posts as $post): ?>
+                      <tr>
+                          <td><img src="data:image/jpeg;base64,<?php echo base64_encode($post["Post"]); ?>" alt="Post Image" style="max-width: 100px;"></td>
+                          <td><?php echo htmlspecialchars($post["Caption"]); ?></td>
+                          <td style="align-content: center;">
+                              <a class="button primary" href="../posts/edit.php?postId=<?php echo $post['PostID']; ?>">Edit</a>
+                              <a class="button primary" href="../posts/delete.php?postId=<?php echo $post['PostID']; ?>" style="margin-left: 2%;">Delete</a>
+                          </td>
+                      </tr>
+                  <?php endforeach; ?>
+              </tbody>
+          </table>
+      <?php else: ?>
+          <p>No posts available.</p>
+      <?php endif; ?>
     </div>
   </div>
 

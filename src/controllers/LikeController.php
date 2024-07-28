@@ -10,7 +10,11 @@ class LikeController{
   }
 
   public function likePost($userId, $postId){
-    return $this->likeModel->likePost($userId, $postId);
+    try {
+      return $this->likeModel->likePost($userId, $postId);
+    } catch (PDOException $ex) {
+      throw $ex;
+    }
   }
 
   public function unlikePost($userId, $postId){

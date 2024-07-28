@@ -17,6 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $commentController->commentPostById($_SESSION["userId"], $_POST["postId"], $_POST["comment"]);
   }
 }
+
+$comments = [];
+if(!empty($posts)){
+  foreach($posts as $post){
+    $comments[$post['PostID']] = $commentController->getCommentByPostId($post['PostID']);
+  }
+}
 ?>
 
 

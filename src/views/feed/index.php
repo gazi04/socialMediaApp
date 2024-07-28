@@ -14,38 +14,10 @@ $postController = new PostController();
 $followController = new FollowController();
 $likeController = new LikeController();
 $commentController = new CommentController();
-$profileUserId;
 
 $profileUserId = $_SESSION["userId"];
 $posts = $feedController->getFeedFromFollowers($profileUserId);
 
-
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-  $profileUserId = $_POST["userId"];
-  $posts = $feedController->getFeedFromFollowers($profileUserId);
-
-
-  if(isset($_POST["like"])){
-    $likeController->likePost($_SESSION["userId"], $_POST["postId"]);
-  } elseif(isset($_POST["unlike"])){
-    $likeController->unlikePost($_SESSION["userId"], $_POST["postId"]);
-  }
-
-  if(isset($_POST["commentPost"]) && isset($_POST["comment"])){
-    $commentController->commentPostById($_SESSION["userId"], $_POST["postId"], $_POST["comment"]);
-  }
-
-  $followerCount = $followController->getFollowerCount($profileUserId);
-  $followingCount = $followController->getFollowingCount($profileUserId);
-}
-
-$comments = [];
-if(!empty($posts)){
-  foreach($posts as $post){
-    $comments[$post['PostID']] = $commentController->getCommentByPostId($post['PostID']);
-  }
-}
 ?>
 
 <!DOCTYPE HTML>
@@ -102,13 +74,7 @@ if(!empty($posts)){
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($posts as $post): ?>
-            <?php
-            $postId = $post["PostID"];
-            $postComments = $comments[$postId] ?? [];
-            ?>
-            <?php include BASE_PATH."/src/components/post.php"; ?>
-          <?php endforeach; ?>
+          <?php include BASE_PATH."/src/components/post.php"; ?>
         </tbody>
       </table>
     <?php else: ?>
