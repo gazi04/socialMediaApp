@@ -59,7 +59,7 @@ class User{
   public function doesUserIdExists($userId){
     $this->db->query("SELECT `UserID` FROM `users` WHERE `UserID` = :userId");
     $this->db->bind(":userId", $userId);
-    return $this->db->rowCount();
+    return $this->db->rowCount() == 1;
   }
 }
 ?>
