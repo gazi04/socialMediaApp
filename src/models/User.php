@@ -55,5 +55,11 @@ class User{
     $this->db->bind(':username', '%' . $username . '%');
     return $this->db->resultSet(); 
   }
+
+  public function doesUserIdExists($userId){
+    $this->db->query();
+    $this->db->bind(":userId", $userId);
+    return $this->db->rowCount();
+  }
 }
 ?>
