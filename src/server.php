@@ -6,8 +6,16 @@ use Ratchet\ConnectionInterface;
 use Ratchet\App;
 
 class Chat implements MessageComponentInterface {
+  protected $clients;
+
+  public function __construct(){
+    $this->clients = new \SplObjectStorage;
+  }
+
   public function onOpen(ConnectionInterface $conn) {
-    echo "Connected \n";
+    $this->clients->attach($conn);
+
+    echo "New connection! ({$conn->resourceId})\n";
   }
 
   public function onMessage(ConnectionInterface $from, $msg) {
