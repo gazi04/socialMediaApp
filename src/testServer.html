@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>WebSocket Test</title>
-  </head>
-  <body>
+</head>
+<body>
     <h1>WebSocket Chat</h1>
     <form id="messageForm">
-      <input type="text" id="messageInput" placeholder="Enter your message" required />
-      <button type="submit">Send</button>
+        <input type="text" id="messageInput" placeholder="Enter your message" required />
+        <button type="submit">Send</button>
     </form>
 
     <script>
-    const conn = new WebSocket('ws://localhost:8080/chat');
-    conn.onopen = function(e) {
-    console.log("Connection established!");
-    };
+        const ws = new WebSocket('ws://localhost:8080/chat');
+        
+        ws.onopen = () => {
+            console.log('Connected to WebSocket server');
+            ws.send('Hello Server');
+        };
+        
+        ws.onmessage = (event) => {
+          console.log("message received: " + event.data);
+        };
+        
+        ws.onclose = () => {
+            console.log('Disconnected from WebSocket server');
+        };
+        
+        ws.onerror = (error) => {
+            console.log('WebSocket error:', error);
+        };
+    
+        function sendMessage(message) {
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(message);
+                console.log('Sent:', message);
+            } else {
+                console.log('WebSocket is not open');
+            }
+        }
 
-    conn.onmessage = function(e) {
-    console.log(e.data);
-    };
+        document.getElementById('messageForm').addEventListener('submit', function(){
+            event.preventDefault();
+            const message = document.getElementById('messageInput').value;
+            sendMessage(message);
+            document.getElementById('messageInput').value = '';
+    })
     </script>
-  </body>
+</body>
 </html>
