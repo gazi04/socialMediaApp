@@ -36,7 +36,8 @@ class Chat implements MessageComponentInterface {
   /*   } */
   /* } */
   public function onMessage(ConnectionInterface $from, $msg){
-    echo var_dump($this->connections);   
+    /* echo var_dump($this->connections);    */
+    echo $msg;
   }
 
   public function onClose(ConnectionInterface $conn) {
@@ -49,7 +50,7 @@ class Chat implements MessageComponentInterface {
   }
 }
 
-$app = new App('localhost', 8080);
+$app = new App('localhost', 8081);
 $app->route('/chat', new Chat, array('*'));
 $app->run();
 ?>
