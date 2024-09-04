@@ -1,0 +1,76 @@
+:root {
+  --menu-hover-overlay: 0, 0, 0, .05;
+}
+
+.container {  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "navbar content recommendations"
+    "navbar content footer";
+}
+
+.navbar { 
+  grid-area: navbar; 
+  padding-left: 1em;
+}
+
+.content { grid-area: content; }
+
+.recommendations { grid-area: recommendations; }
+
+.footer { grid-area: footer; }
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+/* .menu > li { */
+/*   margin-top: ; */
+/* } */
+.menu > li {
+  padding-block: 0.5em;
+}
+
+.menu > li > a {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr; 
+  grid-template-rows: 0.5fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "icon page";
+
+  color: #000; 
+  text-decoration: none;
+  transition: 0.2s;
+  align-items: center;
+  padding-inline: 1em;
+  border: 2px solid red;
+  border-radius: 25px;
+}
+
+.icon {
+  grid-area: icon;
+}
+
+.page {
+  grid-area: page;
+}
+
+.menu > li > a:hover {
+  background-color: rgba(var(--menu-hover-overlay));
+  /* background-color: tomato; */
+}
+
+.icon > img {
+  width: 2em;
+}
