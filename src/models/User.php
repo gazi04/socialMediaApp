@@ -61,5 +61,28 @@ class User{
     $this->db->bind(":userId", $userId);
     return $this->db->rowCount() == 1;
   }
+
+  public function getSessionId($userId){
+    $this->db->query("SELECT `SessionID` FROM `users` WHERE `UserID` = :userId;");
+    $this->db->bind(":userId", $userId);
+    return $this->db->resultSet();
+  }
+
+  public function updateSessionId($userId, $newSessionId){
+    $this->db->query("UPDATE `users` SET `SessionID`=':newSessionId' WHERE `UserID`= :userId;");
+
+    $this->db->bind(":newSessionId", $newSessionId);
+    $this->db->bind(":userId", $userId);
+
+    return $this->db->execute();
+  }
+
+  public function getUserBySessionId($sessionId){
+    $this->db->query("SELECT `UserID`, `Username` FROM `users` WHERE `SessionID` = :sessionId;");
+
+    $this->db->bind(":sessionId", $sessionId);
+
+    return $this->db->resultSet();
+  }
 }
 ?>
