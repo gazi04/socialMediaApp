@@ -1,5 +1,6 @@
 :root {
   --menu-hover-overlay: 0, 0, 0, .05;
+  --menu-vertical-line: 0, 0, 0, .17;
 }
 
 .container {  
@@ -15,7 +16,7 @@
 
 .navbar { 
   grid-area: navbar; 
-  padding-left: 1em;
+  padding-left: 0.5em;
 }
 
 .content { grid-area: content; }
@@ -25,20 +26,18 @@
 .footer { grid-area: footer; }
 
 .menu {
+  font-size: 0.85em;
+  border-right: 0.1px solid rgba(var(--menu-vertical-line));
   list-style-type: none;
-  margin: 0;
   padding: 0;
-  width: 25%;
+  width: 17%;
   position: fixed;
   height: 100%;
   overflow: auto;
 }
 
-/* .menu > li { */
-/*   margin-top: ; */
-/* } */
 .menu > li {
-  padding-block: 0.5em;
+  padding-block: 0.3em;
 }
 
 .menu > li > a {
@@ -51,11 +50,15 @@
 
   color: #000; 
   text-decoration: none;
-  transition: 0.2s;
+  transition: 0.3s;
   align-items: center;
   padding-inline: 1em;
-  border: 2px solid red;
-  border-radius: 25px;
+  border-radius: 8px;
+}
+
+.menu > li > a:hover .icon > img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 .icon {
@@ -68,9 +71,9 @@
 
 .menu > li > a:hover {
   background-color: rgba(var(--menu-hover-overlay));
-  /* background-color: tomato; */
 }
 
 .icon > img {
   width: 2em;
+  transition: transform 0.3s ease;
 }
