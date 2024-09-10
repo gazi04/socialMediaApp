@@ -10,7 +10,7 @@ body {
 
 .container {  
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1.3fr 1.2fr;
   grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -34,7 +34,7 @@ body {
   font-size: 0.85em;
   list-style-type: none;
   padding: 0;
-  width: 17%;
+  width: 10.5%;
   position: fixed;
   height: 100%;
   overflow: auto;
@@ -67,11 +67,14 @@ body {
 }
 
 #banner {
+  padding-inline: 1em;
+  padding-block: 2em;
 
   a {
     text-decoration: none;
     font-weight: 700;
     font-size: 20px;
+    color: black;
   }
 }
 
@@ -81,6 +84,7 @@ body {
 
 .page {
   grid-area: page;
+  margin-inline: 1em;
 
   span {
     font-weight: 400;
@@ -93,7 +97,7 @@ body {
 }
 
 .icon > img {
-  width: 2em;
+  width: 1.7em;
   transition: transform 0.3s ease;
 }
 
@@ -103,5 +107,5 @@ body {
   background-color: rgba(var(--menu-hover-overlay));
   position: fixed;
   top: 0;
-  right: calc(100% - 19%); 
+  right: calc(100% - 12.5%); 
 }
