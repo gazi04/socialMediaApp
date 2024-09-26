@@ -35,6 +35,13 @@ body {
     "login-banner"
     "login-credentials"
     "login-with"; 
+
+  .login-border {
+    padding-inline: 1em;
+    padding-block: 3em;
+    border-width: 1px;
+    border-color: #8f8f8f;
+  }
 }
 
 .login-banner {

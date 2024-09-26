@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <body style="height: 100%;">
     <div class="login-container">
       <div class="login-form">
+        <fieldset class="login-border">
         <div class="login-banner"><h1>Tungjatjeta</h1></div>
         <div class="login-credentials">
           <form method="post" action="login.php">
@@ -41,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </form>
         </div>
         <div class="login-with"></div>
+        </fieldset>
       </div>
     </div>
 
