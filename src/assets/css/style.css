@@ -102,16 +102,11 @@ body {
     "navbar content footer";
 }
 
+/* Style for the menu */
 .navbar { 
   grid-area: navbar; 
   padding-left: 0.5em;
 }
-
-.content { grid-area: content; }
-
-.recommendations { grid-area: recommendations; }
-
-.footer { grid-area: footer; }
 
 .menu {
   font-size: 0.85em;
@@ -158,6 +153,7 @@ body {
     font-weight: 700;
     font-size: 20px;
     color: black;
+    font-family: "Playwrite HU";
   }
 }
 
@@ -192,3 +188,82 @@ body {
   top: 0;
   right: calc(100% - 12.5%); 
 }
+
+/* Style for the main content */
+.content { 
+  grid-area: content;
+}
+
+.content > .post {
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 0.3fr 2.6fr 0.6fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "account"
+    "image"
+    "caption";
+}
+
+.content > .post > .account {
+  grid-area: account;
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "profileImage username"; 
+
+  .user-profile-image {
+    grid-area: profileImage;
+
+    img {
+      clip-path: circle();
+      width: 50%;
+      float: right;
+      padding-inline: 1em;
+    }
+  }
+
+  .username {
+    grid-area: username;
+    padding-block: 1em;
+    font-weight: 500;
+    font-size: large;
+  }
+}
+
+.content > .post > .image {
+  grid-area: image;
+
+  img {
+    width: 85%;
+    padding-block: 0.5em;
+    padding-inline: 3em;
+  }
+}
+
+.content > .post > .caption {
+  grid-area: caption;
+  padding-inline: 3em;
+
+  .intercation > a > img {
+    width: 1.5em;
+    padding-right: 0.4em;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out,
+      color 0.3s ease-in-out;
+  }
+
+  .intercation > a > img:hover {
+    opacity: 0.3;
+  }
+
+  .intercation > .like-counts {
+    font-weight: 400;
+  }
+}
+.recommendations { grid-area: recommendations; }
+
+.footer { grid-area: footer; }
+
