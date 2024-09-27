@@ -16,7 +16,7 @@ $likeController = new LikeController();
 $commentController = new CommentController();
 
 $profileUserId = $_SESSION["userId"];
-$posts = $feedController->getFeedFromFollowers($profileUserId);
+/* $posts = $feedController->getFeedFromFollowers($profileUserId); */
 
 ?>
 
@@ -110,26 +110,7 @@ $posts = $feedController->getFeedFromFollowers($profileUserId);
       <div class="navbar"><?php include(BASE_PATH."/src/components/navbar.php"); ?></div>
 
       <div class="content">
-        <div class="post">
-          <div class="account"> 
-            <div class="user-profile-image"><img src="../../assets/images/sunflower.jpg" /></div>
-            <div class="username">Feed</div>
-          </div>
-          <div class="image">
-            <img src="../../assets/images/sunflower.jpg" />
-          </div>
-          <div class="caption">
-            <div class="intercation">
-              <a><img src="../../assets/icons/heart.png" /></a>
-              <a><img src="../../assets/icons/share.png" /></a>
-              <a><img src="../../assets/icons/send.png" /></a>
-              <div class="like-counts">Likes: 15</div>
-            </div>
-            <div class="text"> 
-              <b>Feed: </b> My sunflower with glasses.
-            </div>
-          </div>
-        </div>
+        <?php $feedController->getFeedFromFollowers($profileUserId)?>
       </div>
 
       <div class="recommendations"></div>
