@@ -11,22 +11,36 @@ class LikeController{
 
   public function likePost($userId, $postId){
     try {
-      return $this->likeModel->likePost($userId, $postId);
+      if (!$this->isLiked($userId, $postId)){ return $this->likeModel->likePost($userId, $postId); }
+      else { return; }
     } catch (PDOException $ex) {
       throw $ex;
     }
   }
 
   public function unlikePost($userId, $postId){
-    return $this->likeModel->unlikePost($userId, $postId);
+    try {
+      if ($this->isLiked($userId, $postId)){ return $this->likeModel->unlikePost($userId, $postId); }
+      else { return; }
+    } catch (PDOException $ex) {
+      throw $ex;
+    }
   }
 
   public function isLiked($userId, $postId){
-    return $this->likeModel->isLiked($userId, $postId);
+    try{
+      return $this->likeModel->isLiked($userId, $postId);
+    } catch (PDOException $ex) {
+      throw $ex;
+    }
   }
 
   public function getLikeCount($postId){
-    return $this->likeModel->getLikeCount($postId);
+    try{
+      return $this->likeModel->getLikeCount($postId);
+    } catch (PDOException $ex) {
+      throw $ex;
+    }
   }
 }
 ?>
