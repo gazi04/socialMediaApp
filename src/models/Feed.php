@@ -9,7 +9,7 @@ class Feed{
   }
 
   public function getFeedFromFollowers($userId) {
-    $this->db->query("SELECT posts.*, users.Username 
+    $this->db->query("SELECT posts.*, users.Username, users.ProfileImage
       FROM posts 
       JOIN users ON posts.UserID = users.UserID 
       JOIN followers ON posts.UserID = followers.FollowingUserID 
@@ -21,7 +21,7 @@ class Feed{
   }
 
   public function getFeedFromNonFollowers($userId) {
-    $this->db->query("SELECT posts.*, users.Username 
+    $this->db->query("SELECT posts.*, users.Username, users.ProfileImage
       FROM posts 
       JOIN users ON posts.UserID = users.UserID 
       WHERE posts.UserID NOT IN (
@@ -38,7 +38,7 @@ class Feed{
 
   public function getFeedWithMostLike($userId) {
     $this->db->query("
-      SELECT posts.*, users.Username, COUNT(postlikes.PostID) as like_count 
+      SELECT posts.*, users.Username, users.ProfileImage COUNT(postlikes.PostID) as like_count 
       FROM posts 
       JOIN users ON posts.UserID = users.UserID 
       LEFT JOIN postlikes ON posts.PostID = postlikes.PostID 
