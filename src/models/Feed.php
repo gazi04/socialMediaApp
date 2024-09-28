@@ -36,7 +36,7 @@ class Feed{
     
   }
 
-  public function getFeedWithMostLike($userId) {
+  public function getFeedWithMostLike() {
     $this->db->query("
       SELECT posts.*, users.Username, users.ProfileImage COUNT(postlikes.PostID) as like_count 
       FROM posts 
@@ -45,7 +45,6 @@ class Feed{
       GROUP BY posts.PostID 
       ORDER BY like_count DESC, posts.CreateAt DESC;
     ");
-    $this->db->bind(":userId", $userId);
     return $this->db->resultSet();
   }
 }
