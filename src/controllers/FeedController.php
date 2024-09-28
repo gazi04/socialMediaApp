@@ -43,8 +43,8 @@ class FeedController{
     //return $this->feedModel->getFeedFromNonFollowers($userId);
   }
 
-  public function getFeedWithMostLikes($userId) {
-    $posts = $this->feedModel->getFeedWithMostLike($userId); 
+  public function getFeedWithMostLikes() {
+    $posts = $this->feedModel->getFeedWithMostLike(); 
 
     if(empty($posts)) {
       echo "No post to see.";
