@@ -28,11 +28,35 @@ class FeedController{
   }
 
   public function getFeedFromNonFollowers($userId) {
-    return $this->feedModel->getFeedFromNonFollowers($userId);
+    $posts = $this->feedModel->getFeedFromNonFollowers($userId); 
+
+    if(empty($posts)) {
+      echo "No post to see.";
+      return;
+    }
+
+    $likes = array();
+    foreach ($posts as $post) {
+      $likes[] = $this->likeController->getLikeCount($post["PostID"]);
+    }
+    include BASE_PATH . "/src/components/post.php";
+    //return $this->feedModel->getFeedFromNonFollowers($userId);
   }
 
   public function getFeedWithMostLikes($userId) {
-    return $this->feedModel->getFeedWithMostLike($userId);
+    $posts = $this->feedModel->getFeedWithMostLike($userId); 
+
+    if(empty($posts)) {
+      echo "No post to see.";
+      return;
+    }
+
+    $likes = array();
+    foreach ($posts as $post) {
+      $likes[] = $this->likeController->getLikeCount($post["PostID"]);
+    }
+    include BASE_PATH . "/src/components/post.php";
+    //return $this->feedModel->getFeedWithMostLike($userId);
   }
 }
 ?>
