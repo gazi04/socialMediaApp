@@ -1,4 +1,12 @@
 {
+  "autoload": {
+    "psr-4": {
+      "Models\\": "src/models",
+      "Core\\": "src/core",
+      "Controllers\\": "src/controllers"
+    }
+  },
+
   "require": {
     "cboden/ratchet": "^0.4.3"
   }

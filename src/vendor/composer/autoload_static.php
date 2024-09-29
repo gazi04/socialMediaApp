@@ -37,6 +37,10 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         array (
             'Psr\\Http\\Message\\' => 17,
         ),
+        'M' => 
+        array (
+            'Models\\' => 7,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -44,6 +48,11 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'E' => 
         array (
             'Evenement\\' => 10,
+        ),
+        'C' => 
+        array (
+            'Core\\' => 5,
+            'Controllers\\' => 12,
         ),
     );
 
@@ -101,6 +110,10 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/models',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -108,6 +121,14 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'Evenement\\' => 
         array (
             0 => __DIR__ . '/..' . '/evenement/evenement/src',
+        ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/core',
+        ),
+        'Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/controllers',
         ),
     );
 

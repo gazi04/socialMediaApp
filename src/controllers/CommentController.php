@@ -1,6 +1,7 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/models/Comment.php";
+require_once "../vendor/autoload.php";
+namespace Controllers;
+use Models\Comment;
 
 class CommentController{
   private $commentModel;

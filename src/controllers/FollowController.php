@@ -1,6 +1,7 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/models/Follow.php";
+require_once "../vendor/autoload.php";
+namespace Controllers;
+use Models\Follow;
 
 class FollowController{
   private $followModel;

@@ -1,6 +1,7 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/models/Feed.php";
+require_once "../vendor/autoload.php";
+namespace Controllers;
+use Models\Feed;
 
 class FeedController{
   private $feedModel;

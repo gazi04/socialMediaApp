@@ -1,6 +1,10 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/models/Like.php";
+require_once "../vendor/autoload.php";
+
+namespace Controllers;
+
+use Models\Like;
+
 
 class LikeController{
   private $likeModel;
@@ -9,11 +13,20 @@ class LikeController{
     $this->likeModel = new Like();
   }
 
+  public function likeOrUnlikePost($userId, $postId){
+    try {
+      if (!$this->isLiked($userId, $postId)){ return $this->likeModel->likePost($userId, $postId); }
+      else {return $this->unlikePost($userId, $postId);}
+    } catch (\PDOException $ex) {
+      throw $ex;
+    }
+  }
+
   public function likePost($userId, $postId){
     try {
       if (!$this->isLiked($userId, $postId)){ return $this->likeModel->likePost($userId, $postId); }
       else { return; }
-    } catch (PDOException $ex) {
+    } catch (\PDOException $ex) {
       throw $ex;
     }
   }
@@ -22,7 +35,7 @@ class LikeController{
     try {
       if ($this->isLiked($userId, $postId)){ return $this->likeModel->unlikePost($userId, $postId); }
       else { return; }
-    } catch (PDOException $ex) {
+    } catch (\PDOException $ex) {
       throw $ex;
     }
   }
@@ -30,7 +43,7 @@ class LikeController{
   public function isLiked($userId, $postId){
     try{
       return $this->likeModel->isLiked($userId, $postId);
-    } catch (PDOException $ex) {
+    } catch (\PDOException $ex) {
       throw $ex;
     }
   }
@@ -38,7 +51,7 @@ class LikeController{
   public function getLikeCount($postId){
     try{
       return $this->likeModel->getLikeCount($postId);
-    } catch (PDOException $ex) {
+    } catch (\PDOException $ex) {
       throw $ex;
     }
   }

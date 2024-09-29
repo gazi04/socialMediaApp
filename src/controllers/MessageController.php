@@ -1,8 +1,8 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/models/Message.php";
-require_once BASE_PATH . "/src/controllers/UserController.php";
-require_once BASE_PATH . "/src/Database.php";
+require_once "../vendor/autoload.php";
+namespace Controllers;
+use Models\Message;
+use Controllers\UserController;
 
 class MessageController{
   private $messageModel;

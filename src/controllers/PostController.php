@@ -1,6 +1,7 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/models/Post.php";
+require_once "../vendor/autoload.php";
+namespace Controllers;
+use Models\Post;
 
 class PostController{
   private $postModel;

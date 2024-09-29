@@ -1,5 +1,8 @@
 <?php
-require_once "../../Database.php";
+namespace Models;
+
+require_once "../vendor/autoload.php";
+use Core\Database;
 
 class Comment{
   private $db;

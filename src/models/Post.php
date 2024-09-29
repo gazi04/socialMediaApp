@@ -1,5 +1,9 @@
 <?php
-require_once "../../Database.php";
+namespace Models;
+
+require_once "../vendor/autoload.php";
+use Core\Database;
+
 
 class Post{
   private $db;
@@ -11,7 +15,7 @@ class Post{
   public function create($userId, $imageData, $caption){
     $this->db->query("INSERT INTO posts (UserID, Post, Caption) VALUES (:user_id, :post, :caption)");
     $this->db->bind(":user_id", $userId);
-    $this->db->bind(":post", $imageData, PDO::PARAM_LOB);
+    $this->db->bind(":post", $imageData, \PDO::PARAM_LOB);
     $this->db->bind(":caption", $caption);
     return $this->db->execute();
   }

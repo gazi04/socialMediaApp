@@ -1,7 +1,7 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/models/User.php";
-require_once BASE_PATH . "/src/Database.php";
+require_once "../vendor/autoload.php";
+namespace Controllers;
+use Models\User;
 
 class UserController{
   private $userModel;
@@ -17,7 +17,7 @@ class UserController{
     try{
       return $this->userModel->create($data["username"], $data["email"], $data["password"]);
     }
-    catch(PDOException $ex){
+    catch(\PDOException $ex){
       if ($ex->getCode() == 23000) {
         echo "Error: The username is already taken. Please choose a different username.";
       } else {
@@ -75,7 +75,7 @@ class UserController{
   public function getProfileData($userId){
     try{
       return $this->userModel->getProfileDataFromUser($userId);
-    } catch (PDOException $ex){
+    } catch (\PDOException $ex){
       error_log("Error occurred while fetching the profile data from the user.");
     }
   }
@@ -87,5 +87,15 @@ class UserController{
   public function doesUserIdExists($userId){
     return $this->userModel->doesUserIdExists($userId);
   }
+
+  public function getSessionId($userId){
+
+  }
+
+  public function updateSessionId($userId, $newSessionId){
+
+  }
+
+  public function getUserBySession($sessionId){}
 }
 ?>
