@@ -28,5 +28,4 @@ function likeOrDislikePost(postId, userId) {
     }
   }
   request.send("likeHandler=true&postId=" + encodeURIComponent(postId) + "&userId=" + encodeURIComponent(userId))
-  // request.send("likeOrDislikePost=true&postId=" + encodeURIComponent(postId) + "&userId=" + encodeURIComponent(userId))
 }
