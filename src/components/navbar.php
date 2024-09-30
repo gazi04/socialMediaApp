@@ -1,3 +1,9 @@
+<?php
+/* include "../core/config.php"; */
+$feedPath = "../feed/index.php";
+$myProfilePath = "../profile/index.php";
+$logoutPath = "../auth/logout.php";
+?>
 <nav>
   <ul class="menu">
     <div id="banner">
@@ -5,7 +11,7 @@
     </div>
 
     <li>
-      <a href="../views/feed/index.php" onmouseover="highlightIcon(this, '../../assets/icons/blackHome.png')" onmouseout="unHighlightIcon(this, '../../assets/icons/whiteHome.png')">
+      <a href="<?php echo $feedPath ?>" onmouseover="highlightIcon(this, '../../assets/icons/blackHome.png')" onmouseout="unHighlightIcon(this, '../../assets/icons/whiteHome.png')">
         <div class="icon"><img src="../../assets/icons/whiteHome.png" /></div>
         <div class="page"><span>Feed</span></div>
       </a>
@@ -47,13 +53,13 @@
       </a>
     </li>
     <li>
-      <a href="#" onmouseover="highlightIcon(this, '../../assets/icons/blackHome.png')" onmouseout="unHighlightIcon(this, '../../assets/icons/whiteHome.png')">
+      <a href="<?php echo $myProfilePath; ?>" onmouseover="highlightIcon(this, '../../assets/icons/blackHome.png')" onmouseout="unHighlightIcon(this, '../../assets/icons/whiteHome.png')">
         <div class="icon"><img src="../../assets/icons/home.png" /></div>
         <div class="page"><span>Profile</span></div>
       </a>
     </li>
     <li class="last-item">
-      <a href="#" onmouseover="highlightIcon(this, '../../assets/icons/blackHome.png')" onmouseout="unHighlightIcon(this, '../../assets/icons/whiteHome.png')">
+      <a href="<?php echo $logoutPath; ?>" onmouseover="highlightIcon(this, '../../assets/icons/blackHome.png')" onmouseout="unHighlightIcon(this, '../../assets/icons/whiteHome.png')">
         <div class="icon"><img src="../../assets/icons/home.png" /></div>
         <div class="page"><span>Logout</span></div>
       </a>
