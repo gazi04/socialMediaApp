@@ -1,6 +1,6 @@
 <?php
-require_once "../../config.php";
-require_once BASE_PATH . "/src/controllers/UserController.php";
+require_once "../../vendor/autoload.php";
+use Controllers\UserController;
 
 $userController = new UserController();
 
