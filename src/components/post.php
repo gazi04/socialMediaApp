@@ -79,12 +79,18 @@
 <?php //endforeach; ?>
 
 <?php 
-//foreach ($posts as $post) {
- // echo '<h1>'.$post["Caption"].'</h1>';
-//}
-//echo "test";
-$index = 0;
+global $likeController;
+
+if (isset($_POST["likeOrDislikePost"]) && isset($_POST["postId"]) && isset($_POST["userId"])) {
+  $likeController->likeOrUnlikePost($_POST["userId"], $_POST["postId"]);
+}
+
+if (isset($_POST["dislikePost"]) && isset($_POST["postId"]) && isset($_POST["userId"])) {
+  $likeController->unlikePost($_POST["userId"], $_POST["postId"]);
+}
+
 ?>
+
 <?php foreach ($posts as $post): ?>
 <div class="post">
   <div class="account"> 
@@ -100,10 +106,12 @@ $index = 0;
   </div>
   <div class="caption">
     <div class="intercation">
-      <a><img src="../../assets/icons/heart.png" /></a>
+      <a onclick="likeOrDislikePost(<?php echo $post["PostID"]; ?>, <?php echo $_SESSION["userId"]; ?>)">
+        <img id="likeIcon<?php echo $post["PostID"]; ?>" src=<?php echo $likeController->isLiked($_SESSION["userId"], $post["PostID"])? "../../assets/icons/redHeart.png": "../../assets/icons/heart.png";?> />
+      </a>
       <a><img src="../../assets/icons/share.png" /></a>
       <a><img src="../../assets/icons/send.png" /></a>
-      <div class="like-counts">Likes: <?php echo $likes[$index] ?></div>
+      <div class="like-counts">Likes: <span id="likes<?php echo $post["PostID"]; ?>"><?php echo $post["LikeCount"] ?></span></div>
     </div>
     <div class="text"> 
       <b><?php echo htmlspecialchars($post["Username"]); ?>: </b> <?php echo htmlspecialchars($post["Caption"]) ?>
@@ -111,5 +119,4 @@ $index = 0;
     </div>
   </div>
 </div>
-<?php $index++; ?>
 <?php endforeach; ?>
