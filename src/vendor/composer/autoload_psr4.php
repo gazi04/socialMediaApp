@@ -19,9 +19,10 @@ return array(
     'Ratchet\\RFC6455\\' => array($vendorDir . '/ratchet/rfc6455/src'),
     'Ratchet\\' => array($vendorDir . '/cboden/ratchet/src/Ratchet'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
-    'Models\\' => array($baseDir . '/src/models'),
+    'Models\\' => array($baseDir . '/models'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'Evenement\\' => array($vendorDir . '/evenement/evenement/src'),
-    'Core\\' => array($baseDir . '/src/core'),
-    'Controllers\\' => array($baseDir . '/src/controllers'),
+    'Core\\' => array($baseDir . '/core'),
+    'Controllers\\' => array($baseDir . '/controllers'),
+    'Auth\\' => array($baseDir . '/views/auth'),
 );

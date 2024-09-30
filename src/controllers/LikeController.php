@@ -1,10 +1,6 @@
 <?php
-require_once "../vendor/autoload.php";
-
 namespace Controllers;
-
 use Models\Like;
-
 
 class LikeController{
   private $likeModel;

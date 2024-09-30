@@ -1,5 +1,4 @@
 <?php
-require_once "../vendor/autoload.php";
 namespace Controllers;
 use Models\User;
 
@@ -75,6 +74,14 @@ class UserController{
   public function getProfileData($userId){
     try{
       return $this->userModel->getProfileDataFromUser($userId);
+    } catch (\PDOException $ex){
+      error_log("Error occurred while fetching the profile data from the user.");
+    }
+  }
+
+  public function getUserByName($username){
+    try{
+      return $this->userModel->findByUsername($username);
     } catch (\PDOException $ex){
       error_log("Error occurred while fetching the profile data from the user.");
     }

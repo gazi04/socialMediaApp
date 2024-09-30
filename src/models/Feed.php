@@ -1,8 +1,8 @@
 <?php
 namespace Models;
 
-require_once "../vendor/autoload.php";
 use Core\Database;
+use Core;
 
 
 class Feed{

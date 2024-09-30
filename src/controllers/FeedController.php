@@ -1,5 +1,4 @@
 <?php
-require_once "../vendor/autoload.php";
 namespace Controllers;
 use Models\Feed;
 
@@ -40,7 +39,7 @@ class FeedController{
       return;
     }
 
-    include BASE_PATH . "/src/components/post.php";
+    include BASE_PATH . "/components/post.php";
   }
 }
 ?>
