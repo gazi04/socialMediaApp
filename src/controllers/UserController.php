@@ -21,7 +21,7 @@ class UserController{
         echo "Error: The username is already taken. Please choose a different username.";
       } else {
         echo "PDOException: " . $ex->getMessage();
-        echo "Database error occurred. Please try again later.";
+        echo "Database error occurred. Please try again later." . $ex->getCode();
       }
       return false;
     }
