@@ -1,16 +1,22 @@
+/* FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+HU:wght@100..400&display=swap');
+
 :root {
+  /* COLORS */
+  --accent-color: #1616ca;
+
+  /* MISC */
   --menu-hover-overlay: 0, 0, 0, .05;
   --menu-vertical-line: 0, 0, 0, .17;
-  --accent-color: #1616ca;
 }
 
+/* GENERAL STYLE */
 body {
   font-family: "Open Sans";
   /* font-weight: 300; */
 }
 
-/* Styles for the login page */
+/* LOGIN PAGE */
 .login-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -22,6 +28,7 @@ body {
     ". login-form ."
     ". login-form ."
     ". . .";
+
   height: 100vh;
 }
 
@@ -39,6 +46,7 @@ body {
   .login-border {
     padding-inline: 1em;
     padding-block: 3em;
+
     border-width: 1px;
     border-color: #8f8f8f;
   }
@@ -64,25 +72,31 @@ body {
     max-width: 100%;
 
     input {
-      font-size: 18px;
       padding: 5px 10px;
       width: 95%;
-      outline: none;
-      background: #F2F2FB;
-      color: #000000;
-      border: 1px solid #C4D1EB;
       height: 1.4em;
+
+      background: #F2F2FB;
+      border: 1px solid #C4D1EB;
+
+      font-size: 18px;
+      color: #000000;
+
+      outline: none;
     }
 
     .submit_button {
-      background-color: var(--accent-color);
-      color: #ffffff;
-      font-size: 1.3em;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
       height: 40px;
       width: 100%;
+
+      background-color: var(--accent-color);
+
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #ffffff;
+
+      border-radius: 10px;
+      cursor: pointer;
     }
   }
 }
@@ -91,6 +105,7 @@ body {
   grid-area: login-with;
 }
 
+/* MAIN TEMPLATE */
 .container {  
   display: grid;
   grid-template-columns: 0.5fr 1.3fr 1.2fr;
@@ -102,19 +117,22 @@ body {
     "navbar content footer";
 }
 
-/* Style for the menu */
+/* MENU */
 .navbar { 
   grid-area: navbar; 
+
   padding-left: 0.5em;
 }
 
 .menu {
-  font-size: 0.85em;
-  list-style-type: none;
   padding: 0;
   width: 10.5%;
   position: fixed;
   height: 100%;
+
+  font-size: 0.85em;
+
+  list-style-type: none;
   overflow: auto;
 }
 
@@ -130,12 +148,14 @@ body {
   grid-template-areas: 
     "icon page";
 
-  color: #000; 
-  text-decoration: none;
-  transition: 0.3s;
   align-items: center;
   padding-inline: 1em;
   padding-block: 0.6em; 
+
+  color: #000; 
+
+  text-decoration: none;
+  transition: 0.3s;
   border-radius: 8px;
 }
 
@@ -149,11 +169,12 @@ body {
   padding-block: 2em;
 
   a {
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 20px;
     color: black;
     font-family: "Playwrite HU";
+    font-weight: 700;
+    font-size: 20px;
+
+    text-decoration: none;
   }
 }
 
@@ -181,15 +202,16 @@ body {
 }
 
 .vertical-line {
+  position: fixed;
   width: 2px;
   height: 100vh;
-  background-color: rgba(var(--menu-hover-overlay));
-  position: fixed;
   top: 0;
-  right: calc(100% - 12.5%); 
+  right: calc(100% - 17%); 
+
+  background-color: rgba(var(--menu-hover-overlay));
 }
 
-/* Style for the main content */
+/* MAIN CONTENT */
 .content { 
   grid-area: content;
 }
@@ -218,21 +240,25 @@ body {
     grid-area: profileImage;
 
     img {
-      clip-path: circle();
       width: 50%;
       float: right;
       padding-inline: 1em;
+
+      clip-path: circle();
     }
   }
 
   .username {
     grid-area: username;
+
     padding-block: 1em;
+
     font-weight: 500;
     font-size: large;
   }
 }
 
+/* POSTS DISPLAYED ON THE MAIN PAGE */
 .content > .post > .image {
   grid-area: image;
 
@@ -245,11 +271,13 @@ body {
 
 .content > .post > .caption {
   grid-area: caption;
+
   padding-inline: 3em;
 
   .intercation > a > img {
     width: 1.5em;
     padding-right: 0.4em;
+
     cursor: pointer;
     transition: opacity 0.3s ease-in-out,
       color 0.3s ease-in-out;
@@ -263,6 +291,122 @@ body {
     font-weight: 400;
   }
 }
+
+/* USER PROFILE */
+.container-profile {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "navbar content";
+
+}
+
+
+.user-profile {  
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.7fr 1.3fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "profile"
+    "posts";
+
+  padding-inline: 10em;
+}
+
+.profile { 
+  grid-area: profile;
+
+  display: grid; 
+  grid-template-columns: 0.7fr 1.3fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "profile-image profile-details";
+
+  position: absolute;
+}
+
+.profile-image {
+  grid-area: profile-image;
+  align-content: center;
+
+  img {
+    width: 223px;
+    padding-inline: 4em;
+
+    clip-path: circle();
+  }
+}
+
+.profile-details {
+  grid-area: profile-details;
+  padding-block: 2em;
+
+  .username {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-block: 1em;
+
+    .name { font-weight: 600; }
+
+    .options { padding-inline: 1.3em;}
+
+    .options > .follow {
+      padding: 0.3em 1.2em;
+
+      border: none;
+      background-color: #f2f2f2f2;
+      border-radius: 10px;
+      background-size: 100% 100%;
+
+      cursor: pointer;
+      outline: none;
+    }
+
+    .options > .follow:hover {
+      background-color: #dfddddf2;
+    }
+  }
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1em;
+    width: 55%;
+  }
+  .bio {
+    width: 65%;
+  }
+}
+
+#posts { 
+  grid-area: posts;
+
+}
+
+#posts > .row {
+  display: flex !important;
+  justify-content: space-around !important;
+
+  width: 100%;
+}
+
+#posts > .row > .post {
+  width: 30%;
+  padding: 10px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
 .recommendations { grid-area: recommendations; }
 
 .footer { grid-area: footer; }
