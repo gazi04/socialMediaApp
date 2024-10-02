@@ -10,16 +10,13 @@ class PostController{
   }
 
   public function createPost($userId, $image, $caption){
-    // Check file size
     if($image["size"] > 500000){
       echo "Sorry, your file is too large.";
       return false;
     }
 
-    // Convert image to binary data
     $imageData = file_get_contents($image["tmp_name"]);
 
-    // Save post to the database
     if($this->postModel->create($userId, $imageData, $caption)){
       echo "The file " . htmlspecialchars(basename($image["name"])) . " has been uploaded.";
       return true;
@@ -33,7 +30,7 @@ class PostController{
   public function deletePost($postId){
     try {
       return $this->postModel->delete($postId);
-    } catch (PDOException $ex){
+    } catch (\PDOException $ex){
       error_log("Error occurred by deleting a post from the database");
     }
   }
@@ -41,17 +38,17 @@ class PostController{
   public function getPostsByUserId($userId){
     try {
       return $this->postModel->getPostsByUserId($userId);
-    } catch (PDOException $ex){
+    } catch (\PDOException $ex){
       error_log("Error by getting all the posts from the database.");
     }
   }
 
   public function getAllPosts(){
-    return $this->postModel->getAllPosts();
-    // try{
-    // } catch (PDOException $ex){
-    //     error_log("Error: It seems we can't get the posts from the database.");
-    // }
+    try{
+      return $this->postModel->getAllPosts();
+    } catch (\PDOException $ex){
+      error_log("Error: It seems we can't get the posts from the database.");
+    }
   }
 
   public function getPostById($postId){
@@ -62,7 +59,7 @@ class PostController{
     try {
       return $this->postModel->update($postId, $caption);
     }
-    catch (PDOException $ex){
+    catch (\PDOException $ex){
       error_log("Error in the process of updating the post.");
     }
   }
