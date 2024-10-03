@@ -108,7 +108,7 @@ body {
 /* MAIN TEMPLATE */
 .container {  
   display: grid;
-  grid-template-columns: 0.5fr 1.3fr 1.2fr;
+  grid-template-columns: 0.5fr 1fr 0.7fr;
   grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -333,7 +333,9 @@ body {
 
 .profile-image {
   grid-area: profile-image;
-  align-content: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
   img {
     width: 223px;
@@ -377,7 +379,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding-block: 1em;
-    width: 55%;
+    width: 45%;
   }
   .bio {
     width: 65%;
@@ -390,8 +392,7 @@ body {
 }
 
 #posts > .row {
-  display: flex !important;
-  justify-content: space-around !important;
+  display: flex;
 
   width: 100%;
 }
