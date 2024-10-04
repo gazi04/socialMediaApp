@@ -64,19 +64,13 @@ if (!empty($_currentRow)) {
     foreach ($rows as $row) {
       echo "<div class='row'>";
       foreach ($row as $post) {
-        echo '<div class="post"><img src="data:image/jped;base64, '.base64_encode($post["Post"]).' " /></div>';
+        echo '<div class="post" onclick="openModal()"><img src="data:image/jped;base64, '.base64_encode($post["Post"]).' "  /></div>';
       }
       echo "</div>";
     }
     ?>
-    <div class="row">
-      <div class="post"><img src="../../assets/images/sunflower.jpg"/></div>
-      <div class="post"><img src="../../assets/images/sunflower.jpg"/></div>
-      <div class="post"><img src="../../assets/images/sunflower.jpg"/></div>
-    </div>
-    <div class="row">
-      <div class="post"><img src="../../assets/images/sunflower.jpg"/></div>
-      <div class="post"><img src="../../assets/images/sunflower.jpg"/></div>
-    </div>
   </div>
 </div>
+<dialog data-model id="postModal"> 
+  <button id="closeModal" data-close-modal>Close</button>
+</dialog>
