@@ -29,3 +29,20 @@ function likeOrDislikePost(postId, userId) {
   }
   request.send("likeHandler=true&postId=" + encodeURIComponent(postId) + "&userId=" + encodeURIComponent(userId))
 }
+
+// function openModal(postID) {
+//   const modal = document.getElementById("postModal"+postID);
+//   modal.showModal();
+//
+//   modal.addEventListener('click', function(event) {
+//     if (event.target === modal) {
+//       closeModal(postId);
+//     }
+//   });
+// }
+//
+// function closeModal(postID) {
+//   const modal = document.getElementById("postModal"+postID);
+//   modal.close();
+// }
+
