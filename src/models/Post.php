@@ -24,7 +24,7 @@ class Post{
   }
 
   public function getPostsByUserId($userId){
-    $this->db->query("SELECT `PostID`, `UserID`, Post`, `Caption` FROM `posts` WHERE `UserID` = :userId ORDER BY `CreateAt` DESC;");
+    $this->db->query("SELECT `PostID`, `Post`, `Caption` FROM `posts` WHERE `UserID` = :userId ORDER BY `CreateAt` DESC;");
     $this->db->bind(":userId", $userId);
     return $this->db->resultSet();
   }
