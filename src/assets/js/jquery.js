@@ -46,10 +46,8 @@ $(document).ready(function() {
     if($inputField.val().trim() !== ""){
       $postButton.prop("disabled", false);
       $postButton.addClass("enable");
-      console.log("there is something in the post input");
     } else {
       $postButton.prop("disabled", true);
-      console.log("nothing in the post input");
       $postButton.removeClass("enable");
     }
   });
