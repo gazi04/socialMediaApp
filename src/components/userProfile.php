@@ -64,13 +64,42 @@ if (!empty($_currentRow)) {
     foreach ($rows as $row) {
       echo "<div class='row'>";
       foreach ($row as $post) {
-        echo '<div class="post" onclick="openModal()"><img src="data:image/jped;base64, '.base64_encode($post["Post"]).' "  /></div>';
+        echo '<div class="post" onclick="openModal()"><img src="data:image/jped;base64, '.base64_encode($post["Post"]).' "/></div>';
       }
       echo "</div>";
     }
     ?>
   </div>
 </div>
-<dialog data-model id="postModal"> 
-  <button id="closeModal" data-close-modal>Close</button>
+
+<dialog data-model id="postModal">
+  <div class="post-modal">
+    <div class="post-image">
+      <img id="modalImage" src="../../assets/images/sunflower.jpg" />
+    </div>
+    <div class="post-interaction">
+      <div class="user"><img src="../../assets/images/sunflower.jpg"/> <span>gazi</span></div>
+
+      <div class="comments"></div>
+
+      <div class="interactions">
+        <div class="icons">
+          <div class="icon"><img src="../../assets/icons/heart.png" /></div>
+          <div class="icon"><img src="../../assets/icons/heart.png" /></div>
+          <div class="icon"><img src="../../assets/icons/heart.png" /></div>
+        </div>
+        <div class="text">
+          <span class="likes"> 33:</span> likes
+        </div>
+      </div>
+
+      <div class="add-comment">
+        <div class="input-container">
+          <input placeholder="Enter text" id="inputField" class="input-field" type="text">
+        </div>
+        <button id="postButton" disabled>Post</button>
+      </div>
+      <!-- <button id="closeModal" data-close-modal>Close</button> -->
+    </div>
+  </div>
 </dialog>
