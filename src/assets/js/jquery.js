@@ -37,4 +37,20 @@ $(document).ready(function() {
 
   // Assign the openModal function globally to be used in onclick attribute
   window.openModal = openModal;
+
+  // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL
+  const $inputField = $("#inputField");
+  const $postButton = $("#postButton");
+
+  $inputField.on("input", function(){
+    if($inputField.val().trim() !== ""){
+      $postButton.prop("disabled", false);
+      $postButton.addClass("enable");
+      console.log("there is something in the post input");
+    } else {
+      $postButton.prop("disabled", true);
+      console.log("nothing in the post input");
+      $postButton.removeClass("enable");
+    }
+  });
 });
