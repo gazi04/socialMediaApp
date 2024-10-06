@@ -87,5 +87,12 @@ class User{
 
     return $this->db->resultSet();
   }
+
+  public function getUserIdByPostId($postId){
+    $this->db->query("SELECT `UserID` FROM `posts` WHERE `PostID` = :postId;");
+
+    $this->db->bind(":postId", $postId);
+    return $this->db->resultSet();
+  }
 }
 ?>

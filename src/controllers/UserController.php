@@ -95,6 +95,11 @@ class UserController{
     return $this->userModel->doesUserIdExists($userId);
   }
 
+  public function getUserIdByPostId($postId){
+    try{ return $this->userModel->getUserIdByPostId($postId);}
+    catch(\PDOException $ex) { error_log($ex);}
+  }
+
   public function getSessionId($userId){
 
   }
