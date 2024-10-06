@@ -64,7 +64,18 @@ if (!empty($_currentRow)) {
     foreach ($rows as $row) {
       echo "<div class='row'>";
       foreach ($row as $post) {
-        echo '<div class="post" onclick="openModal()"><img src="data:image/jped;base64, '.base64_encode($post["Post"]).' "/></div>';
+        $caption = htmlspecialchars($post["Caption"], ENT_QUOTES, "UTF-8");
+        $username = htmlspecialchars($userController->getUsernameByPostId($post["PostID"]));
+        $likes = htmlspecialchars($likeController->getLikeCount($post["PostID"]));
+        $postImage = base64_encode($post["Post"]);
+
+        echo '<div class="post" onclick="openModal(this)" 
+        data-post-id='.$post["PostID"].'
+        data-username="'.$username.'"
+        data-caption="'.$caption.'"
+        data-likes="'.$likes.'"
+        data-image="data:image/jped;base64, '.$postImage.'"
+        ><img src="data:image/jped;base64, '.$postImage.'"/></div>';
       }
       echo "</div>";
     }
@@ -72,47 +83,29 @@ if (!empty($_currentRow)) {
   </div>
 </div>
 
-<dialog data-model id="postModal" style="border: none; width: 90%;">
+<dialog data-model id="postModal" style="border: none; width: 70%;">
   <div class="post-modal">
     <div class="post-image">
       <img id="modalImage" src="../../assets/images/sunflower.jpg" />
     </div>
     <div class="post-interaction">
-      <div class="user"><img src="../../assets/images/sunflower.jpg"/> <span>gazi</span></div>
+      <div class="user" id="modalUserProfile">
+        <div id="modalProfileImage"></div>
+        <span id="modalUsername"></span> <span id="modalCaption"></span>
+      </div>
 
       <div class="comments">
         <div class="comment">
           <div class="user-image"><img src="../../assets/images/sunflower.jpg"/></div>
           <div class="text">
-            <span class="username">gazi04</span>
+            <span class="username"></span>
             <span class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
           </div>
         </div>
         <div class="comment">
           <div class="user-image"><img src="../../assets/images/sunflower.jpg"/></div>
           <div class="text">
-            <span class="username">gazi04</span>
-            <span class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="user-image"><img src="../../assets/images/sunflower.jpg"/></div>
-          <div class="text">
-            <span class="username">gazi04</span>
-            <span class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="user-image"><img src="../../assets/images/sunflower.jpg"/></div>
-          <div class="text">
-            <span class="username">gazi04</span>
-            <span class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="user-image"><img src="../../assets/images/sunflower.jpg"/></div>
-          <div class="text">
-            <span class="username">gazi04</span>
+            <span class="username" id="modalUsername"></span>
             <span class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
           </div>
         </div>
@@ -125,7 +118,7 @@ if (!empty($_currentRow)) {
           <div class="icon"><img src="../../assets/icons/heart.png" /></div>
         </div>
         <div class="text">
-          <span class="likes"> 33:</span> likes
+          <span class="likes" id="modalLikes"></span>
         </div>
       </div>
 
