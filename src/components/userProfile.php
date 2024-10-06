@@ -72,7 +72,7 @@ if (!empty($_currentRow)) {
   </div>
 </div>
 
-<dialog data-model id="postModal" style="border: none;">
+<dialog data-model id="postModal" style="border: none; width: 90%;">
   <div class="post-modal">
     <div class="post-image">
       <img id="modalImage" src="../../assets/images/sunflower.jpg" />
