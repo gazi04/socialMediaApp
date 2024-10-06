@@ -95,10 +95,15 @@ class UserController{
     return $this->userModel->doesUserIdExists($userId);
   }
 
-  public function getUserIdByPostId($postId){
-    try{ return $this->userModel->getUserIdByPostId($postId);}
+  public function getUsernameByPostId($postId){
+    try{ return $this->userModel->getUsernameByPostId($postId);}
     catch(\PDOException $ex) { error_log($ex);}
   }
+
+public function getProfileImage($userId) {
+    try{ return $this->userModel->getProfilePictureByUserId($userId);}
+    catch(\PDOException $ex) { error_log($ex);}
+}
 
   public function getSessionId($userId){
 

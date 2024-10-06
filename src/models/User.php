@@ -11,6 +11,13 @@ class User{
     $this->db = new Database();
   }
 
+  public function getProfilePictureByUserId($userId) {
+    $this->db->query("SELECT `ProfileImage` FROM `users` WHERE `UserID` = :userId;");
+    $this->db->bind(":userId", $userId);
+    $result = $this->db->single();
+    return $result["ProfileImage"];
+  }
+
   public function create($username, $email, $password){
     $this->db->query("INSERT INTO users (`Username`, `Password`, `Email`, `Bio`) VALUES (:username, :password, :email, '')");
     $this->db->bind(":username", $username);
@@ -88,11 +95,11 @@ class User{
     return $this->db->resultSet();
   }
 
-  public function getUserIdByPostId($postId){
-    $this->db->query("SELECT `UserID` FROM `posts` WHERE `PostID` = :postId;");
-
+  public function getUsernameByPostId($postId){
+    $this->db->query("SELECT Username FROM posts INNER JOIN users ON posts.UserID = users.UserID WHERE PostID = :postId; ");
     $this->db->bind(":postId", $postId);
-    return $this->db->resultSet();
+    $result = $this->db->single();
+    return $result["Username"];
   }
 }
 ?>
