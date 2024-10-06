@@ -308,7 +308,7 @@ body {
 .user-profile {  
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.7fr 1.3fr;
+  grid-template-rows: 0.5fr 1.5fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -327,8 +327,6 @@ body {
   gap: 0px 0px; 
   grid-template-areas: 
     "profile-image profile-details";
-
-  position: absolute;
 }
 
 .profile-image {
@@ -407,6 +405,134 @@ body {
   }
 }
 
+/* POST MODAL */
+.post-modal {
+  display: grid; 
+  grid-template-columns: 1.23fr 0.77fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "post-image post-interaction"; 
+
+  height: 80%;
+}
+
+.post-modal > .post-image {
+  grid-area: post-image;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  img {
+    width: 96%;
+  }
+}
+
+.post-modal > .post-interaction {
+  grid-area: post-interaction;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 0.4fr 2.5fr 0.7fr 0.4fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "user"
+    "comments"
+    "interactions"
+    "add-comment"; 
+
+  .user {
+    grid-area: user;
+    display: flex;
+    align-items: center;
+    
+    img {
+      width: 125px;
+      clip-path: circle();
+    }
+  }
+
+  .comments {
+    grid-area: comments;
+    margin-block: 1em;
+    height: 300px;
+    overflow: scroll;
+  }
+
+  .comment {
+    display: grid; 
+    grid-template-columns: 0.2fr 1.8fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "user-image comment-text"; 
+
+    .user-image {
+      grid-area: user-image;
+
+      img {
+        width: 60px;
+        clip-path: circle();
+      }
+    }
+
+    .text {
+      grid-area: comment-text;
+      .username { font-weight: 600;}
+    }
+  }
+
+  .interactions {
+    grid-area: interactions;
+
+    .icons {
+      display: flex;
+      .icon { margin-inline: 0.3em; }
+    }
+
+    .text { padding-inline: 0.5em;}
+  }
+
+  .add-comment {
+    grid-area: add-comment;
+    display: flex;
+    justify-content: space-between;
+
+    .input-container {
+      position: relative;
+      width: 93%;
+
+      .input-field {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+      }
+    }
+
+    #postButton {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      background-color: transparent;
+      border: none;
+      color: #b4b4bb;
+      font-weight: 600;
+      cursor: not-allowed;
+    }
+
+    #postButton.enable {
+      cursor: pointer;
+      color: #3125d4;
+    }
+
+    #postButton.enable:hover {
+      color: black;
+    }
+  }
+}
 
 .recommendations { grid-area: recommendations; }
 
