@@ -28,6 +28,7 @@ $profileUserId = $_SESSION["userId"];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
+    <script src="../../assets/js/jquery.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -43,6 +44,7 @@ $profileUserId = $_SESSION["userId"];
     </div>
 
     <script type="text/javascript" src="../../assets/js/script.js"></script>
+    <script src="../../assets/js/jquery.js"></script>
   </body>
 </html>
 
