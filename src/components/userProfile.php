@@ -66,7 +66,6 @@ if (!empty($_currentRow)) {
       foreach ($row as $post) {
         $caption = htmlspecialchars($post["Caption"], ENT_QUOTES, "UTF-8");
         $username = htmlspecialchars($userController->getUsernameByPostId($post["PostID"]));
-        $likes = htmlspecialchars($likeController->getLikeCount($post["PostID"]));
         $postImage = base64_encode($post["Post"]);
 
         echo '<div class="post" onclick="openModal(this)" 
@@ -74,7 +73,6 @@ if (!empty($_currentRow)) {
         data-user-id='.$_SESSION["userId"].'
         data-username="'.$username.'"
         data-caption="'.$caption.'"
-        data-likes="'.$likes.'"
         data-image="data:image/jped;base64, '.$postImage.'"
         ><img src="data:image/jped;base64, '.$postImage.'"/></div>';
       }

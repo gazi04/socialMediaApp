@@ -28,7 +28,6 @@ $(document).ready(function() {
           likeIcon.prop("src", "../../assets/icons/redHeart.png");
         } else { likeIcon.prop("src", "../../assets/icons/heart.png"); }
 
-        console.log(response.likes);
         likeSpan.empty();
         likeSpan.text(response.likes);
       },
@@ -56,7 +55,7 @@ $(document).ready(function() {
 
     $.post("../../components/likeHandler.php", 
       {
-        likeHandler: true,
+        likeStatus: true,
         postId: postId,
         userId: userId
       }, 
