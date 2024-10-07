@@ -46,6 +46,8 @@ $(document).ready(function() {
     const imageSrc = $(postElement).data('image');
     const profilePictureSrc = $(postElement).data('profile-picture')
 
+    $(".likeButton").attr("data-postid", postId);
+
     $("#modalProfileImage").empty();
     $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
 
@@ -68,7 +70,7 @@ $(document).ready(function() {
         $("#likes").text(response.likes);
       },
       "json"
-    )
+    );
 
     // $('#modalUserProfile').html(`<img src="data:image/jped;base64, ${profilePictureSrc}"/> <b>${username}</b> ${caption}`);
 
