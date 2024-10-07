@@ -18,7 +18,7 @@ class Comment{
   }
 
   public function getCommentByPostId($postId){
-    $this->db->query("SELECT postcomments.*, users.Username FROM postcomments JOIN users ON postcomments.UserID = users.UserID WHERE PostID = :postId ORDER BY CreateAt DESC");
+    $this->db->query("SELECT postcomments.*, users.Username, users.ProfileImage FROM postcomments JOIN users ON postcomments.UserID = users.UserID WHERE PostID = :postId ORDER BY CreateAt DESC");
     $this->db->bind(":postId", $postId);
     return $this->db->resultSet();
   }
