@@ -71,6 +71,7 @@ if (!empty($_currentRow)) {
 
         echo '<div class="post" onclick="openModal(this)" 
         data-post-id='.$post["PostID"].'
+        data-user-id='.$_SESSION["userId"].'
         data-username="'.$username.'"
         data-caption="'.$caption.'"
         data-likes="'.$likes.'"
@@ -112,14 +113,15 @@ if (!empty($_currentRow)) {
       </div>
 
       <div class="interactions">
-        <div class="icons">
-          <div class="icon"><img src="../../assets/icons/heart.png" /></div>
-          <div class="icon"><img src="../../assets/icons/heart.png" /></div>
-          <div class="icon"><img src="../../assets/icons/heart.png" /></div>
-        </div>
-        <div class="text">
-          <span class="likes" id="modalLikes"></span>
-        </div>
+        <a class="likeButton icon" 
+          data-postid="<?php echo $post["PostID"]; ?>"
+          data-userid="<?php echo $_SESSION["userId"]; ?>"
+        >
+          <img id="likeIcon" src=<?php echo $likeController->isLiked($_SESSION["userId"], $post["PostID"])? "../../assets/icons/redHeart.png": "../../assets/icons/heart.png";?> />
+        </a>
+        <a class="icon" style="margin-inline: 0.4em;"><img src="../../assets/icons/share.png" /></a>
+        <a class="icon"><img src="../../assets/icons/send.png" /></a>
+        <div class="like-counts">Likes: <span id="likes"></span></div>
       </div>
 
       <div class="add-comment">

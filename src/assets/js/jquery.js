@@ -12,33 +12,10 @@ $(document).ready(function() {
   );
 
   $(".likeButton").on("click", function(){
-    // $.post("../../components/likeHandler.php", 
-    //   {
-    //     likeHandler: true,
-    //     postId: $(this).data("postId"),
-    //     userId: $(this).data("userId")
-    //   }, 
-    //   function(response) {
-    //     console.log(response);
-    //     console.log("hello");
-    //
-    //     // if (response.isLiked) {
-    //     //   $("#likeIcon" + postId).attr("src", "../../assets/icons/redHeart.png");
-    //     // } else {
-    //     //   $("#likeIcon" + postId).attr("src", "../../assets/icons/heart.png");
-    //     // }
-    //     //
-    //     // $("#likes" + postId).text(response.likes);
-    //   },
-    //   // "json"
-    // );
-
     const postId = $(this).data("postid");
     const userId = $(this).data("userid");
     const likeIcon = $(this).children("#likeIcon");
     const likeSpan = $(this).siblings(".like-counts").children("#likes");
-    console.log(postId);
-    console.log(userId);
 
     $.post("../../components/likeHandler.php", 
       {
@@ -47,11 +24,11 @@ $(document).ready(function() {
         userId: userId
       }, 
       function(response) {
-        console.log("Success:", response); // Success case
         if(response.isLiked){
           likeIcon.prop("src", "../../assets/icons/redHeart.png");
         } else { likeIcon.prop("src", "../../assets/icons/heart.png"); }
 
+        console.log(response.likes);
         likeSpan.empty();
         likeSpan.text(response.likes);
       },
@@ -64,8 +41,8 @@ $(document).ready(function() {
 
   function openModal(postElement) {
     const postId = $(postElement).data('post-id');
+    const userId = $(postElement).data("user-id");
     const caption = $(postElement).data('caption');
-    const likes = $(postElement).data('likes');
     const username = $(postElement).data('username');
     const imageSrc = $(postElement).data('image');
     const profilePictureSrc = $(postElement).data('profile-picture')
@@ -75,9 +52,24 @@ $(document).ready(function() {
 
     $('#modalImage').prop('src', imageSrc);
     $('#modalCaption').text(caption);
-    $('#modalLikes').text(`Likes: ${likes}`);
     $('#modalUsername').text(username);
 
+    $.post("../../components/likeHandler.php", 
+      {
+        likeHandler: true,
+        postId: postId,
+        userId: userId
+      }, 
+      function(response) {
+        if(response.isLiked){
+          $("#likeIcon").prop("src", "../../assets/icons/redHeart.png");
+        } else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
+
+        $("#likes").empty();
+        $("#likes").text(response.likes);
+      },
+      "json"
+    )
 
     // $('#modalUserProfile').html(`<img src="data:image/jped;base64, ${profilePictureSrc}"/> <b>${username}</b> ${caption}`);
 
