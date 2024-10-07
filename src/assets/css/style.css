@@ -440,6 +440,7 @@ body {
     "interactions"
     "add-comment"; 
 
+
   .user {
     grid-area: user;
     display: flex;
@@ -448,6 +449,11 @@ body {
     img {
       width: 125px;
       clip-path: circle();
+    }
+
+    #modalUsername {
+      font-weight: 600;
+      padding-inline: 0.4em;
     }
   }
 
@@ -465,6 +471,7 @@ body {
     gap: 0px 0px; 
     grid-template-areas: 
       "user-image comment-text"; 
+    margin-block: 0.5em;
 
     .user-image {
       grid-area: user-image;
@@ -483,6 +490,11 @@ body {
 
   .interactions {
     grid-area: interactions;
+
+    a > img{
+      width: 1.7em;
+      margin-inline: 0.3em;
+    }
 
     .icons {
       display: flex;
