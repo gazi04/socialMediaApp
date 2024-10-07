@@ -61,8 +61,11 @@ if (isset($_POST["dislikePost"]) && isset($_POST["postId"]) && isset($_POST["use
   </div>
   <div class="caption">
     <div class="intercation">
-      <a onclick="likeOrDislikePost(<?php echo $post["PostID"]; ?>, <?php echo $_SESSION["userId"]; ?>)">
-        <img id="likeIcon<?php echo $post["PostID"]; ?>" src=<?php echo $likeController->isLiked($_SESSION["userId"], $post["PostID"])? "../../assets/icons/redHeart.png": "../../assets/icons/heart.png";?> />
+      <a class="likeButton" 
+        data-postid="<?php echo $post["PostID"]; ?>"
+        data-userid="<?php echo $_SESSION["userId"]; ?>"
+      >
+        <img id="likeIcon" src=<?php echo $likeController->isLiked($_SESSION["userId"], $post["PostID"])? "../../assets/icons/redHeart.png": "../../assets/icons/heart.png";?> />
       </a>
       <a><img src="../../assets/icons/share.png" /></a>
       <a><img src="../../assets/icons/send.png" /></a>

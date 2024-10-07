@@ -12,5 +12,9 @@ if (isset($_POST["likeHandler"]) && isset($_POST["postId"]) && isset($_POST["use
   ]);
 
   exit();
+} else {
+    // Handle the case where required data is missing
+    echo json_encode(["error" => "Invalid request"]);
+    exit();
 }
 ?>
