@@ -41,8 +41,7 @@ if (!empty($_currentRow)) {
       <div class="username">
         <div class="name"><?php echo $userProfileData["Username"]; ?></div>
         <div class="options">
-          <a class="follow" style="margin-right: 5px;">Follow</a>
-          <a class="follow">Follow</a>
+          <a class="follow" style="margin-right: 5px;">Edit</a>
         </div>
       </div>
       <div class="stats"> 
@@ -51,12 +50,7 @@ if (!empty($_currentRow)) {
         <div id="number-of-followings"><?php echo $numberOfFollowing; ?> following</div>
       </div>
       <div class="bio">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-          test,
-          molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-          numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-        </p>
+        <p><?php echo $userProfileData["Bio"]; ?></p>
       </div>
     </div>
   </div>
