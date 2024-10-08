@@ -15,7 +15,19 @@ class CommentController{
 
 
   public function getCommentByPostId($postId){
-    return $this->commentModel->getCommentByPostId($postId);
+    $comments = $this->commentModel->getCommentByPostId($postId);
+
+    foreach ($comments as $comment) {
+      echo '
+        <div class="comment">
+          <div class="user-image"><img src="data:image/jped;base64, '.base64_encode($comment["ProfileImage"]).'"/></div>
+          <div class="text">
+            <span class="username">'.$comment["Username"].'</span>
+            <span class="comment-text">'.$comment["Comment"].'</span>
+          </div>
+        </div>
+      ';
+    }
   }
 
 

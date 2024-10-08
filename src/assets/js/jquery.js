@@ -44,7 +44,6 @@ $(document).ready(function() {
     const caption = $(postElement).data('caption');
     const username = $(postElement).data('username');
     const imageSrc = $(postElement).data('image');
-    const profilePictureSrc = $(postElement).data('profile-picture')
 
     $(".likeButton").attr("data-postid", postId);
 
@@ -54,6 +53,16 @@ $(document).ready(function() {
     $('#modalImage').prop('src', imageSrc);
     $('#modalCaption').text(caption);
     $('#modalUsername').text(username);
+
+    $.post("../../components/getComments.php",
+      {
+        getComments: true,
+        postId: postId
+      },
+      function(response) {
+        $("#comments").html(response)
+      }
+    )
 
     $.post("../../components/likeHandler.php", 
       {

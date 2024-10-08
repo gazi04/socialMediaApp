@@ -30,6 +30,8 @@ foreach ($posts as $post) {
 if (!empty($_currentRow)) {
   $rows[] = $_currentRow;
 }
+
+
 ?>
 <div class="user-profile">
   <div class="profile">
@@ -93,22 +95,7 @@ if (!empty($_currentRow)) {
         <span id="modalUsername"></span> <span id="modalCaption"></span>
       </div>
 
-      <div class="comments">
-        <div class="comment">
-          <div class="user-image"><img src="../../assets/images/sunflower.jpg"/></div>
-          <div class="text">
-            <span class="username"></span>
-            <span class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="user-image"><img src="../../assets/images/sunflower.jpg"/></div>
-          <div class="text">
-            <span class="username" id="modalUsername"></span>
-            <span class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
-          </div>
-        </div>
-      </div>
+      <div id="comments"></div>
 
       <div class="interactions">
         <a class="likeButton icon" 
