@@ -2,6 +2,7 @@
 namespace Controllers;
 use Models\User;
 
+
 class UserController{
   private $userModel;
 
@@ -14,7 +15,7 @@ class UserController{
     // $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
 
     try{
-      return $this->userModel->create($data["username"], $data["email"], $data["password"]);
+      return $this->userModel->create($data["username"], $data["email"], $data["password"], file_get_contents(\BASE_PATH."/assets/images/defaultUser.jpg"));
     }
     catch(\PDOException $ex){
       if ($ex->getCode() == 23000) {

@@ -18,11 +18,12 @@ class User{
     return $result["ProfileImage"];
   }
 
-  public function create($username, $email, $password){
-    $this->db->query("INSERT INTO users (`Username`, `Password`, `Email`, `Bio`) VALUES (:username, :password, :email, '')");
+  public function create($username, $email, $password, $image){
+    $this->db->query("INSERT INTO users (`Username`, `Password`, `Email`, `Bio`, `ProfileImage`) VALUES (:username, :password, :email, '', :profileImage)");
     $this->db->bind(":username", $username);
     $this->db->bind(":email", $email);
     $this->db->bind(":password", $password);
+    $this->db->bind(":profileImage", $image);
     return $this->db->execute();
   }
 
