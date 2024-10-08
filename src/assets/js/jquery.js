@@ -46,6 +46,7 @@ $(document).ready(function() {
     const imageSrc = $(postElement).data('image');
 
     $(".likeButton").attr("data-postid", postId);
+    $("#postCommentButton").attr("data-postid", postId)
 
     $("#modalProfileImage").empty();
     $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
@@ -62,7 +63,7 @@ $(document).ready(function() {
       function(response) {
         $("#comments").html(response)
       }
-    )
+    );
 
     $.post("../../components/likeHandler.php", 
       {
@@ -89,23 +90,49 @@ $(document).ready(function() {
     // $('#likeButton').data('post-id', postId);
   }
 
+  // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
   $(window).on('click', function(e) {
     if ($(e.target).is('#postModal')) {
       $('#postModal')[0].close();
     }
   });
 
+  // STORES THE COMMENT IN THE DATABASE AND REFRESHES THE LISTS OF COMMENTS
+  $("#postCommentButton").on("click", function() {
+    const comment = $(this).siblings(".input-container").children("#inputField");
+
+    $.post("../../components/postComment.php",
+      {
+        postComment: true,
+        postId: $(this).data("postid"),
+        comment: comment.val()
+      }
+    );
+
+    $.post("../../components/getComments.php",
+      {
+        getComments: true,
+        postId: $(this).data("postid")
+      },
+      function(response) {
+        $("#comments").html(response)
+      }
+    );
+
+    comment.val("");
+  });
+
   // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL
   const $inputField = $("#inputField");
-  const $postButton = $("#postButton");
+  const $postCommentButton = $("#postCommentButton");
 
   $inputField.on("input", function(){
     if($inputField.val().trim() !== ""){
-      $postButton.prop("disabled", false);
-      $postButton.addClass("enable");
+      $postCommentButton.prop("disabled", false);
+      $postCommentButton.addClass("enable");
     } else {
-      $postButton.prop("disabled", true);
-      $postButton.removeClass("enable");
+      $postCommentButton.prop("disabled", true);
+      $postCommentButton.removeClass("enable");
     }
   });
 

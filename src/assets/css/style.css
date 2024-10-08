@@ -524,7 +524,7 @@ body {
       }
     }
 
-    #postButton {
+    #postCommentButton {
       display: flex;
       align-items: center;
       padding: 10px 15px;
@@ -535,12 +535,12 @@ body {
       cursor: not-allowed;
     }
 
-    #postButton.enable {
+    #postCommentButton.enable {
       cursor: pointer;
       color: #3125d4;
     }
 
-    #postButton.enable:hover {
+    #postCommentButton.enable:hover {
       color: black;
     }
   }

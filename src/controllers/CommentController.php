@@ -9,7 +9,7 @@ class CommentController{
     $this->commentModel = new Comment();
   }
 
-  public function commentPostById($userId, $postId, $comment){
+  public function commentPost($userId, $postId, $comment){
     return $this->commentModel->commentPost($userId, $postId, $comment);
   }
 

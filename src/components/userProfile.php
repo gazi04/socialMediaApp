@@ -107,7 +107,7 @@ if (!empty($_currentRow)) {
         <div class="input-container">
           <input placeholder="Enter text" id="inputField" class="input-field" type="text">
         </div>
-        <button id="postButton" disabled>Post</button>
+        <button id="postCommentButton" disabled>Post</button>
       </div>
       <!-- <button id="closeModal" data-close-modal>Close</button> -->
     </div>
