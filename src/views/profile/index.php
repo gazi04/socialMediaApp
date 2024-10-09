@@ -10,7 +10,7 @@
     <script src="../../assets/js/jquery.min.js"></script>
   </head>
   <body>
-    <div class="container-profile">
+    <div class="container-without-leftbar">
       <div class="navbar"><?php require(BASE_PATH."/components/navbar.php"); ?></div>
       <div class="content"><?php require(BASE_PATH."/components/userProfile.php"); ?></div>
     </div>

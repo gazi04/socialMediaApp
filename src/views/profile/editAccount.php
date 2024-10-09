@@ -15,7 +15,7 @@
       <div class="edit-profile-content">
         <h2>Edit Profile</h2>
         <div class="change-profile-image">
-          <div class="current-image">
+          <div class="current-user">
             <img src="../../assets/images/sunflower.jpg" />
             <span class="username">gazzmend.h</span>
           </div>
@@ -27,7 +27,7 @@
           <textarea placeholder="Bio"></textarea>
         </div>
 
-        <button id="submitProfile">Submit</button>
+        <div class="submit-button"><button id="submitProfile">Submit</button></div>
       </div>
     </div>
     <script src="../../assets/js/jquery.js"></script>
