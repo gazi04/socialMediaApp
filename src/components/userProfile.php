@@ -41,7 +41,7 @@ if (!empty($_currentRow)) {
       <div class="username">
         <div class="name"><?php echo $userProfileData["Username"]; ?></div>
         <div class="options">
-          <a class="follow" style="margin-right: 5px;">Edit</a>
+          <a id="editProfile" href="editAccount.php">Edit</a>
         </div>
       </div>
       <div class="stats"> 
