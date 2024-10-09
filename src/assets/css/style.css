@@ -360,12 +360,13 @@ body {
     } 
   }
 
-  .edit-bio > textarea{
+  .edit-bio > textarea {
     width: 100%;
     max-height: 133px;
 
     resize: none;
   }
+
 
   .submit-button {
     display: flex;
@@ -373,15 +374,18 @@ body {
     margin-block: 1em;
 
     button {
-      background-color: #1652F0;
-      border: 1px solid #1652F0;
+      background-color: #14a7f0;
+      border: 1px solid #14a7f0;
       border-radius: 8px;
-      color: #FFFFFF;
-      cursor: pointer;
-      font-size: 14px;
+
       line-height: 1.15;
       padding: 12px 16px;
+
+      color: #FFFFFF;
+      font-size: 14px;
       text-align: center;
+
+      cursor: not-allowed;
     }
 
     button:hover {
@@ -393,6 +397,11 @@ body {
       background-color: #0039D7;
       border-color: #0039D7;
     } 
+
+    .enable {
+      background-color: #1652F0;
+      cursor: pointer;
+    }
   }
 }
 

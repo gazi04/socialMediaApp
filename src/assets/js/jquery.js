@@ -122,7 +122,7 @@ $(document).ready(function() {
     comment.val("");
   });
 
-  // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL
+  // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL ACCORDING IF THERE IS ANY INPUT
   const $inputField = $("#inputField");
   const $postCommentButton = $("#postCommentButton");
 
@@ -135,6 +135,20 @@ $(document).ready(function() {
       $postCommentButton.removeClass("enable");
     }
   });
+
+  // ENABLE AND DISABLE THE SUBMIT BUTTON FOR THE EDIT ACCOUNT PAGE ACCORDING IF THERE IS ANY INPUT
+  const $bioTextarea = $("#bioInput");
+  const $editProfileSubmit = $("#submitProfile");
+
+  $bioTextarea.on("input", function(){
+    if($bioTextarea.val().trim() !== ""){
+      $editProfileSubmit.prop("disabled", false);
+      $editProfileSubmit.addClass("enable");
+    } else {
+      $editProfileSubmit.prop("disabled", true);
+      $editProfileSubmit.removeClass("enable");
+    }
+  })
 
   // assign the openmodal function globally to be used in onclick attribute
   window.openModal = openModal;
