@@ -24,7 +24,7 @@
 
         <h2>Bio</h2>
         <div class="edit-bio">
-          <textarea placeholder="Bio"></textarea>
+          <textarea placeholder="Bio" rows="5" cols="40"></textarea>
         </div>
 
         <div class="submit-button"><button id="submitProfile">Submit</button></div>

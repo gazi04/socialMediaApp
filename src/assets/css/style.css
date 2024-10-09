@@ -321,24 +321,78 @@ body {
 
       img{
         width: 223px;
-        padding-inline: 4em;
 
+        cursor: pointer;
         clip-path: circle();
       }
+
+      img:hover {
+        webkit-filter: blur(2px);
+        filter: blur(2px);
+      }
     }
+
+    #submitImage > a {
+      background-color: #1652F0;
+      border: 1px solid #1652F0;
+      border-radius: 8px;
+
+      line-height: 1.15;
+      padding: 12px 16px;
+      margin-block: 1em;
+      text-align: center;
+
+      font-size: 14px;
+      color: #FFFFFF;
+
+      cursor: pointer;
+      transition: all 80ms ease-in-out;
+    }
+
+    #submitImage > a:hover {
+      background-color: #0A46E4;
+      border-color: #0A46E4;
+    }
+
+    #submitImage > a:active {
+      background-color: #0039D7;
+      border-color: #0039D7;
+    } 
   }
 
-  .edit-bio {
+  .edit-bio > textarea{
+    width: 100%;
+    max-height: 133px;
 
+    resize: none;
   }
 
   .submit-button {
     display: flex;
     justify-content: end;
-   
+    margin-block: 1em;
+
     button {
-      width: 30%;
+      background-color: #1652F0;
+      border: 1px solid #1652F0;
+      border-radius: 8px;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1.15;
+      padding: 12px 16px;
+      text-align: center;
     }
+
+    button:hover {
+      background-color: #0A46E4;
+      border-color: #0A46E4;
+    }
+
+    button:active {
+      background-color: #0039D7;
+      border-color: #0039D7;
+    } 
   }
 }
 
