@@ -150,6 +150,11 @@ $(document).ready(function() {
     }
   })
 
+  // EVERYTIME THE USER CLICK THE PROFILE IMAGE IT WOULD ACTUALLY CLICK THE BUTTON TO CHANGE THE IMAGE
+  $(".current-user").children("img").on("click", function(){ 
+    $("#submitImage a").click();
+  });
+
   // assign the openmodal function globally to be used in onclick attribute
   window.openModal = openModal;
 });
