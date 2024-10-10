@@ -152,7 +152,26 @@ $(document).ready(function() {
 
   // EVERYTIME THE USER CLICK THE PROFILE IMAGE IT WOULD ACTUALLY CLICK THE BUTTON TO CHANGE THE IMAGE
   $(".current-user").children("img").on("click", function(){ 
-    $("#submitImage a").click();
+    $("#changePhotoLink a").click();
+  });
+
+  $("#changePhotoLink").on("click", function(e) {
+    e.preventDefault();
+    $("#imageInput").click();
+  });
+
+  // CHANGE PROFILE IMAGE TO THE IMAGE THAT THE USER UPLOADS
+  $("#imageInput").on("change", function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        $(".current-user").children("img").attr("src", e.target.result);
+      }
+      reader.readAsDataURL(file);
+    }
+    $editProfileSubmit.prop("disabled", false);
+    $editProfileSubmit.addClass("enable");
   });
 
   // assign the openmodal function globally to be used in onclick attribute
