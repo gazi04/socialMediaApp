@@ -320,10 +320,11 @@ body {
       align-items: center;
 
       img{
-        width: 223px;
-
-        cursor: pointer;
-        clip-path: circle();
+        width: 150px;
+        height: 150px;
+        margin-inline: 0.4em;
+        object-fit: cover;
+        border-radius: 50%;
       }
 
       img:hover {
