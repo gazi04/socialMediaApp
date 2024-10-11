@@ -63,7 +63,7 @@ class UserController{
       }       
     }
 
-    $result = $this->userModel->update($userId, $newUsername, $imageData, $bio);
+    $result = $this->userModel->updateBioAndImage($userId, $imageData, $bio);
 
     if($result){
       $_SESSION["username"] = $newUsername;

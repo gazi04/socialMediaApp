@@ -46,16 +46,15 @@ class User{
     return $result["count"] > 0;
   }
 
-  public function update($userId, $username, $imageData = null, $bio){
+  public function updateBioAndImage($userId, $imageData = null, $bio){
     if ($imageData){
-      $this->db->query("UPDATE users SET Username = :username, ProfileImage = :imageData, Bio = :bio WHERE UserID = :userId");
+      $this->db->query("UPDATE users SET  ProfileImage = :imageData, Bio = :bio WHERE UserID = :userId");
       $this->db->bind(":imageData", $imageData, \PDO::PARAM_LOB);
     } else{
-      $this->db->query("UPDATE users SET Username = :username, Bio = :bio WHERE UserID = :userId");
+      $this->db->query("UPDATE users SET  Bio = :bio WHERE UserID = :userId");
     }
 
     $this->db->bind(":userId", $userId);
-    $this->db->bind(":username", $username);
     $this->db->bind(":bio", $bio);
 
     return $this->db->execute();
