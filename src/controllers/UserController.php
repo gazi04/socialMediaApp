@@ -52,7 +52,7 @@ class UserController{
     return false;
   }
 
-  public function updateProfile($userId, $profileImage = null, $newUsername, $bio){
+  public function updateBioAndImage($userId, $profileImage = null, $bio){
     $imageData = null;
     if($profileImage && $profileImage["tmp_name"]){
       $imageData = file_get_contents($profileImage["tmp_name"]);
@@ -64,10 +64,6 @@ class UserController{
     }
 
     $result = $this->userModel->updateBioAndImage($userId, $imageData, $bio);
-
-    if($result){
-      $_SESSION["username"] = $newUsername;
-    }
 
     return $result;
   }
