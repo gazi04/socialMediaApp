@@ -58,8 +58,7 @@ class UserController{
       $imageData = file_get_contents($profileImage["tmp_name"]);
 
       if($profileImage["size"] > 500000){
-        echo "Your profile image is too large";
-        return;
+        return "Your profile image is too large";
       }       
     }
 

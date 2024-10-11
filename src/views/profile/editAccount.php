@@ -6,6 +6,12 @@ require_once "../auth/check.php";
 
 $userController = new UserController;
 $user = $userController->getProfileData($_SESSION["userId"]);
+
+if (isset($_POST["editAccount"]) && isset($_POST["bio"])) {
+  $image = isset($_FILES["image"]) ? $_FILES["image"] : null;
+  $result = $userController->updateBioAndImage($_SESSION["userId"], $image, $_POST["bio"]);
+  exit();
+}
 ?>
 
 <!DOCTYPE HTML>

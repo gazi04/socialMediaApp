@@ -169,11 +169,38 @@ $(document).ready(function() {
         $(".current-user").children("img").attr("src", e.target.result);
       }
       reader.readAsDataURL(file);
+      $editProfileSubmit.prop("disabled", false);
+      $editProfileSubmit.addClass("enable");
     }
-    $editProfileSubmit.prop("disabled", false);
-    $editProfileSubmit.addClass("enable");
   });
 
-  // assign the openmodal function globally to be used in onclick attribute
+  $("#submitProfile").on("click", function(e) {
+    e.preventDefault();
+
+    const bio = $("#bioInput").val();
+    const imageFile = $("#imageInput")[0].files[0];
+
+    const formData = new FormData();
+    formData.append("editAccount", true);
+    formData.append("bio", bio);
+    formData.append("image", imageFile);
+
+    $.ajax({
+      url: "editAccount.php",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        console.log(response)
+        window.location.href = "index.php";
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error:", textStatus, errorThrown);
+      }
+    });
+  });
+
+  // ASSIGN THE OPENMODAL FUNCTION GLOBALLY TO BE USED IN ONCLICK ATTRIBUTE
   window.openModal = openModal;
 });
