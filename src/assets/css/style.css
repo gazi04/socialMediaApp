@@ -439,10 +439,11 @@ body {
   align-items: center;
 
   img {
-    width: 223px;
-    padding-inline: 4em;
-
-    clip-path: circle();
+      width: 200px;
+      height: 200px;
+      margin-inline: 0.4em;
+      object-fit: cover;
+      border-radius: 50%;
   }
 }
 
