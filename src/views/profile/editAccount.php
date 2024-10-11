@@ -1,4 +1,12 @@
-<?php require_once "../auth/check.php"; ?>
+<?php
+
+use Controllers\UserController;
+
+require_once "../auth/check.php";
+
+$userController = new UserController;
+$user = $userController->getProfileData($_SESSION["userId"]);
+?>
 
 <!DOCTYPE HTML>
 <html>
@@ -16,18 +24,19 @@
         <h2>Edit Profile</h2>
         <div class="change-profile-image">
           <div class="current-user">
-            <img src="../../assets/images/sunflower.jpg" />
-            <span class="username">gazzmend.h</span>
+            <img src="data:image/jpeg;base64, <?php echo base64_encode($user["ProfileImage"]); ?>" />
+            <span class="username"><?php echo $user["Username"]; ?></span>
           </div>
-          <div id="submitImage"><a>Change photo</a></div> 
+          <input type="file" id="imageInput" accept="image/*" style="display: none;" />
+          <div id="changePhotoLink"><a>Change photo</a></div> 
         </div>
 
         <h2>Bio</h2>
         <div class="edit-bio">
-          <textarea id="bioInput" placeholder="Bio" rows="5" cols="40"></textarea>
+          <textarea id="bioInput" placeholder="Bio" rows="5" cols="40"><?php echo $user["Bio"] ?></textarea>
         </div>
 
-        <div class="submit-button"><button id="submitProfile">Submit</button></div>
+        <div class="submit-button"><button id="submitProfile" disabled>Submit</button></div>
       </div>
     </div>
     <script src="../../assets/js/jquery.js"></script>
