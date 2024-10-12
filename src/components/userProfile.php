@@ -30,8 +30,6 @@ foreach ($posts as $post) {
 if (!empty($_currentRow)) {
   $rows[] = $_currentRow;
 }
-
-
 ?>
 <div class="user-profile">
   <div class="profile">
@@ -64,6 +62,14 @@ if (!empty($_currentRow)) {
         $username = htmlspecialchars($userController->getUsernameByPostId($post["PostID"]));
         $postImage = base64_encode($post["Post"]);
 
+        $postDataArray[] = [
+          "postId" => $post["PostID"],
+          "userId" => $_SESSION["userId"],
+          "caption" => $caption,
+          "username" => $username,
+          "imageSrc" => "data:image/jped;base64, ".$postImage
+        ];
+
         echo '<div class="post" onclick="openModal(this)" 
         data-post-id='.$post["PostID"].'
         data-user-id='.$_SESSION["userId"].'
@@ -74,6 +80,7 @@ if (!empty($_currentRow)) {
       }
       echo "</div>";
     }
+    echo "<script>setPostsArray(".json_encode($postDataArray).");</script>";
     ?>
   </div>
 </div>

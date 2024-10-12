@@ -28,6 +28,9 @@ $(document).ready(function() {
         userId: userid
       }, 
       function(response) {
+        console.log(userid);
+        console.log(postid);
+        console.log(response.result);
         if(response.isLiked){
           likeicon.prop("src", "../../assets/icons/redHeart.png");
         } else { 
@@ -54,33 +57,33 @@ $(document).ready(function() {
     $(".likebutton").attr("data-postid", postid);
     $("#postcommentbutton").attr("data-postid", postid)
 
-    $("#modalprofileimage").empty();
-    $(".profile-image").children("img").clone().appendto("#modalprofileimage");
+    $("#modalProfileImage").empty();
+    $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
 
-    $('#modalimage').prop('src', imagesrc);
-    $('#modalcaption').text(caption);
-    $('#modalusername').text(username);
+    $('#modalImage').prop('src', imagesrc);
+    $('#modalCaption').text(caption);
+    $('#modalUsername').text(username);
 
-    $.post("../../components/getcomments.php",
+    $.post("../../components/getComments.php",
       {
-        getcomments: true,
-        postid: postid
+        getComments: true,
+        postId: postid
       },
       function(response) {
         $("#comments").html(response)
       }
     );
 
-    $.post("../../components/likehandler.php", 
+    $.post("../../components/likeHandler.php", 
       {
-        likestatus: true,
-        postid: postid,
-        userid: userid
+        likeStatus: true,
+        postId: postid,
+        userId: userid
       }, 
       function(response) {
-        if(response.isliked){
-          $("#likeicon").prop("src", "../../assets/icons/redheart.png");
-        } else { $("#likeicon").prop("src", "../../assets/icons/heart.png"); }
+        if(response.isLiked){
+          $("#likeIcon").prop("src", "../../assets/icons/redHeart.png");
+        } else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
 
         $("#likes").empty();
         $("#likes").text(response.likes);
@@ -90,7 +93,9 @@ $(document).ready(function() {
 
     // $('#modaluserprofile').html(`<img src="data:image/jped;base64, ${profilepicturesrc}"/> <b>${username}</b> ${caption}`);
 
-    $('#postmodal')[0].showmodal();
+    // const modal = document.getElementById("postModal");
+    // console.log(modal);
+    $('#postModal')[0].showModal();
 
     // optional: you can store postid if needed for future actions (e.g., liking the post)
     // $('#likebutton').data('post-id', postid);
@@ -100,8 +105,8 @@ $(document).ready(function() {
 
   // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
   $(window).on('click', function(e) {
-    if ($(e.target).is('#postmodal')) {
-      $('#postmodal')[0].close();
+    if ($(e.target).is('#postModal')) {
+      $('#postModal')[0].close();
     }
   });
 
@@ -210,6 +215,6 @@ $(document).ready(function() {
   });
 
   // SETTING FUNCTIONS TO BE USED GLOBALLY
-  window.openmodal = openmodal;
+  window.openModal = openmodal;
   window.setPostsArray = setPostsArray;
 });
