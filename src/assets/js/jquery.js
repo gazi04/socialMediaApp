@@ -1,6 +1,9 @@
 $(document).ready(function() {
-   // HIGHLIGHT ICONS IF MOUSE IS OVER THE NAVBAR BUTTONS
-  $(".menuOption").hover(
+  let postsArray = [];
+  let currentIndex = 0;
+
+  // HIGHLIGHT ICONS IF MOUSE IS OVER THE NAVBAR BUTTONS
+  $(".menuoption").hover(
     function(){
       const icon = $(this).children(".icon").children("img");
       $(icon).prop("src", icon.data("highlighted-icon"));
@@ -11,70 +14,73 @@ $(document).ready(function() {
     }
   );
 
+  // HANDLES LIKES IN THE FEED VIEW
   $(".likeButton").on("click", function(){
-    const postId = $(this).data("postid");
-    const userId = $(this).data("userid");
-    const likeIcon = $(this).children("#likeIcon");
-    const likeSpan = $(this).siblings(".like-counts").children("#likes");
+    const postid = $(this).data("postid");
+    const userid = $(this).data("userid");
+    const likeicon = $(this).children("#likeIcon");
+    const likespan = $(this).siblings(".like-counts").children("#likes");
 
     $.post("../../components/likeHandler.php", 
       {
         likeHandler: true,
-        postId: postId,
-        userId: userId
+        postId: postid,
+        userId: userid
       }, 
       function(response) {
         if(response.isLiked){
-          likeIcon.prop("src", "../../assets/icons/redHeart.png");
-        } else { likeIcon.prop("src", "../../assets/icons/heart.png"); }
+          likeicon.prop("src", "../../assets/icons/redHeart.png");
+        } else { 
+          likeicon.prop("src", "../../assets/icons/heart.png");
+        }
 
-        likeSpan.empty();
-        likeSpan.text(response.likes);
+        likespan.empty();
+        likespan.text(response.likes);
       },
       "json"
-    ).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error("Request failed:", textStatus, errorThrown);
-        console.error("Response Text:", jqXHR.responseText);
+    ).fail(function(jqxhr, textstatus, errorthrown) {
+        console.error("request failed:", textstatus, errorthrown);
+        console.error("response text:", jqxhr.responsetext);
       });
   });
 
-  function openModal(postElement) {
-    const postId = $(postElement).data('post-id');
-    const userId = $(postElement).data("user-id");
-    const caption = $(postElement).data('caption');
-    const username = $(postElement).data('username');
-    const imageSrc = $(postElement).data('image');
+  function openmodal(postelement) {
+    const postid = $(postelement).data('post-id');
+    const userid = $(postelement).data("user-id");
+    const caption = $(postelement).data('caption');
+    const username = $(postelement).data('username');
+    const imagesrc = $(postelement).data('image');
 
-    $(".likeButton").attr("data-postid", postId);
-    $("#postCommentButton").attr("data-postid", postId)
+    $(".likebutton").attr("data-postid", postid);
+    $("#postcommentbutton").attr("data-postid", postid)
 
-    $("#modalProfileImage").empty();
-    $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
+    $("#modalprofileimage").empty();
+    $(".profile-image").children("img").clone().appendto("#modalprofileimage");
 
-    $('#modalImage').prop('src', imageSrc);
-    $('#modalCaption').text(caption);
-    $('#modalUsername').text(username);
+    $('#modalimage').prop('src', imagesrc);
+    $('#modalcaption').text(caption);
+    $('#modalusername').text(username);
 
-    $.post("../../components/getComments.php",
+    $.post("../../components/getcomments.php",
       {
-        getComments: true,
-        postId: postId
+        getcomments: true,
+        postid: postid
       },
       function(response) {
         $("#comments").html(response)
       }
     );
 
-    $.post("../../components/likeHandler.php", 
+    $.post("../../components/likehandler.php", 
       {
-        likeStatus: true,
-        postId: postId,
-        userId: userId
+        likestatus: true,
+        postid: postid,
+        userid: userid
       }, 
       function(response) {
-        if(response.isLiked){
-          $("#likeIcon").prop("src", "../../assets/icons/redHeart.png");
-        } else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
+        if(response.isliked){
+          $("#likeicon").prop("src", "../../assets/icons/redheart.png");
+        } else { $("#likeicon").prop("src", "../../assets/icons/heart.png"); }
 
         $("#likes").empty();
         $("#likes").text(response.likes);
@@ -82,37 +88,39 @@ $(document).ready(function() {
       "json"
     );
 
-    // $('#modalUserProfile').html(`<img src="data:image/jped;base64, ${profilePictureSrc}"/> <b>${username}</b> ${caption}`);
+    // $('#modaluserprofile').html(`<img src="data:image/jped;base64, ${profilepicturesrc}"/> <b>${username}</b> ${caption}`);
 
-    $('#postModal')[0].showModal();
+    $('#postmodal')[0].showmodal();
 
-    // Optional: you can store postId if needed for future actions (e.g., liking the post)
-    // $('#likeButton').data('post-id', postId);
+    // optional: you can store postid if needed for future actions (e.g., liking the post)
+    // $('#likebutton').data('post-id', postid);
   }
+
+  function setPostsArray(posts){postsArray = posts;}
 
   // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
   $(window).on('click', function(e) {
-    if ($(e.target).is('#postModal')) {
-      $('#postModal')[0].close();
+    if ($(e.target).is('#postmodal')) {
+      $('#postmodal')[0].close();
     }
   });
 
   // STORES THE COMMENT IN THE DATABASE AND REFRESHES THE LISTS OF COMMENTS
-  $("#postCommentButton").on("click", function() {
-    const comment = $(this).siblings(".input-container").children("#inputField");
+  $("#postcommentbutton").on("click", function() {
+    const comment = $(this).siblings(".input-container").children("#inputfield");
 
-    $.post("../../components/postComment.php",
+    $.post("../../components/postcomment.php",
       {
-        postComment: true,
-        postId: $(this).data("postid"),
+        postcomment: true,
+        postid: $(this).data("postid"),
         comment: comment.val()
       }
     );
 
-    $.post("../../components/getComments.php",
+    $.post("../../components/getcomments.php",
       {
-        getComments: true,
-        postId: $(this).data("postid")
+        getcomments: true,
+        postid: $(this).data("postid")
       },
       function(response) {
         $("#comments").html(response)
@@ -122,85 +130,86 @@ $(document).ready(function() {
     comment.val("");
   });
 
-  // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL ACCORDING IF THERE IS ANY INPUT
-  const $inputField = $("#inputField");
-  const $postCommentButton = $("#postCommentButton");
+  // enable and disable the post button for comments in the post modal according if there is any input
+  const $inputfield = $("#inputfield");
+  const $postcommentbutton = $("#postcommentbutton");
 
-  $inputField.on("input", function(){
-    if($inputField.val().trim() !== ""){
-      $postCommentButton.prop("disabled", false);
-      $postCommentButton.addClass("enable");
+  $inputfield.on("input", function(){
+    if($inputfield.val().trim() !== ""){
+      $postcommentbutton.prop("disabled", false);
+      $postcommentbutton.addclass("enable");
     } else {
-      $postCommentButton.prop("disabled", true);
-      $postCommentButton.removeClass("enable");
+      $postcommentbutton.prop("disabled", true);
+      $postcommentbutton.removeclass("enable");
     }
   });
 
-  // ENABLE AND DISABLE THE SUBMIT BUTTON FOR THE EDIT ACCOUNT PAGE ACCORDING IF THERE IS ANY INPUT
-  const $bioTextarea = $("#bioInput");
-  const $editProfileSubmit = $("#submitProfile");
+  // enable and disable the submit button for the edit account page according if there is any input
+  const $biotextarea = $("#bioinput");
+  const $editprofilesubmit = $("#submitprofile");
 
-  $bioTextarea.on("input", function(){
-    if($bioTextarea.val().trim() !== ""){
-      $editProfileSubmit.prop("disabled", false);
-      $editProfileSubmit.addClass("enable");
+  $biotextarea.on("input", function(){
+    if($biotextarea.val().trim() !== ""){
+      $editprofilesubmit.prop("disabled", false);
+      $editprofilesubmit.addclass("enable");
     } else {
-      $editProfileSubmit.prop("disabled", true);
-      $editProfileSubmit.removeClass("enable");
+      $editprofilesubmit.prop("disabled", true);
+      $editprofilesubmit.removeclass("enable");
     }
   })
 
-  // EVERYTIME THE USER CLICK THE PROFILE IMAGE IT WOULD ACTUALLY CLICK THE BUTTON TO CHANGE THE IMAGE
+  // everytime the user click the profile image it would actually click the button to change the image
   $(".current-user").children("img").on("click", function(){ 
-    $("#changePhotoLink a").click();
+    $("#changephotolink a").click();
   });
 
-  $("#changePhotoLink").on("click", function(e) {
-    e.preventDefault();
-    $("#imageInput").click();
+  $("#changephotolink").on("click", function(e) {
+    e.preventdefault();
+    $("#imageinput").click();
   });
 
-  // CHANGE PROFILE IMAGE TO THE IMAGE THAT THE USER UPLOADS
-  $("#imageInput").on("change", function() {
+  // change profile image to the image that the user uploads
+  $("#imageinput").on("change", function() {
     const file = this.files[0];
     if (file) {
-      const reader = new FileReader();
+      const reader = new filereader();
       reader.onload = function(e) {
         $(".current-user").children("img").attr("src", e.target.result);
       }
-      reader.readAsDataURL(file);
-      $editProfileSubmit.prop("disabled", false);
-      $editProfileSubmit.addClass("enable");
+      reader.readasdataurl(file);
+      $editprofilesubmit.prop("disabled", false);
+      $editprofilesubmit.addclass("enable");
     }
   });
 
-  $("#submitProfile").on("click", function(e) {
-    e.preventDefault();
+  $("#submitprofile").on("click", function(e) {
+    e.preventdefault();
 
-    const bio = $("#bioInput").val();
-    const imageFile = $("#imageInput")[0].files[0];
+    const bio = $("#bioinput").val();
+    const imagefile = $("#imageinput")[0].files[0];
 
-    const formData = new FormData();
-    formData.append("editAccount", true);
-    formData.append("bio", bio);
-    formData.append("image", imageFile);
+    const formdata = new formdata();
+    formdata.append("editaccount", true);
+    formdata.append("bio", bio);
+    formdata.append("image", imagefile);
 
     $.ajax({
-      url: "editAccount.php",
-      type: "POST",
-      data: formData,
-      processData: false,
-      contentType: false,
+      url: "editaccount.php",
+      type: "post",
+      data: formdata,
+      processdata: false,
+      contenttype: false,
       success: function(response) {
         console.log(response)
         window.location.href = "index.php";
       },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error("Error:", textStatus, errorThrown);
+      error: function(jqxhr, textstatus, errorthrown) {
+        console.error("error:", textstatus, errorthrown);
       }
     });
   });
 
-  // ASSIGN THE OPENMODAL FUNCTION GLOBALLY TO BE USED IN ONCLICK ATTRIBUTE
-  window.openModal = openModal;
+  // SETTING FUNCTIONS TO BE USED GLOBALLY
+  window.openmodal = openmodal;
+  window.setPostsArray = setPostsArray;
 });
