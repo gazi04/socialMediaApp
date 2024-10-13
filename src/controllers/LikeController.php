@@ -12,7 +12,7 @@ class LikeController{
   public function likeOrUnlikePost($userId, $postId){
     try {
       if (!$this->isLiked($userId, $postId)){ return $this->likeModel->likePost($userId, $postId); }
-      else {return $this->unlikePost($userId, $postId);}
+      else {return $this->likeModel->unlikePost($userId, $postId);}
     } catch (\PDOException $ex) {
       throw $ex;
     }

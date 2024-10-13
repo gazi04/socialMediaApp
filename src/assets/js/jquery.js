@@ -28,14 +28,8 @@ $(document).ready(function() {
         userId: userid
       }, 
       function(response) {
-        console.log(userid);
-        console.log(postid);
-        console.log(response.result);
-        if(response.isLiked){
-          likeicon.prop("src", "../../assets/icons/redHeart.png");
-        } else { 
-          likeicon.prop("src", "../../assets/icons/heart.png");
-        }
+        if(response.isLiked){ likeicon.prop("src", "../../assets/icons/redHeart.png"); } 
+        else { likeicon.prop("src", "../../assets/icons/heart.png"); }
 
         likespan.empty();
         likespan.text(response.likes);
@@ -54,7 +48,8 @@ $(document).ready(function() {
     const username = $(postelement).data('username');
     const imagesrc = $(postelement).data('image');
 
-    $(".likebutton").attr("data-postid", postid);
+    $(".like").attr("data-postid", postid);
+    $(".like").attr("data-userid", userid);
     $("#postcommentbutton").attr("data-postid", postid)
 
     $("#modalProfileImage").empty();
@@ -64,44 +59,68 @@ $(document).ready(function() {
     $('#modalCaption').text(caption);
     $('#modalUsername').text(username);
 
-    $.post("../../components/getComments.php",
-      {
-        getComments: true,
-        postId: postid
-      },
-      function(response) {
-        $("#comments").html(response)
-      }
-    );
+    fetchComments(postid);
+    fetchLikes(postid, userid);
+
+    $('#postModal')[0].showModal();
+  }
+
+  // HANDLES THE LIKES IN THE POSTS THAT ARE DISPLAYED IN THE MODAL POP UP
+  $(".like").on("click", function() {
+    const likespan = $(this).siblings(".like-counts").children("#likes");
+    const likeicon = $(this).children("#likeIcon");
+    const postid = $(this).attr("data-postid");
+    const userid = $(this).attr("data-userid");
 
     $.post("../../components/likeHandler.php", 
       {
-        likeStatus: true,
+        likeHandler: true,
         postId: postid,
         userId: userid
       }, 
       function(response) {
-        if(response.isLiked){
-          $("#likeIcon").prop("src", "../../assets/icons/redHeart.png");
-        } else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
+        if(response.isLiked){ likeicon.prop("src", "../../assets/icons/redHeart.png"); }
+        else { likeicon.prop("src", "../../assets/icons/heart.png"); }
+
+        likespan.empty();
+        likespan.text(response.likes);
+      },
+      "json"
+    ).fail(function(jqxhr, textstatus, errorthrown) {
+        console.error("request failed:", textstatus, errorthrown);
+        console.error("response text:", jqxhr.responsetext);
+      });
+  });
+
+  function setPostsArray(posts){postsArray = posts;}
+
+  function fetchLikes(postId, userId){
+    $.post("../../components/likeHandler.php", 
+      {
+        likeStatus: true,
+        postId: postId,
+        userId: userId
+      }, 
+      function(response) {
+        if(response.isLiked){ $("#likeIcon").prop("src", "../../assets/icons/redHeart.png"); }
+        else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
 
         $("#likes").empty();
         $("#likes").text(response.likes);
       },
       "json"
     );
-
-    // $('#modaluserprofile').html(`<img src="data:image/jped;base64, ${profilepicturesrc}"/> <b>${username}</b> ${caption}`);
-
-    // const modal = document.getElementById("postModal");
-    // console.log(modal);
-    $('#postModal')[0].showModal();
-
-    // optional: you can store postid if needed for future actions (e.g., liking the post)
-    // $('#likebutton').data('post-id', postid);
   }
 
-  function setPostsArray(posts){postsArray = posts;}
+  function fetchComments(postId) {
+    $.post("../../components/getComments.php",
+      {
+        getComments: true,
+        postId: postId
+      },
+      function(response) { $("#comments").html(response) }
+    );
+  }
 
   // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
   $(window).on('click', function(e) {
@@ -122,20 +141,11 @@ $(document).ready(function() {
       }
     );
 
-    $.post("../../components/getcomments.php",
-      {
-        getcomments: true,
-        postid: $(this).data("postid")
-      },
-      function(response) {
-        $("#comments").html(response)
-      }
-    );
-
+    fetchComments($(this).data("postid"));
     comment.val("");
   });
 
-  // enable and disable the post button for comments in the post modal according if there is any input
+  // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL ACCORDING IF THERE IS ANY INPUT
   const $inputfield = $("#inputfield");
   const $postcommentbutton = $("#postcommentbutton");
 
@@ -149,7 +159,7 @@ $(document).ready(function() {
     }
   });
 
-  // enable and disable the submit button for the edit account page according if there is any input
+  // ENABLE AND DISABLE THE SUBMIT BUTTON FOR THE EDIT ACCOUNT PAGE ACCORDING IF THERE IS ANY INPUT
   const $biotextarea = $("#bioinput");
   const $editprofilesubmit = $("#submitprofile");
 
@@ -163,7 +173,7 @@ $(document).ready(function() {
     }
   })
 
-  // everytime the user click the profile image it would actually click the button to change the image
+  // EVERYTIME THE USER CLICK THE PROFILE IMAGE IT WOULD ACTUALLY CLICK THE BUTTON TO CHANGE THE IMAGE
   $(".current-user").children("img").on("click", function(){ 
     $("#changephotolink a").click();
   });

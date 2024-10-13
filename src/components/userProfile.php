@@ -62,13 +62,7 @@ if (!empty($_currentRow)) {
         $username = htmlspecialchars($userController->getUsernameByPostId($post["PostID"]));
         $postImage = base64_encode($post["Post"]);
 
-        $postDataArray[] = [
-          "postId" => $post["PostID"],
-          "userId" => $_SESSION["userId"],
-          "caption" => $caption,
-          "username" => $username,
-          "imageSrc" => "data:image/jped;base64, ".$postImage
-        ];
+        // $postDataArray[] = [ "postId" => $post["PostID"], "userId" => $_SESSION["userId"], "caption" => $caption, "username" => $username, "imageSrc" => "data:image/jped;base64, ".$postImage ];
 
         echo '<div class="post" onclick="openModal(this)" 
         data-post-id='.$post["PostID"].'
@@ -80,7 +74,7 @@ if (!empty($_currentRow)) {
       }
       echo "</div>";
     }
-    echo "<script>setPostsArray(".json_encode($postDataArray).");</script>";
+    //echo "<script>setPostsArray(".json_encode($postDataArray).");</script>";
     ?>
   </div>
 </div>
@@ -99,11 +93,8 @@ if (!empty($_currentRow)) {
       <div id="comments"></div>
 
       <div class="interactions">
-        <a class="likeButton icon" 
-          data-postid="<?php echo $post["PostID"]; ?>"
-          data-userid="<?php echo $_SESSION["userId"]; ?>"
-        >
-          <img id="likeIcon" src=<?php echo $likeController->isLiked($_SESSION["userId"], $post["PostID"])? "../../assets/icons/redHeart.png": "../../assets/icons/heart.png";?> />
+        <a class="like" data-userId="<?php echo $_SESSION["userId"]; ?>" >
+          <img id="likeIcon" />
         </a>
         <a class="icon" style="margin-inline: 0.4em;"><img src="../../assets/icons/share.png" /></a>
         <a class="icon"><img src="../../assets/icons/send.png" /></a>
