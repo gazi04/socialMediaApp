@@ -50,7 +50,7 @@ $(document).ready(function() {
 
     $(".like").attr("data-postid", postid);
     $(".like").attr("data-userid", userid);
-    $("#postcommentbutton").attr("data-postid", postid)
+    $("#postCommentButton").attr("data-postid", postid)
 
     $("#modalProfileImage").empty();
     $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
@@ -123,17 +123,18 @@ $(document).ready(function() {
   }
 
   // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
-  $(window).on('click', function(e) {
-    if ($(e.target).is('#postModal')) {
-      $('#postModal')[0].close();
+  $(window).on("click", function(e) {
+    if ($(e.target).is("#postModal")) {
+      $("#inputField").val("");
+      $("#postModal")[0].close();
     }
   });
 
   // STORES THE COMMENT IN THE DATABASE AND REFRESHES THE LISTS OF COMMENTS
-  $("#postcommentbutton").on("click", function() {
-    const comment = $(this).siblings(".input-container").children("#inputfield");
+  $("#postCommentButton").on("click", function() {
+    const comment = $(this).siblings(".input-container").children("#inputField");
 
-    $.post("../../components/postcomment.php",
+    $.post("../../components/postComment.php",
       {
         postcomment: true,
         postid: $(this).data("postid"),
@@ -146,74 +147,74 @@ $(document).ready(function() {
   });
 
   // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL ACCORDING IF THERE IS ANY INPUT
-  const $inputfield = $("#inputfield");
-  const $postcommentbutton = $("#postcommentbutton");
+  const $inputfield = $("#inputField");
+  const $postcommentbutton = $("#postCommentButton");
 
   $inputfield.on("input", function(){
     if($inputfield.val().trim() !== ""){
       $postcommentbutton.prop("disabled", false);
-      $postcommentbutton.addclass("enable");
+      $postcommentbutton.addClass("enable");
     } else {
       $postcommentbutton.prop("disabled", true);
-      $postcommentbutton.removeclass("enable");
+      $postcommentbutton.removeClass("enable");
     }
   });
 
   // ENABLE AND DISABLE THE SUBMIT BUTTON FOR THE EDIT ACCOUNT PAGE ACCORDING IF THERE IS ANY INPUT
-  const $biotextarea = $("#bioinput");
-  const $editprofilesubmit = $("#submitprofile");
+  const $biotextarea = $("#bioInput");
+  const $editprofilesubmit = $("#submitProfile");
 
   $biotextarea.on("input", function(){
     if($biotextarea.val().trim() !== ""){
       $editprofilesubmit.prop("disabled", false);
-      $editprofilesubmit.addclass("enable");
+      $editprofilesubmit.addClass("enable");
     } else {
       $editprofilesubmit.prop("disabled", true);
-      $editprofilesubmit.removeclass("enable");
+      $editprofilesubmit.removeClass("enable");
     }
   })
 
   // EVERYTIME THE USER CLICK THE PROFILE IMAGE IT WOULD ACTUALLY CLICK THE BUTTON TO CHANGE THE IMAGE
   $(".current-user").children("img").on("click", function(){ 
-    $("#changephotolink a").click();
+    $("#changePhotoLink a").click();
   });
 
-  $("#changephotolink").on("click", function(e) {
-    e.preventdefault();
-    $("#imageinput").click();
+  $("#changePhotoLink").on("click", function(e) {
+    e.preventDefault();
+    $("#imageInput").click();
   });
 
-  // change profile image to the image that the user uploads
-  $("#imageinput").on("change", function() {
+  // CHANGE PROFILE IMAGE TO THE IMAGE THAT THE USER UPLOADS
+  $("#imageInput").on("change", function() {
     const file = this.files[0];
     if (file) {
-      const reader = new filereader();
+      const reader = new FileReader();
       reader.onload = function(e) {
         $(".current-user").children("img").attr("src", e.target.result);
       }
-      reader.readasdataurl(file);
+      reader.readAsDataURL(file);
       $editprofilesubmit.prop("disabled", false);
-      $editprofilesubmit.addclass("enable");
+      $editprofilesubmit.addClass("enable");
     }
   });
 
-  $("#submitprofile").on("click", function(e) {
-    e.preventdefault();
+  $("#submitProfile").on("click", function(e) {
+    e.preventDefault();
 
-    const bio = $("#bioinput").val();
-    const imagefile = $("#imageinput")[0].files[0];
+    const bio = $("#bioInput").val();
+    const imagefile = $("#imageInput")[0].files[0];
 
-    const formdata = new formdata();
-    formdata.append("editaccount", true);
+    const formdata = new FormData();
+    formdata.append("editAccount", true);
     formdata.append("bio", bio);
     formdata.append("image", imagefile);
 
     $.ajax({
-      url: "editaccount.php",
+      url: "editAccount.php",
       type: "post",
       data: formdata,
-      processdata: false,
-      contenttype: false,
+      processData: false,
+      contentType: false,
       success: function(response) {
         console.log(response)
         window.location.href = "index.php";
