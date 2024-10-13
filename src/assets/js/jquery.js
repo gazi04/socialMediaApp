@@ -3,7 +3,7 @@ $(document).ready(function() {
   let currentIndex = 0;
 
   // HIGHLIGHT ICONS IF MOUSE IS OVER THE NAVBAR BUTTONS
-  $(".menuoption").hover(
+  $(".menuOption").hover(
     function(){
       const icon = $(this).children(".icon").children("img");
       $(icon).prop("src", icon.data("highlighted-icon"));
