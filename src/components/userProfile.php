@@ -2,14 +2,10 @@
 use Controllers\UserController;
 use Controllers\PostController;
 use Controllers\FollowController;
-use Controllers\LikeController;
-use Controllers\CommentController;
 
 $userController = new UserController();
 $postController = new PostController();
 $followController = new FollowController();
-$likeController = new LikeController();
-$commentController = new CommentController();
 
 $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 $numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
@@ -18,7 +14,7 @@ $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
 $posts = $postController->getPostsByUserId($_SESSION["userId"]);
 $rows = [];
 $_currentRow = [];
-
+/* ADDING THE POSTS IN A 2D ARRAY WHERE EACH SUB ARRAY HAS MAXIMUM 3 POSTS */
 foreach ($posts as $post) {
   $_currentRow[] = $post;
   if (count($_currentRow) >= 3) {
@@ -26,7 +22,6 @@ foreach ($posts as $post) {
     $_currentRow = [];
   }
 }
-
 if (!empty($_currentRow)) {
   $rows[] = $_currentRow;
 }
@@ -34,7 +29,6 @@ if (!empty($_currentRow)) {
 <div class="user-profile">
   <div class="profile">
     <div class="profile-image"> <img src="data:image/jped;base64, <?php echo base64_encode($userProfileData["ProfileImage"]); ?>" /> </div>
-
     <div class="profile-details">
       <div class="username">
         <div class="name"><?php echo $userProfileData["Username"]; ?></div>
@@ -61,16 +55,10 @@ if (!empty($_currentRow)) {
         $caption = htmlspecialchars($post["Caption"], ENT_QUOTES, "UTF-8");
         $username = htmlspecialchars($userController->getUsernameByPostId($post["PostID"]));
         $postImage = base64_encode($post["Post"]);
-
         $postDataArray[] = [ "postId" => $post["PostID"], "userId" => $_SESSION["userId"], "caption" => $caption, "username" => $username, "imageSrc" => "data:image/jped;base64, ".$postImage ];
 
-        echo '<div class="post" onclick="openModal(this)" 
-        data-post-id='.$post["PostID"].'
-        data-user-id='.$_SESSION["userId"].'
-        data-username="'.$username.'"
-        data-caption="'.$caption.'"
-        data-image="data:image/jped;base64, '.$postImage.'"
-        ><img src="data:image/jped;base64, '.$postImage.'"/></div>';
+        echo '<div class="post" onclick="openModal(this)" data-post-id='.$post["PostID"].'>
+          <img src="data:image/jped;base64, '.$postImage.'"/></div>';
       }
       echo "</div>";
     }
@@ -83,7 +71,7 @@ if (!empty($_currentRow)) {
   </div>
 </div>
 
-<dialog data-model class="test" id="postModal" style="">
+<dialog data-model id="postModal">
   <button id="prevPost">prev</button>
   <div class="post-modal">
     <div class="post-image">
@@ -112,7 +100,6 @@ if (!empty($_currentRow)) {
         </div>
         <button id="postCommentButton" disabled>Post</button>
       </div>
-      <!-- <button id="closeModal" data-close-modal>Close</button> -->
     </div>
   </div>
   <button id="nextPost">next</button>
