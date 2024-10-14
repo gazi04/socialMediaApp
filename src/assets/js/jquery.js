@@ -136,8 +136,8 @@ $(document).ready(function() {
 
     $.post("../../components/postComment.php",
       {
-        postcomment: true,
-        postid: $(this).data("postid"),
+        postComment: true,
+        postId: $(this).data("postid"),
         comment: comment.val()
       }
     );
