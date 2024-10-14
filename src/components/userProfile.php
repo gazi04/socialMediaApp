@@ -62,7 +62,7 @@ if (!empty($_currentRow)) {
         $username = htmlspecialchars($userController->getUsernameByPostId($post["PostID"]));
         $postImage = base64_encode($post["Post"]);
 
-        // $postDataArray[] = [ "postId" => $post["PostID"], "userId" => $_SESSION["userId"], "caption" => $caption, "username" => $username, "imageSrc" => "data:image/jped;base64, ".$postImage ];
+        $postDataArray[] = [ "postId" => $post["PostID"], "userId" => $_SESSION["userId"], "caption" => $caption, "username" => $username, "imageSrc" => "data:image/jped;base64, ".$postImage ];
 
         echo '<div class="post" onclick="openModal(this)" 
         data-post-id='.$post["PostID"].'
@@ -74,12 +74,17 @@ if (!empty($_currentRow)) {
       }
       echo "</div>";
     }
-    //echo "<script>setPostsArray(".json_encode($postDataArray).");</script>";
+    echo "<script>
+    $(document).ready(function() { 
+      setPostsArray(".json_encode($postDataArray).");
+    });
+    </script>";
     ?>
   </div>
 </div>
 
-<dialog data-model id="postModal" style="border: none; width: 70%;">
+<dialog data-model class="test" id="postModal" style="">
+  <button id="prevPost">prev</button>
   <div class="post-modal">
     <div class="post-image">
       <img id="modalImage" src="../../assets/images/sunflower.jpg" />
@@ -110,4 +115,5 @@ if (!empty($_currentRow)) {
       <!-- <button id="closeModal" data-close-modal>Close</button> -->
     </div>
   </div>
+  <button id="nextPost">next</button>
 </dialog>

@@ -2,6 +2,76 @@ $(document).ready(function() {
   let postsArray = [];
   let currentIndex = 0;
 
+  function openmodal(postelement) {
+    const postid = $(postelement).data('post-id');
+    const post = getPostFromArray(postid);
+
+    $(".like").attr("data-postid", post["postId"]);
+    $(".like").attr("data-userid", post["userId"]);
+
+    $("#postCommentButton").attr("data-postid", postid)
+
+    $("#modalProfileImage").empty();
+    // DISPLAYS THE USER PROFILE IMAGE WHO'S MADE THIS POST, IT NEEDS ANOTHER SOLUTION
+    // BECAUSE IT ISN'T DYNAMIC AS YOU CAN SEE IT CLONE ONLY THE PROFILE IMAGE FROM THE USER PROFILE PAGE
+    $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
+
+    fetchDataIntoPostModal(post);
+    $('#postModal')[0].showModal();
+  }
+
+  // TAKES THE POSTS FROM THE HTML PAGE 
+  function setPostsArray(posts){ postsArray = posts; }
+
+  function getPostFromArray(postId){
+    for (let index = 0; index < postsArray.length; index++) {
+      if (postsArray[index]["postId"] === postId){
+        currentIndex = index;
+        return postsArray[index];
+      }
+    }
+  }
+
+  function fetchDataIntoPostModal(post){
+    fetchImageUsernameAndCaption(post["username"], post["caption"], post["imageSrc"]);
+    fetchComments(post["postId"]);
+    fetchLikes(post["postId"], post["userId"]);
+  }
+
+  function fetchImageUsernameAndCaption(username, caption, image){
+    $("#modalUsername").text(username);
+    $("#modalCaption").text(caption);
+    $("#modalImage").prop("src", image);
+  }
+
+  function fetchLikes(postId, userId){
+    $.post("../../components/likeHandler.php", 
+      {
+        likeStatus: true,
+        postId: postId,
+        userId: userId
+      }, 
+      function(response) {
+        if(response.isLiked){ $("#likeIcon").prop("src", "../../assets/icons/redHeart.png"); }
+        else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
+
+        $("#likes").empty();
+        $("#likes").text(response.likes);
+      },
+      "json"
+    );
+  }
+
+  function fetchComments(postId) {
+    $.post("../../components/getComments.php",
+      {
+        getComments: true,
+        postId: postId
+      },
+      function(response) { $("#comments").html(response) }
+    );
+  }
+
   // HIGHLIGHT ICONS IF MOUSE IS OVER THE NAVBAR BUTTONS
   $(".menuOption").hover(
     function(){
@@ -41,29 +111,6 @@ $(document).ready(function() {
       });
   });
 
-  function openmodal(postelement) {
-    const postid = $(postelement).data('post-id');
-    const userid = $(postelement).data("user-id");
-    const caption = $(postelement).data('caption');
-    const username = $(postelement).data('username');
-    const imagesrc = $(postelement).data('image');
-
-    $(".like").attr("data-postid", postid);
-    $(".like").attr("data-userid", userid);
-    $("#postCommentButton").attr("data-postid", postid)
-
-    $("#modalProfileImage").empty();
-    $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
-
-    $('#modalImage').prop('src', imagesrc);
-    $('#modalCaption').text(caption);
-    $('#modalUsername').text(username);
-
-    fetchComments(postid);
-    fetchLikes(postid, userid);
-
-    $('#postModal')[0].showModal();
-  }
 
   // HANDLES THE LIKES IN THE POSTS THAT ARE DISPLAYED IN THE MODAL POP UP
   $(".like").on("click", function() {
@@ -92,44 +139,6 @@ $(document).ready(function() {
       });
   });
 
-  function setPostsArray(posts){postsArray = posts;}
-
-  function fetchLikes(postId, userId){
-    $.post("../../components/likeHandler.php", 
-      {
-        likeStatus: true,
-        postId: postId,
-        userId: userId
-      }, 
-      function(response) {
-        if(response.isLiked){ $("#likeIcon").prop("src", "../../assets/icons/redHeart.png"); }
-        else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
-
-        $("#likes").empty();
-        $("#likes").text(response.likes);
-      },
-      "json"
-    );
-  }
-
-  function fetchComments(postId) {
-    $.post("../../components/getComments.php",
-      {
-        getComments: true,
-        postId: postId
-      },
-      function(response) { $("#comments").html(response) }
-    );
-  }
-
-  // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
-  $(window).on("click", function(e) {
-    if ($(e.target).is("#postModal")) {
-      $("#inputField").val("");
-      $("#postModal")[0].close();
-    }
-  });
-
   // STORES THE COMMENT IN THE DATABASE AND REFRESHES THE LISTS OF COMMENTS
   $("#postCommentButton").on("click", function() {
     const comment = $(this).siblings(".input-container").children("#inputField");
@@ -145,6 +154,15 @@ $(document).ready(function() {
     fetchComments($(this).data("postid"));
     comment.val("");
   });
+
+  // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
+  $(window).on("click", function(e) {
+    if ($(e.target).is("#postModal")) {
+      $("#inputField").val("");
+      $("#postModal")[0].close();
+    }
+  });
+
 
   // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL ACCORDING IF THERE IS ANY INPUT
   const $inputfield = $("#inputField");
@@ -223,6 +241,23 @@ $(document).ready(function() {
         console.error("error:", textstatus, errorthrown);
       }
     });
+  });
+
+
+  $("#prevPost").on("click", function(){
+    if (currentIndex == 0) { currentIndex = postsArray.length - 1; }
+    else { currentIndex -= 1;}
+
+    const post = postsArray[currentIndex];
+    fetchDataIntoPostModal(post);
+  });
+
+  $("#nextPost").on("click", function(){
+    if (currentIndex == (postsArray.length - 1)) { currentIndex = 0; }
+    else { currentIndex += 1;}
+
+    const post = postsArray[currentIndex];
+    fetchDataIntoPostModal(post);
   });
 
   // SETTING FUNCTIONS TO BE USED GLOBALLY
