@@ -38,8 +38,8 @@ if (!empty($_currentRow)) {
       </div>
       <div class="stats"> 
         <div id="number-of-posts"><?php echo count($posts); ?> posts</div>&nbsp;
-        <div id="number-of-followers"><?php echo $numberOfFollowers; ?> followers</div>&nbsp;
-        <div id="number-of-followings"><?php echo $numberOfFollowing; ?> following</div>
+        <div id="number-of-followers" onclick="openFollowListModal(this)"><?php echo $numberOfFollowers; ?> followers</div>&nbsp;
+        <div id="number-of-followings" onclick="openFollowListModal(this)"><?php echo $numberOfFollowing; ?> following</div>
       </div>
       <div class="bio">
         <p><?php echo $userProfileData["Bio"]; ?></p>
@@ -103,4 +103,45 @@ if (!empty($_currentRow)) {
     </div>
   </div>
   <button id="nextPost">next</button>
+</dialog>
+
+<dialog data-model id="userListModal" style="width: 40%;">
+  <div id="users-list">
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+    <div class="user">
+      <img src="../../assets/images/sunflower.jpg" />
+      <span class="username">GAzmendi04</span>
+    </div>
+  </div>
 </dialog>

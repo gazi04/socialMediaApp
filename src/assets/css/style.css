@@ -515,10 +515,15 @@ body {
   }
 }
 
+dialog{
+  border: none;
+  width: 70%;
+}
+
 /* POST MODAL */
 .post-modal {
   display: grid; 
-  grid-template-columns: 1.23fr 0.77fr; 
+  grid-template-columns: 1.23fr 0.97fr; 
   grid-template-rows: 1fr; 
   gap: 0px 0px; 
   grid-template-areas: 
@@ -660,6 +665,29 @@ body {
 
     #postCommentButton.enable:hover {
       color: black;
+    }
+  }
+}
+
+#users-list{
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  border: none;
+  overflow: scroll;
+
+  .user{
+    display: flex;
+    align-items: center;
+    margin-block: 0.5em;
+
+    img {
+      width: 70px;
+      height: 70px;
+      margin-inline: 0.4em;
+      padding-inline: 1em;
+      object-fit: cover;
+      border-radius: 50%;
     }
   }
 }
