@@ -17,7 +17,7 @@ $(document).ready(function() {
     $(".profile-image").children("img").clone().appendTo("#modalProfileImage");
 
     fetchDataIntoPostModal(post);
-    $('#postModal')[0].showModal();
+    $("#postModal")[0].showModal();
   }
 
   // TAKES THE POSTS FROM THE HTML PAGE 
@@ -62,15 +62,50 @@ $(document).ready(function() {
     );
   }
 
-  function fetchComments(postId) {
+  function fetchComments(postId){
     $.post("../../components/getComments.php",
       {
         getComments: true,
         postId: postId
       },
-      function(response) { $("#comments").html(response) }
+      function(response){ $("#comments").html(response) }
     );
   }
+
+  function fetchUsersThatIFollow($myUserId){
+    $.post("../../components/getUsers.php",
+      {
+        getUsersThatIFollow: true,
+        userId: $myUserId
+      },
+      function(response){
+        console.log(response);
+      }
+    );
+  }
+  
+  function fetchUsersThatFollowMe($myUserId){
+    $.post("../../components/getUsers.php",
+      {
+        getUsersThatFollowMe: true,
+        userId: $myUserId
+      },
+      function(response){
+        console.log(response);
+      }
+    );
+  }
+
+  function openFollowListModal(element, userId, option){
+    if (option === "followers"){
+      fetchUsersThatIFollow(userId);
+    }
+    else if (option === "followings"){
+      fetchUsersThatFollowMe(userId);
+    }
+    $("#userListModal")[0].showModal();
+  }
+
 
   // HIGHLIGHT ICONS IF MOUSE IS OVER THE NAVBAR BUTTONS
   $(".menuOption").hover(
@@ -155,11 +190,14 @@ $(document).ready(function() {
     comment.val("");
   });
 
-  // CLOSE POST MODAL IF CLICKED OUTSIDE THE MODAL
-  $(window).on("click", function(e) {
-    if ($(e.target).is("#postModal")) {
+  // CLOSE POST MODAL OR USER LIST MODAL IF CLICKED OUTSIDE THE MODAL
+  $(window).on("click", function(e){
+    if ($(e.target).is("#postModal")){
       $("#inputField").val("");
       $("#postModal")[0].close();
+    }
+    else if ($(e.target).is("#userListModal")){
+      $("#userListModal")[0].close();
     }
   });
 
@@ -262,5 +300,6 @@ $(document).ready(function() {
 
   // SETTING FUNCTIONS TO BE USED GLOBALLY
   window.openModal = openmodal;
+  window.openFollowListModal = openFollowListModal;
   window.setPostsArray = setPostsArray;
 });

@@ -10,6 +10,7 @@ $followController = new FollowController();
 $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 $numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
 $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
+$usersThatFollowMe = $followController->getFollowers($_SESSION["userId"]);
 
 $posts = $postController->getPostsByUserId($_SESSION["userId"]);
 $rows = [];
@@ -38,8 +39,8 @@ if (!empty($_currentRow)) {
       </div>
       <div class="stats"> 
         <div id="number-of-posts"><?php echo count($posts); ?> posts</div>&nbsp;
-        <div id="number-of-followers" onclick="openFollowListModal(this)"><?php echo $numberOfFollowers; ?> followers</div>&nbsp;
-        <div id="number-of-followings" onclick="openFollowListModal(this)"><?php echo $numberOfFollowing; ?> following</div>
+        <div id="number-of-followers" onclick="openFollowListModal(this,<?php echo $_SESSION['userId']; ?>, 'followers')"><?php echo $numberOfFollowers; ?> followers</div>&nbsp;
+        <div id="number-of-followings" onclick="openFollowListModal(this, <?php echo $_SESSION["userId"], 'followings' ?>)"><?php echo $numberOfFollowing; ?> following</div>
       </div>
       <div class="bio">
         <p><?php echo $userProfileData["Bio"]; ?></p>
