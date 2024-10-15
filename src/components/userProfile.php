@@ -72,7 +72,7 @@ if (!empty($_currentRow)) {
 </div>
 
 <dialog data-model id="postModal">
-  <button id="prevPost">prev</button>
+  <button id="prevPost"> <img src="../../assets/icons/right-arrow.png"/> </button>
   <div class="post-modal">
     <div class="post-image">
       <img id="modalImage" src="../../assets/images/sunflower.jpg" />
@@ -102,7 +102,7 @@ if (!empty($_currentRow)) {
       </div>
     </div>
   </div>
-  <button id="nextPost">next</button>
+  <button id="nextPost">  <img src="../../assets/icons/right-arrow.png"/> </button>
 </dialog>
 
 <dialog data-model id="userListModal" style="width: 40%;">
