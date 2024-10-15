@@ -78,9 +78,7 @@ $(document).ready(function() {
         getUsersThatIFollow: true,
         userId: $myUserId
       },
-      function(response){
-        console.log(response);
-      }
+      function(response){ $("#users-list").html(response); }
     );
   }
   
@@ -90,9 +88,7 @@ $(document).ready(function() {
         getUsersThatFollowMe: true,
         userId: $myUserId
       },
-      function(response){
-        console.log(response);
-      }
+      function(response){ $("#users-list").html(response); }
     );
   }
 

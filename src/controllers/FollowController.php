@@ -30,11 +30,31 @@ class FollowController{
   }
 
   public function getFollowers($userId){
-    return $this->followModel->getFollowers($userId);
+    $users = $this->followModel->getFollowers($userId);
+
+    foreach($users as $user){
+      $username = htmlspecialchars($user["Username"], ENT_QUOTES, "UTF-8");
+      $profileImage = "data:image/jped;base64, ".base64_encode($user["ProfileImage"]);
+      echo "
+      <div class='user'>
+      <img src='".$profileImage."' />
+      <span class='username'>".$username."</span>
+      </div> ";
+    }
   }
 
   public function getFollowings($userId){
-    return $this->followModel->getFollowings($userId);
+    $users = $this->followModel->getFollowings($userId);
+
+    foreach($users as $user){
+      $username = htmlspecialchars($user["Username"], ENT_QUOTES, "UTF-8");
+      $profileImage = "data:image/jped;base64, ".base64_encode($user["ProfileImage"]);
+      echo "
+      <div class='user'>
+      <img src='".$profileImage."' />
+      <span class='username'>".$username."</span>
+      </div> ";
+    }
   }
 }
 

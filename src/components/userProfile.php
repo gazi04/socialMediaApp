@@ -10,7 +10,6 @@ $followController = new FollowController();
 $userProfileData = $userController->getProfileData($_SESSION["userId"]);
 $numberOfFollowers = $followController->getFollowerCount($_SESSION["userId"]);
 $numberOfFollowing =  $followController->getFollowingCount($_SESSION["userId"]);
-$usersThatFollowMe = $followController->getFollowers($_SESSION["userId"]);
 
 $posts = $postController->getPostsByUserId($_SESSION["userId"]);
 $rows = [];
@@ -40,7 +39,7 @@ if (!empty($_currentRow)) {
       <div class="stats"> 
         <div id="number-of-posts"><?php echo count($posts); ?> posts</div>&nbsp;
         <div id="number-of-followers" onclick="openFollowListModal(this,<?php echo $_SESSION['userId']; ?>, 'followers')"><?php echo $numberOfFollowers; ?> followers</div>&nbsp;
-        <div id="number-of-followings" onclick="openFollowListModal(this, <?php echo $_SESSION["userId"], 'followings' ?>)"><?php echo $numberOfFollowing; ?> following</div>
+        <div id="number-of-followings" onclick="openFollowListModal(this, <?php echo $_SESSION["userId"]?>, 'followings')"><?php echo $numberOfFollowing; ?> following</div>
       </div>
       <div class="bio">
         <p><?php echo $userProfileData["Bio"]; ?></p>
@@ -107,42 +106,5 @@ if (!empty($_currentRow)) {
 </dialog>
 
 <dialog data-model id="userListModal" style="width: 40%;">
-  <div id="users-list">
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-    <div class="user">
-      <img src="../../assets/images/sunflower.jpg" />
-      <span class="username">GAzmendi04</span>
-    </div>
-  </div>
+  <div id="users-list"> </div>
 </dialog>
