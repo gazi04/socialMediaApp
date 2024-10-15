@@ -9,7 +9,7 @@ $(document).ready(function() {
     $(".like").attr("data-postid", post["postId"]);
     $(".like").attr("data-userid", post["userId"]);
 
-    $("#postCommentButton").attr("data-postid", postid)
+    $("#postCommentButton").attr("data-postid", postid);
 
     $("#modalProfileImage").empty();
     // DISPLAYS THE USER PROFILE IMAGE WHO'S MADE THIS POST, IT NEEDS ANOTHER SOLUTION
@@ -36,6 +36,10 @@ $(document).ready(function() {
     fetchImageUsernameAndCaption(post["username"], post["caption"], post["imageSrc"]);
     fetchComments(post["postId"]);
     fetchLikes(post["postId"], post["userId"]);
+    $(".like").attr("data-postid", post["postId"]);
+    $(".like").attr("data-userid", post["userId"]);
+
+    $("#postCommentButton").attr("data-postid", post["postId"]);
   }
 
   function fetchImageUsernameAndCaption(username, caption, image){
@@ -63,7 +67,7 @@ $(document).ready(function() {
   }
 
   function fetchComments(postId){
-    $.post("../../components/getComments.php",
+    $.post("../../components/commentHandler.php",
       {
         getComments: true,
         postId: postId
@@ -173,17 +177,19 @@ $(document).ready(function() {
   // STORES THE COMMENT IN THE DATABASE AND REFRESHES THE LISTS OF COMMENTS
   $("#postCommentButton").on("click", function() {
     const comment = $(this).siblings(".input-container").children("#inputField");
+    // console.log($(this));
+    console.log($(this).data());
 
-    $.post("../../components/postComment.php",
-      {
-        postComment: true,
-        postId: $(this).data("postid"),
-        comment: comment.val()
-      }
-    );
-
-    fetchComments($(this).data("postid"));
-    comment.val("");
+    // $.post("../../components/postComment.php",
+    //   {
+    //     postComment: true,
+    //     postId: $(this).data("postid"),
+    //     comment: comment.val()
+    //   }
+    // );
+    //
+    // fetchComments($(this).data("postid"));
+    // comment.val("");
   });
 
   // CLOSE POST MODAL OR USER LIST MODAL IF CLICKED OUTSIDE THE MODAL
