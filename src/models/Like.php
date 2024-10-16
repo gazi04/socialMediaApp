@@ -38,5 +38,4 @@ class Like{
     return $result["like_count"];
   }
 }
-
 ?>

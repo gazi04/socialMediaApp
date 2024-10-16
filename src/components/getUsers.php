@@ -9,4 +9,5 @@ if(isset($_POST["getUsersThatIFollow"]) && isset($_POST["userId"])){
 else if(isset($_POST["getUsersThatFollowMe"]) && isset($_POST["userId"])){
   echo $followController->getFollowers($_POST["userId"]);
 }
+exit();
 ?>

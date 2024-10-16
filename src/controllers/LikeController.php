@@ -10,7 +10,7 @@ class LikeController{
   }
 
   public function likeOrUnlikePost($userId, $postId){
-    try {
+    try{
       if (!$this->isLiked($userId, $postId)){ return $this->likeModel->likePost($userId, $postId); }
       else {return $this->likeModel->unlikePost($userId, $postId);}
     } catch (\PDOException $ex) {
@@ -19,7 +19,7 @@ class LikeController{
   }
 
   public function likePost($userId, $postId){
-    try {
+    try{
       if (!$this->isLiked($userId, $postId)){ return $this->likeModel->likePost($userId, $postId); }
       else { return; }
     } catch (\PDOException $ex) {
@@ -28,7 +28,7 @@ class LikeController{
   }
 
   public function unlikePost($userId, $postId){
-    try {
+    try{
       if ($this->isLiked($userId, $postId)){ return $this->likeModel->unlikePost($userId, $postId); }
       else { return; }
     } catch (\PDOException $ex) {

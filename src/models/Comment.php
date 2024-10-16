@@ -30,5 +30,4 @@ class Comment{
     return $result['comment_count'];
   }
 }
-
 ?>

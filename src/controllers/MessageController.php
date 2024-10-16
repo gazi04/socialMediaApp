@@ -32,5 +32,4 @@ class MessageController{
     return $this->messageModel->getChatHistory($loggedUserId, $userChatingWithId);
   }
 }
-
 ?>

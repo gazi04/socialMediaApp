@@ -13,11 +13,10 @@ class CommentController{
     return $this->commentModel->commentPost($userId, $postId, $comment);
   }
 
-
   public function getCommentByPostId($postId){
     $comments = $this->commentModel->getCommentByPostId($postId);
 
-    foreach ($comments as $comment) {
+    foreach ($comments as $comment){
       echo '
         <div class="comment">
           <div class="user-image"><img src="data:image/jped;base64, '.base64_encode($comment["ProfileImage"]).'"/></div>
@@ -29,7 +28,6 @@ class CommentController{
       ';
     }
   }
-
 
   public function getCommentCountByPost($postId){
     return $this->commentModel->getCommentCountByPost($postId);

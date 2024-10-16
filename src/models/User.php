@@ -1,8 +1,6 @@
 <?php
 namespace Models;
-
 use Core\Database;
-
 
 class User{
   private $db;

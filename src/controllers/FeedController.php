@@ -9,36 +9,33 @@ class FeedController{
     $this->feedModel = new Feed();
   }
 
-  public function getFeedFromFollowers($userId) {
+  public function getFeedFromFollowers($userId){
     $posts = $this->feedModel->getFeedFromFollowers($userId); 
 
-    if(empty($posts)) {
+    if(empty($posts)){
       echo "No post to see.";
       return;
     }
-
     include BASE_PATH . "/src/components/post.php";
   }
 
-  public function getFeedFromNonFollowers($userId) {
+  public function getFeedFromNonFollowers($userId){
     $posts = $this->feedModel->getFeedFromNonFollowers($userId); 
 
-    if(empty($posts)) {
+    if(empty($posts)){
       echo "No post to see.";
       return;
     }
-
     include BASE_PATH . "/src/components/post.php";
   }
 
-  public function getFeedWithMostLikes() {
+  public function getFeedWithMostLikes(){
     $posts = $this->feedModel->getFeedWithMostLike(); 
 
     if(empty($posts)) {
       echo "No post to see.";
       return;
     }
-
     include BASE_PATH . "/components/post.php";
   }
 }

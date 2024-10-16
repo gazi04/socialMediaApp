@@ -28,7 +28,7 @@ class PostController{
   }
 
   public function deletePost($postId){
-    try {
+    try{
       return $this->postModel->delete($postId);
     } catch (\PDOException $ex){
       error_log("Error occurred by deleting a post from the database");
@@ -36,7 +36,7 @@ class PostController{
   }
 
   public function getPostsByUserId($userId){
-    try {
+    try{
       return $this->postModel->getPostsByUserId($userId);
     } catch (\PDOException $ex){
       error_log("Error by getting all the posts from the database.");
@@ -56,7 +56,7 @@ class PostController{
   }
 
   public function updatePost($postId, $caption){
-    try {
+    try{
       return $this->postModel->update($postId, $caption);
     }
     catch (\PDOException $ex){

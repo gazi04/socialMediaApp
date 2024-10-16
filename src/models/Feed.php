@@ -4,7 +4,6 @@ namespace Models;
 use Core\Database;
 use Core;
 
-
 class Feed{
   private $db;
 

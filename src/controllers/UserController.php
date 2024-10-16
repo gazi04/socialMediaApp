@@ -2,7 +2,6 @@
 namespace Controllers;
 use Models\User;
 
-
 class UserController{
   private $userModel;
 
@@ -31,7 +30,7 @@ class UserController{
   public function login($username, $password){
     $user = $this->userModel->findByUsername($username);
 
-    if (!empty($user) && ($password == $user["Password"])) {
+    if (!empty($user) && ($password == $user["Password"])){
       session_start();
       $_SESSION["userId"] = $user["UserID"];
       $_SESSION["username"] = $user["Username"];
