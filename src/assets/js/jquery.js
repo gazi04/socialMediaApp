@@ -106,7 +106,6 @@ $(document).ready(function() {
     $("#userListModal")[0].showModal();
   }
 
-
   // HIGHLIGHT ICONS IF MOUSE IS OVER THE NAVBAR BUTTONS
   $(".menuOption").hover(
     function(){
@@ -178,18 +177,22 @@ $(document).ready(function() {
   $("#postCommentButton").on("click", function() {
     const comment = $(this).siblings(".input-container").children("#inputField");
     // console.log($(this));
-    console.log($(this).data());
+    console.log($(this).attr("data-postid"));
 
-    // $.post("../../components/postComment.php",
-    //   {
-    //     postComment: true,
-    //     postId: $(this).data("postid"),
-    //     comment: comment.val()
-    //   }
-    // );
-    //
-    // fetchComments($(this).data("postid"));
-    // comment.val("");
+    $.post("../../components/commentHandler.php",
+      {
+        postComment: true,
+        postId: $(this).attr("data-postid"),
+        comment: comment.val()
+      },
+      function(response){
+        console.log(response);
+      }
+    );
+
+    fetchComments($(this).data("postid"));
+    comment.val("");
+    $postcommentbutton.removeClass("enable");
   });
 
   // CLOSE POST MODAL OR USER LIST MODAL IF CLICKED OUTSIDE THE MODAL
@@ -202,7 +205,6 @@ $(document).ready(function() {
       $("#userListModal")[0].close();
     }
   });
-
 
   // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL ACCORDING IF THERE IS ANY INPUT
   const $inputfield = $("#inputField");

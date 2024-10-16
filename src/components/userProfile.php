@@ -32,9 +32,7 @@ if (!empty($_currentRow)) {
     <div class="profile-details">
       <div class="username">
         <div class="name"><?php echo $userProfileData["Username"]; ?></div>
-        <div class="options">
-          <a id="editProfile" href="editAccount.php">Edit</a>
-        </div>
+        <div class="options"> <a id="editProfile" href="editAccount.php">Edit</a></div>
       </div>
       <div class="stats"> 
         <div id="number-of-posts"><?php echo count($posts); ?> posts</div>&nbsp;
@@ -72,7 +70,7 @@ if (!empty($_currentRow)) {
 </div>
 
 <dialog data-model id="postModal">
-  <button id="prevPost"> <img src="../../assets/icons/right-arrow.png"/> </button>
+  <button id="prevPost"><img src="../../assets/icons/right-arrow.png"/></button>
   <div class="post-modal">
     <div class="post-image">
       <img id="modalImage" src="../../assets/images/sunflower.jpg" />
@@ -80,15 +78,14 @@ if (!empty($_currentRow)) {
     <div class="post-interaction">
       <div class="user" id="modalUserProfile">
         <div id="modalProfileImage"></div>
-        <span id="modalUsername"></span> <span id="modalCaption"></span>
+        <span id="modalUsername"></span> 
+        <span id="modalCaption"></span>
       </div>
 
       <div id="comments"></div>
 
       <div class="interactions">
-        <a class="like" data-userId="<?php echo $_SESSION["userId"]; ?>" >
-          <img id="likeIcon" />
-        </a>
+        <a class="like" data-userId="<?php echo $_SESSION["userId"]; ?>" ><img id="likeIcon" /></a>
         <a class="icon" style="margin-inline: 0.4em;"><img src="../../assets/icons/share.png" /></a>
         <a class="icon"><img src="../../assets/icons/send.png" /></a>
         <div class="like-counts">Likes: <span id="likes"></span></div>
@@ -98,11 +95,12 @@ if (!empty($_currentRow)) {
         <div class="input-container">
           <input placeholder="Enter text" id="inputField" class="input-field" type="text">
         </div>
+        <input type="hidden" class="postIdLabel"/>
         <button id="postCommentButton" disabled>Post</button>
       </div>
     </div>
   </div>
-  <button id="nextPost">  <img src="../../assets/icons/right-arrow.png"/> </button>
+  <button id="nextPost"><img src="../../assets/icons/right-arrow.png"/></button>
 </dialog>
 
 <dialog data-model id="userListModal" style="width: 40%;">
