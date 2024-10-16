@@ -4,19 +4,18 @@ use Controllers\UserController;
 
 $userController = new UserController();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
   $username = $_POST["username"];
   $password = $_POST["password"];
 
-  if ($userController->login($username, $password)) {
+  if ($userController->login($username, $password)){
     header("Location: ../feed/index.php");
     exit;
-  } else {
+  } else{
     echo "Login failed. Please check your username and password.";
   }
 }
 ?>
-
 
 <!DOCTYPE HTML>
 <html>
@@ -25,24 +24,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/script.js"></script>
   </head>
-  <body style="height: 100%;">
-    <div class="login-container">
-      <div class="login-form">
-        <fieldset class="login-border">
-        <div class="login-banner"><h1>Tungjatjeta</h1></div>
-        <div class="login-credentials">
-          <form method="post" action="login.php">
+  <body>
+    <div class="authentication-container">
+      <div id="logOrsign-form">
+        <fieldset>
+        <div class="banner"><h1>Tungjatjeta</h1></div>
+        <div class="credentials">
+          <form method="post" action="login.php" >
             <input type="text" name="username" placeholder="Username" required/><br><br>
             <input type="password" name="password" placeholder="Passord" required/><br><br>
-            <input type="submit" value="Login" class="submit_button" />
+            <input type="submit" value="Log In" class="submit_button" />
           </form>
+          <div id="strikethroughLink"> 
+            <div class="line"></div>
+            <a href="signUp.php">Sign Up</a>
+            <div class="line"></div>
+          </div>
         </div>
         <div class="login-with"></div>
         </fieldset>
       </div>
     </div>
-
-    <script type="text/javascript" src="../assets/js/script.js"></script>
-  </body>
+</body>
 </html>
+
+

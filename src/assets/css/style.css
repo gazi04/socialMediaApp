@@ -16,8 +16,8 @@ body {
   /* font-weight: 300; */
 }
 
-/* LOGIN PAGE */
-.login-container {
+/* GRID FOR THE AUTHETICATION PAGES */
+.authentication-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -32,18 +32,19 @@ body {
   height: 100vh;
 }
 
-.login-form {
+/* LOGIN PAGE */
+#logOrsign-form {
   grid-area: login-form;
   display: grid; 
   grid-template-columns: 1fr; 
   grid-template-rows: 0.7fr 1.5fr 1fr; 
   gap: 0px 0px; 
   grid-template-areas: 
-    "login-banner"
-    "login-credentials"
-    "login-with"; 
+    "banner"
+    "credentials"
+    "logOrSign-with"; 
 
-  .login-border {
+  fieldset {
     padding-inline: 1em;
     padding-block: 3em;
 
@@ -52,8 +53,8 @@ body {
   }
 }
 
-.login-banner {
-  grid-area: login-banner;
+.banner {
+  grid-area: banner;
 
   h1 {
     text-align: center;
@@ -63,8 +64,8 @@ body {
   }
 }
 
-.login-credentials {
-  grid-area: login-credentials;
+.credentials {
+  grid-area: credentials;
 
   form {
     align-items: center;
@@ -99,10 +100,31 @@ body {
       cursor: pointer;
     }
   }
+
+  #strikethroughLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.7em;
+
+    .line {
+      height: 2px;
+      width: 33%;
+      margin-inline: 1em;
+      background: #bab6b6;
+    }
+
+    a { 
+      text-decoration: none;
+      color: var(--accent-color);
+    }
+
+    a:hover { color: black;}
+  }
 }
 
 .login-with {
-  grid-area: login-with;
+  grid-area: logOrsign-with;
 }
 
 /* MAIN TEMPLATE */
@@ -515,7 +537,7 @@ body {
   }
 }
 
-dialog{
+dialog {
   border: none;
   width: 70%;
 }
@@ -614,7 +636,7 @@ dialog{
   .interactions {
     grid-area: interactions;
 
-    a > img{
+    a > img {
       width: 1.7em;
       margin-inline: 0.3em;
     }
@@ -669,19 +691,19 @@ dialog{
   }
 }
 
-#users-list{
+#users-list {
   display: flex;
   flex-direction: column;
   height: 300px;
   border: none;
   overflow: scroll;
 
-  .user{
+  .user {
     display: flex;
     align-items: center;
     margin-block: 0.5em;
 
-    img{
+    img {
       width: 70px;
       height: 70px;
       margin-inline: 0.4em;
@@ -692,7 +714,7 @@ dialog{
   }
 }
 
-#prevPost{
+#prevPost {
   position: fixed;
   left: 6%;
   top: 45%;
@@ -702,13 +724,13 @@ dialog{
   background-color: white;
   border-radius: 50%;
 
-  img{
+  img {
     width: 1.7em;
     transform: rotate(180deg);
   }
 }
 
-#nextPost{
+#nextPost {
   position: fixed;
   right: 6%;
   top: 45%;
@@ -721,7 +743,7 @@ dialog{
   img{ width: 1.7em; }
 }
 
-#nextPost:hover{
+#nextPost:hover {
   opacity: 0.5;
 }
 
