@@ -16,7 +16,7 @@ $logoutPath = "../auth/logout.php";
       </a>
     </li>
     <li>
-      <a href="#" class="menuOption">
+      <a id="searchOption" href="#" class="menuOption">
         <div class="icon"><img id="menuIcon" src="../../assets/icons/search.png" data-original-icon="../../assets/icons/search.png" data-highlighted-icon="../../assets/icons/highlightedSearch.png" /></div>
         <div class="page"><span>Search</span></div>
       </a>
@@ -59,5 +59,10 @@ $logoutPath = "../auth/logout.php";
     </li>
   </ul>
 
+  <div id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search here..." autofocus/>
+    <button id="closeSearch">Close</button>
+  </div>
+  
   <div class="vertical-line"></div>
 </nav>

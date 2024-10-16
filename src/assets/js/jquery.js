@@ -285,7 +285,6 @@ $(document).ready(function() {
     });
   });
 
-
   $("#prevPost").on("click", function(){
     if (currentIndex == 0) { currentIndex = postsArray.length - 1; }
     else { currentIndex -= 1;}
@@ -300,6 +299,18 @@ $(document).ready(function() {
 
     const post = postsArray[currentIndex];
     fetchDataIntoPostModal(post);
+  });
+
+  $("#searchOption").on("click", function(e){
+    e.preventDefault();
+    $("#searchContainer").show().removeClass("fadeOutLeft");
+    $("#searchContainer").show().addClass("fadeInLeft");
+  });
+
+  $("#closeSearch").on("click", function(e){
+    e.preventDefault();
+    $("#searchContainer").show().removeClass("fadeInLeft");
+    $("#searchContainer").show().addClass("fadeOutLeft");
   });
 
   // SETTING FUNCTIONS TO BE USED GLOBALLY
