@@ -313,6 +313,18 @@ $(document).ready(function() {
     $("#searchContainer").show().addClass("fadeOutLeft");
   });
 
+  $("#searchingTerm").on("input", function(){
+    console.log($(this).val());
+
+    $.post("../../components/getUsers.php",
+      {
+        searchUser: true,
+        term: $(this).val()
+      },
+      function(response){ $("#users-list").html(response); }
+    );
+  });
+
   // SETTING FUNCTIONS TO BE USED GLOBALLY
   window.openModal = openmodal;
   window.openFollowListModal = openFollowListModal;
