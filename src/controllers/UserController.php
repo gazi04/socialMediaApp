@@ -83,7 +83,20 @@ class UserController{
   }
 
   public function searchUsers($username){
-    return $this->userModel->searchUsers($username);
+    $users = $this->userModel->searchUsers($username);
+
+    if(empty($users)){ echo "ska users"; }
+
+    foreach($users as $user){
+      $userid = htmlspecialchars($user["UserID"]);
+      $username = htmlspecialchars($user["Username"], ENT_QUOTES, "UTF-8");
+      $profileImage = "data:image/jped;base64, ".base64_encode($user["ProfileImage"]);
+      echo "
+      <div class='user'>
+      <img src='".$profileImage."' />
+      <span class='username'>".$username."</span>
+      </div> ";
+    }
   }
 
   public function doesUserIdExists($userId){

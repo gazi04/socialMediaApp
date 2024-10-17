@@ -59,7 +59,7 @@ class User{
   }
 
   public function searchUsers($username){
-    $this->db->query('SELECT UserID, Username, Email, ProfileImage, Bio FROM users WHERE Username LIKE :username');
+    $this->db->query('SELECT UserID, Username, ProfileImage, FROM users WHERE Username LIKE :username');
     $this->db->bind(':username', '%' . $username . '%');
     return $this->db->resultSet(); 
   }
