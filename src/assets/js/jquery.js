@@ -106,6 +106,11 @@ $(document).ready(function() {
     $("#userListModal")[0].showModal();
   }
 
+  function redirectToProfile(userid){
+    const data = {"userid": userid};
+    window.location.href = "../profile/index.php?"+$.param(data);
+  }
+
   // HIGHLIGHT ICONS IF MOUSE IS OVER THE NAVBAR BUTTONS
   $(".menuOption").hover(
     function(){
@@ -336,4 +341,5 @@ $(document).ready(function() {
   window.openModal = openmodal;
   window.openFollowListModal = openFollowListModal;
   window.setPostsArray = setPostsArray;
+  window.redirectToProfile = redirectToProfile;
 });

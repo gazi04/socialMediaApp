@@ -97,9 +97,9 @@ class UserController{
       $username = htmlspecialchars($user["Username"], ENT_QUOTES, "UTF-8");
       $profileImage = "data:image/jped;base64, ".base64_encode($user["ProfileImage"]);
       echo "
-      <div class='user'>
-      <img src='".$profileImage."' />
-      <span class='username'>".$username."</span>
+      <div class='user' onClick='redirectToProfile(".$userid.")'>
+        <img src='".$profileImage."' />
+        <span class='username'>".$username."</span>
       </div> ";
     }
   }
