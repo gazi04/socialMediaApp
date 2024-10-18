@@ -92,8 +92,6 @@ class UserController{
       echo $ex->getMessage();
     }
 
-    if(empty($users)){ echo "ska users"; }
-
     foreach($users as $user){
       $userid = htmlspecialchars($user["UserID"]);
       $username = htmlspecialchars($user["Username"], ENT_QUOTES, "UTF-8");

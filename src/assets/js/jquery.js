@@ -314,8 +314,6 @@ $(document).ready(function() {
   });
 
   $("#searchingTerm").on("input", function(){
-    console.log($(this).val());
-
     $.post("../../components/getUsers.php",
       {
         searchUser: true,
