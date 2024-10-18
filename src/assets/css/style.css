@@ -216,6 +216,7 @@ body {
 
 .menu > li > a:hover {
   background-color: rgba(var(--menu-hover-overlay));
+  cursor: pointer;
 }
 
 .icon > img {
@@ -762,6 +763,7 @@ dialog {
     display: flex;
     align-items: center;
     margin-block: 0.5em;
+    cursor: pointer;
 
     img {
       width: 70px;
@@ -771,6 +773,12 @@ dialog {
       object-fit: cover;
       border-radius: 50%;
     }
+  }
+
+  .user:hover {
+    background-color: rgba(0,0,0,0.04);
+    border-radius: 10px;
+    transition: 0.3s;
   }
 }
 
