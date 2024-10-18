@@ -82,8 +82,15 @@ class UserController{
     }
   }
 
-  public function searchUsers($username){
-    $users = $this->userModel->searchUsers($username);
+  public function searchUsers($username, $userId){
+    if(empty($username)){exit();}
+
+    try{ 
+      $users = $this->userModel->searchUsers($username, $userId);
+    }
+    catch (\PDOException $ex){
+      echo $ex->getMessage();
+    }
 
     if(empty($users)){ echo "ska users"; }
 
