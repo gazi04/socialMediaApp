@@ -258,6 +258,7 @@ $(document).ready(function() {
     }
   });
 
+  // SUBMITS THE CHANGES THAT USER WHAT TO MAKE FOR HIS PROFILE
   $("#submitProfile").on("click", function(e) {
     e.preventDefault();
 
@@ -285,6 +286,7 @@ $(document).ready(function() {
     });
   });
 
+  // THE NEXT TWO HANDLERS ARE RESPONSIBLE FOR NAVIGATING THROUGH THE POSTS IN THE MODAL POP UP
   $("#prevPost").on("click", function(){
     if (currentIndex == 0) { currentIndex = postsArray.length - 1; }
     else { currentIndex -= 1;}
@@ -301,6 +303,7 @@ $(document).ready(function() {
     fetchDataIntoPostModal(post);
   });
 
+  // ADDS ANIMATION TO THE SEARCH BAR IF OPEN IT
   $("#searchOption").on("click", function(e){
     e.preventDefault();
     $("#searchContainer").show().removeClass("fadeOutLeft");
@@ -321,6 +324,12 @@ $(document).ready(function() {
       },
       function(response){ $("#users-list").html(response); }
     );
+  });
+
+  // NAVBAR OPTION FOR THE LOGGED USER TO LOOK AT HIS PROFILE
+  $("#userProfile").on("click", function(){
+    const data = {"loggedUser": true};
+    window.location.href = "../profile/index.php?"+$.param(data);
   });
 
   // SETTING FUNCTIONS TO BE USED GLOBALLY

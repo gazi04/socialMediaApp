@@ -46,7 +46,7 @@ $logoutPath = "../auth/logout.php";
       </a>
     </li>
     <li>
-      <a href="<?php echo $myProfilePath; ?>" class="menuOption">
+      <a id="userProfile" class="menuOption">
         <div class="icon"><img id="menuIcon" src="../../assets/icons/home.png" data-original-icon="../../assets/icons/home.png" data-highlighted-icon="../../assets/icons/blackHome.png" /></div>
         <div class="page"><span>Profile</span></div>
       </a>
