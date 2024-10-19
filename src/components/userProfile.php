@@ -41,7 +41,11 @@ if (!empty($_currentRow)) {
     <div class="profile-details">
       <div class="username">
         <div class="name"><?php echo $userProfileData["Username"]; ?></div>
+        <?php if($userid == $_SESSION["userId"]):?>
         <div class="options"><a id="editProfile" href="editAccount.php">Edit</a></div>
+        <?php else: ?>
+        <div class="options"><a id="editProfile" href="">Follow</a></div>
+        <?php endif; ?>
       </div>
       <div class="stats"> 
         <div id="number-of-posts"><?php echo count($posts); ?> posts</div>&nbsp;
@@ -51,7 +55,7 @@ if (!empty($_currentRow)) {
       <div class="bio"><p><?php echo $userProfileData["Bio"]; ?></p></div>
     </div>
   </div>
-
+  <?php if(empty($posts)){return;} ?>
   <div id="posts">
     <?php
     foreach ($rows as $row) {
