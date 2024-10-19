@@ -9,12 +9,12 @@ class FollowController{
     $this->followModel = new Follow();
   }
 
-  public function followUser($followerUserId, $followingUserId){
-    return $this->followModel->followUser($followerUserId, $followingUserId); 
-  }
+  public function followOrUnfollowUser($followerUserId, $followingUserId){
+    if($this->isFollowing($followerUserId, $followingUserId)){
+      return $this->followModel->unfollowUser($followerUserId, $followingUserId); 
+    }
 
-  public function unfollowUser($followerUserId, $followingUserId){
-    return $this->followModel->unfollowUser($followerUserId, $followingUserId); 
+    return $this->followModel->followUser($followerUserId, $followingUserId); 
   }
 
   public function isFollowing($followerUserId, $followingUserId){
