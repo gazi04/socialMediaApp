@@ -337,6 +337,21 @@ $(document).ready(function() {
     window.location.href = "../profile/index.php?"+$.param(data);
   });
 
+  $("#followOrUnFollowUser").on("click", function(){
+    $.post("../../components/followHandler.php", 
+      {
+        followOrUnfollowUser: true,
+        userid: $(this).attr("data-userid")
+      }, function(response){
+        const text = response["followersCount"] + " follower";
+        $("#followOrUnFollowUser").text(response["status"]);
+        $("#number-of-followers").text(text);
+
+        console.log($("#followOrUnFollowUser").text());
+        console.log($("#number-of-followers").text());
+      }, "json");
+  });
+
   // SETTING FUNCTIONS TO BE USED GLOBALLY
   window.openModal = openmodal;
   window.openFollowListModal = openFollowListModal;

@@ -42,9 +42,13 @@ if (!empty($_currentRow)) {
       <div class="username">
         <div class="name"><?php echo $userProfileData["Username"]; ?></div>
         <?php if($userid == $_SESSION["userId"]):?>
-        <div class="options"><a id="editProfile" href="editAccount.php">Edit</a></div>
+        <div class="options"><a class="editProfile" href="editAccount.php">Edit</a></div>
         <?php else: ?>
-        <div class="options"><a id="editProfile" href="">Follow</a></div>
+          <?php if($followController->isFollowing($_SESSION["userId"], $userid)): ?>
+            <div class="options"><a class="editProfile" id="followOrUnFollowUser" data-userid="<?php echo $userid; ?>">Unfollow</a></div>
+          <?php else: ?>
+            <div class="options"><a class="editProfile" id="followOrUnFollowUser" data-userid="<?php echo $userid; ?>">Follow</a></div>
+          <?php endif; ?>
         <?php endif; ?>
       </div>
       <div class="stats"> 
