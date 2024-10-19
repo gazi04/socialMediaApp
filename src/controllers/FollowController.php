@@ -11,10 +11,10 @@ class FollowController{
 
   public function followOrUnfollowUser($followerUserId, $followingUserId){
     if($this->isFollowing($followerUserId, $followingUserId)){
-      return $this->followModel->unfollowUser($followerUserId, $followingUserId); 
+      return $this->followModel->unfollowUser($followerUserId, $followingUserId) == true ? "unfollow": null; 
     }
 
-    return $this->followModel->followUser($followerUserId, $followingUserId); 
+    return $this->followModel->followUser($followerUserId, $followingUserId) == true ? "follow": null; 
   }
 
   public function isFollowing($followerUserId, $followingUserId){
