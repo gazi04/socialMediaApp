@@ -753,7 +753,7 @@ dialog {
   }
 }
 
-#users-list {
+.usersList {
   display: flex;
   flex-direction: column;
   height: 300px;

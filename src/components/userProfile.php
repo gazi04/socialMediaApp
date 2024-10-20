@@ -118,5 +118,5 @@ if (!empty($_currentRow)) {
 </dialog>
 
 <dialog data-model id="userListModal" style="width: 40%;">
-  <div id="users-list"></div>
+  <div id="followers-following-list" class="usersList"></div>
 </dialog>

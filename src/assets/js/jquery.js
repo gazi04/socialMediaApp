@@ -56,8 +56,12 @@ $(document).ready(function() {
         userId: userId
       }, 
       function(response) {
-        if(response.isLiked){ $("#likeIcon").prop("src", "../../assets/icons/redHeart.png"); }
-        else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
+        if(response.isLiked){ 
+          $("#likeIcon").prop("src", "../../assets/icons/redHeart.png");
+        }
+        else { 
+          $("#likeIcon").prop("src", "../../assets/icons/heart.png");
+        }
 
         $("#likes").empty();
         $("#likes").text(response.likes);
@@ -82,7 +86,7 @@ $(document).ready(function() {
         getUsersThatIFollow: true,
         userId: $myUserId
       },
-      function(response){ $("#users-list").html(response); }
+      function(response){$("#followers-following-list").html(response);}
     );
   }
   
@@ -92,7 +96,7 @@ $(document).ready(function() {
         getUsersThatFollowMe: true,
         userId: $myUserId
       },
-      function(response){ $("#users-list").html(response); }
+      function(response){$("#followers-following-list").html(response);}
     );
   }
 
