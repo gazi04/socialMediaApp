@@ -45,7 +45,7 @@ class Follow{
     return $result["following_count"];
   }
 
-  public function getFollowers($userId){
+  public function getFollowings($userId){
     $this->db->query("
         SELECT users.UserID, users.Username, users.ProfileImage 
         FROM followers JOIN users ON followers.FollowerUserID = users.UserID      
@@ -55,7 +55,7 @@ class Follow{
     }
 
 
-    public function getFollowings($userId){
+    public function getFollowers($userId){
       $this->db->query("
             SELECT users.UserID, users.Username, users.ProfileImage 
             FROM followers 
