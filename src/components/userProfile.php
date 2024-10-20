@@ -68,7 +68,7 @@ if (!empty($_currentRow)) {
         $caption = htmlspecialchars($post["Caption"], ENT_QUOTES, "UTF-8");
         $username = htmlspecialchars($userController->getUsernameByPostId($post["PostID"]));
         $postImage = base64_encode($post["Post"]);
-        $postDataArray[] = [ "postId" => $post["PostID"], "userId" => $userid, "caption" => $caption, "username" => $username, "imageSrc" => "data:image/jped;base64, ".$postImage ];
+        $postDataArray[] = [ "postId" => $post["PostID"], "userId" => $_SESSION["userId"], "caption" => $caption, "username" => $username, "imageSrc" => "data:image/jped;base64, ".$postImage ];
 
         echo '<div class="post" onclick="openModal(this)" data-post-id='.$post["PostID"].'>
           <img src="data:image/jped;base64, '.$postImage.'"/></div>';
