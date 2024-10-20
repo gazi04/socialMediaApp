@@ -4,9 +4,9 @@
 <div class="post">
   <div class="account"> 
     <?php if (!empty($post["ProfileImage"])): ?>
-      <div class="user-profile-image"><img src="data:image/jpeg;base64, <?php echo base64_encode($post["ProfileImage"]); ?>" /></div>
+    <div class="user-profile-image"><img src="data:image/jpeg;base64, <?php echo base64_encode($post["ProfileImage"]); ?>" onclick="redirectToProfile(<?php echo $post['UserID'] ?>)" /></div>
     <?php else: ?>
-      <div class="user-profile-image"><img src="../../assets/images/defaultUser.jpg" /></div>
+      <div class="user-profile-image"><img src="../../assets/images/defaultUser.jpg" onclick="redirectToProfile(<?php echo $post['UserID'] ?>)" /></div>
     <?php endif; ?>
     <div class="username"><?php echo htmlspecialchars($post["Username"]) ?></div>
   </div>

@@ -330,6 +330,7 @@ body {
       object-fit: cover;
       float: right;
       border-radius: 50%;
+      cursor: pointer;
     }
   }
 

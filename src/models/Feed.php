@@ -13,7 +13,7 @@ class Feed{
 
   public function getFeedFromFollowers($userId) {
     $this->db->query("
-      SELECT posts.*, users.Username, users.ProfileImage, COUNT(postlikes.LikeID) as LikeCount
+      SELECT posts.*, users.UserID, users.Username, users.ProfileImage, COUNT(postlikes.LikeID) as LikeCount
       FROM posts
       JOIN users ON posts.UserID = users.UserID
       JOIN followers ON posts.UserID = followers.FollowingUserID
@@ -28,7 +28,7 @@ class Feed{
 
   public function getFeedFromNonFollowers($userId) {
     $this->db->query("
-      SELECT posts.*, users.Username, users.ProfileImage, COUNT(postlikes.LikeID) AS LikeCount
+      SELECT posts.*, users.UserID, users.Username, users.ProfileImage, COUNT(postlikes.LikeID) AS LikeCount
       FROM posts
       JOIN users ON posts.UserID = users.UserID
       LEFT JOIN postlikes ON posts.PostID = postlikes.PostID
