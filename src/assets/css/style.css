@@ -130,7 +130,7 @@ body {
 /* MAIN TEMPLATE */
 .container {  
   display: grid;
-  grid-template-columns: 0.5fr 1fr 0.7fr;
+  grid-template-columns: 0.27fr 1fr 0.5fr;
   grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -142,24 +142,16 @@ body {
 /* MENU */
 .navbar { 
   grid-area: navbar; 
-
   padding-left: 0.5em;
 }
 
-@media (max-width: 1368px) {
-  .menu > li > a > .page { display: none; }
-  .menu > li > a {width: 17%; }
-  nav > .vertical-line { right: calc(100% - 6%);}
-}
 
 .menu {
   padding: 0;
   width: 10.5%;
   position: fixed;
   height: 100%;
-
   font-size: 0.85em;
-
   list-style-type: none;
   overflow: auto;
 }
@@ -201,7 +193,6 @@ body {
     font-family: "Playwrite HU";
     font-weight: 700;
     font-size: 20px;
-
     text-decoration: none;
   }
 }
@@ -235,8 +226,7 @@ body {
   width: 2px;
   height: 100vh;
   top: 0;
-  right: calc(100% - 17%); 
-
+  left: 200px;
   background-color: rgba(var(--menu-hover-overlay));
 }
 
@@ -314,6 +304,7 @@ body {
     "account"
     "image"
     "caption";
+  padding-inline: 5em;
 }
 
 .content > .post > .account {
@@ -825,6 +816,15 @@ dialog {
 .recommendations { grid-area: recommendations; }
 
 .footer { grid-area: footer; }
+
+/* MEDIA QUERIES */
+@media (max-width: 1368px) {
+  .menu { padding-block: 9.3em; }
+  .menu > li > a > .page { display: none; }
+  .menu > #banner { display: none; }
+  .menu > li > a {width: 17%; }
+  nav > .vertical-line { left: 75px; }
+}
 
 /* ANIMATIONS */
 .fadeInLeft {
