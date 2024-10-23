@@ -2,6 +2,7 @@
 $feedPath = "../feed/index.php";
 $myProfilePath = "../profile/index.php";
 $logoutPath = "../auth/logout.php";
+$chatRoomPath = "../chat";
 ?>
 <nav>
   <ul class="menu">
@@ -28,7 +29,7 @@ $logoutPath = "../auth/logout.php";
       </a>
     </li>
     <li>
-      <a href="#" class="menuOption">
+      <a href="<?php echo $chatRoomPath; ?>" class="menuOption">
         <div class="icon"><img id="menuIcon" src="../../assets/icons/send.png" data-original-icon="../../assets/icons/send.png" data-highlighted-icon="../../assets/icons/sendBlack.png"/></div>
         <div class="page"><span>Messages</span></div>
       </a>

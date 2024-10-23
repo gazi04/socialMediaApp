@@ -226,7 +226,7 @@ body {
   width: 2px;
   height: 100vh;
   top: 0;
-  left: 200px;
+  left: 230px;
   background-color: rgba(var(--menu-hover-overlay));
 }
 
@@ -813,6 +813,33 @@ dialog {
   opacity: 0.5;
 }
 
+#chat-container {
+  display: grid; 
+  grid-template-columns: 0.2fr 0.7fr 2.1fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "navbar chat-rooms chat-room";
+}
+
+#chat-navbar {
+  grid-area: navbar;
+
+  .menu { padding-block: 9.3em; }
+  .menu > li > a > .page { display: none; }
+  .menu > #banner { display: none; }
+  .menu > li > a {width: 17%; }
+  nav > .vertical-line { left: 75px; }
+}
+
+#chat-rooms {
+  grid-area: chat-rooms;
+}
+
+#chat-room {
+  grid-area: chat-room;
+}
+
 .recommendations { grid-area: recommendations; }
 
 .footer { grid-area: footer; }
@@ -836,28 +863,28 @@ dialog {
   animation-fill-mode: both;
 }
 @-webkit-keyframes fadeInLeft {
-0% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
-100% {
-  opacity: 1;
-  -webkit-transform: none;
-  transform: none;
-}
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }
 @keyframes fadeInLeft {
-0% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
-100% {
-  opacity: 1;
-  -webkit-transform: none;
-  transform: none;
-}
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }
 
 .fadeOutLeft {
@@ -869,23 +896,23 @@ dialog {
   animation-fill-mode: both;
 }
 @-webkit-keyframes fadeOutLeft {
-0% {
-  opacity: 1;
-}
-100% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
 }
 @keyframes fadeOutLeft {
-0% {
-  opacity: 1;
-}
-100% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
 } 
 
