@@ -18,7 +18,92 @@ include \BASE_PATH . "/views/auth/check.php";
     <div id="chat-container">
       <div id="chat-navbar"><?php include(BASE_PATH."/components/navbar.php"); ?></div>
 
-      <div id="chat-rooms"></div>
+      <div id="chat-rooms" class="usersList">
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+        <div class="user">
+          <img src="../../assets/images/sunflower.jpg"/>
+          <span class='username'>Test</span>
+        </div>
+      </div>
 
       <div id="chat-room"></div>
     </div>

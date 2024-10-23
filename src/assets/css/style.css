@@ -834,6 +834,16 @@ dialog {
 
 #chat-rooms {
   grid-area: chat-rooms;
+  height: 90vh;
+  margin-block: 2em;
+  font-size: large;
+  font-weight: 600;
+  
+  .user { margin-right: 1.5em; }
+  .user > img {
+    width: 90px;
+    height: 90px;
+  }
 }
 
 #chat-room {
