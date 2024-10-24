@@ -885,6 +885,8 @@ dialog {
     color: #646464;
   }
 
+  input:focus-visible { outline: none; }
+
   button {
     width: 4%;
     margin-top: .1em;
