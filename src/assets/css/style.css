@@ -756,6 +756,7 @@ dialog {
   height: 300px;
   border: none;
   overflow: scroll;
+  font-weight: 500;
 
   .user {
     display: flex;
@@ -777,6 +778,7 @@ dialog {
     background-color: rgba(0,0,0,0.04);
     border-radius: 10px;
     transition: 0.3s;
+    font-weight: 650;
   }
 }
 
@@ -837,7 +839,6 @@ dialog {
   height: 90vh;
   margin-block: 2em;
   font-size: large;
-  font-weight: 600;
   
   .user { margin-right: 1.5em; }
   .user > img {
@@ -847,7 +848,56 @@ dialog {
 }
 
 #chat-room {
-  grid-area: chat-room;
+  grid-area: chat-room; 
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1.9fr 0.1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "messages"
+    "message-input"; 
+  padding-inline: 1em;
+}
+
+#messages {
+  grid-area: messages;
+}
+
+#message-input {
+  grid-area: message-input;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2em;
+  padding-inline: 1em;
+  border: none;
+  border-radius: 30px;
+  background-color: #f4f2f2;
+  text-align: center;
+
+  input {
+    padding: 0.7rem 1rem;
+    width: 94%;
+    background-color: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: #646464;
+  }
+
+  button {
+    width: 4%;
+    margin-top: .1em;
+    border: none;
+    background-color: transparent;
+
+    img {
+      height: 1.6em;
+      width: 1.6em;
+      background-color: transparent;
+      rotate: 42deg;
+    }
+  }
 }
 
 .recommendations { grid-area: recommendations; }
@@ -873,28 +923,28 @@ dialog {
   animation-fill-mode: both;
 }
 @-webkit-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+0% {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+100% {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+}
 }
 @keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+0% {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+100% {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+}
 }
 
 .fadeOutLeft {
@@ -906,23 +956,22 @@ dialog {
   animation-fill-mode: both;
 }
 @-webkit-keyframes fadeOutLeft {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
+0% {
+  opacity: 1;
+}
+100% {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
 }
 @keyframes fadeOutLeft {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
+0% {
+  opacity: 1;
+}
+100% {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
 } 
-
