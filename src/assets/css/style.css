@@ -772,6 +772,11 @@ dialog {
       object-fit: cover;
       border-radius: 50%;
     }
+
+    img:hover {
+      background-color: transparent;
+      cursor: pointer;
+    }
   }
 
   .user:hover {
