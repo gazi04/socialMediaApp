@@ -106,7 +106,20 @@ include \BASE_PATH . "/views/auth/check.php";
       </div>
 
       <div id="chat-room">
-        <div id="messages"></div>
+        <div id="messages">
+          <div class="sended">
+            <div class="message">hallo</div>
+            <div class="message">hallo</div>
+            <div class="message">hallo</div>
+            <div class="message">hallo</div>
+          </div>
+          <div class="received">
+            <div class="message">hallo</div>
+            <div class="message">hallo</div>
+            <div class="message">hallo</div>
+            <div class="message">hallo</div>
+          </div>
+        </div>
         <div id="message-input">
           <input type="text" placeholder="Message">
           <button>

@@ -866,6 +866,49 @@ dialog {
 
 #messages {
   grid-area: messages;
+  padding: 2em;
+  overflow: scroll;
+
+  .sended {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .received {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sended, .received {
+    .message {
+      color: #fff;
+      font-size: 18px;
+      max-width: 28ch;
+      text-align: center;
+      margin-block: 0.2em;
+    }
+    .message {
+      --b: 2em;
+      --h: 1em;
+
+      --p: 50%;
+      --r: 1.2em;
+      --c: #563444;
+
+      padding: 1em;
+      border-radius: var(--r)/var(--r) min(var(--r),var(--p) - var(--b)/2) min(var(--r),100% - var(--p) - var(--b)/2) var(--r);
+      clip-path: polygon(100% 100%,0 100%,0 0,100% 0,
+        100% max(0%  ,var(--p) - var(--b)/2),
+        calc(100% + var(--h)) var(--p),
+        100% min(100%,var(--p) + var(--b)/2));
+      background: var(--c);
+      border-image: conic-gradient(var(--c) 0 0) fill 0/
+        calc(var(--p) - var(--b)/2) 0 calc(100% - var(--p) - var(--b)/2) var(--r)/
+        0 var(--h) 0 0;
+    }
+  }
 }
 
 #message-input {
@@ -982,3 +1025,4 @@ dialog {
   transform: translate3d(-100%, 0, 0);
 }
 } 
+
