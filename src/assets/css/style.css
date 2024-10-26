@@ -5,6 +5,14 @@
   /* COLORS */
   --accent-color: #1616ca;
 
+  /* VARIABLES FOR BUBBLE MESSAGES */
+  --bubble-chat-sended: #1c71d8;
+  --bubble-chat-received: #c2c2c2;
+  --b: 2em;
+  --h: 1em;
+  --p: 100%;
+  --r: 1.2em;
+
   /* MISC */
   --menu-hover-overlay: 0, 0, 0, .05;
   --menu-vertical-line: 0, 0, 0, .17;
@@ -841,10 +849,9 @@ dialog {
 
 #chat-rooms {
   grid-area: chat-rooms;
-  height: 90vh;
-  margin-block: 2em;
+  height: 100vh;
   font-size: large;
-  
+
   .user { margin-right: 1.5em; }
   .user > img {
     width: 90px;
@@ -862,53 +869,65 @@ dialog {
     "messages"
     "message-input"; 
   padding-inline: 1em;
+  height: 100vh;
 }
 
 #messages {
   grid-area: messages;
   padding: 2em;
+  height: 88%;
   overflow: scroll;
-
+  
   .sended {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    .message {
+      background: var(--bubble-chat-sended);
+      border-radius: 
+        var(--r)/var(--r)
+        min(var(--r),var(--p) - var(--b)/2) 
+        min(var(--r),100% - var(--p) - var(--b)/2) 
+        var(--r);
+    }
   }
 
   .received {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    .message {
+      background: var(--bubble-chat-received);
+      border-radius: 
+        var(--r)/var(--r)
+        min(var(--r),var(--p) - var(--b)/2) 
+        var(--r)
+        min(var(--r),100% - var(--p) - var(--b)/2);
+    }
   }
 
   .sended, .received {
     .message {
-      color: #fff;
-      font-size: 18px;
+      margin-block: 0.2em;
       max-width: 28ch;
       text-align: center;
-      margin-block: 0.2em;
+      color: #fff;
+      font-size: 18px;
     }
     .message {
-      --b: 2em;
-      --h: 1em;
-
-      --p: 50%;
-      --r: 1.2em;
-      --c: #563444;
 
       padding: 1em;
-      border-radius: var(--r)/var(--r) min(var(--r),var(--p) - var(--b)/2) min(var(--r),100% - var(--p) - var(--b)/2) var(--r);
-      clip-path: polygon(100% 100%,0 100%,0 0,100% 0,
-        100% max(0%  ,var(--p) - var(--b)/2),
+      clip-path: polygon(
+        100% 100%,
+        0 100%,
+        0 0,
+        100% 0,
+        100% max(0%, var(--p) - var(--b)/2),
         calc(100% + var(--h)) var(--p),
         100% min(100%,var(--p) + var(--b)/2));
-      background: var(--c);
-      border-image: conic-gradient(var(--c) 0 0) fill 0/
-        calc(var(--p) - var(--b)/2) 0 calc(100% - var(--p) - var(--b)/2) var(--r)/
-        0 var(--h) 0 0;
     }
   }
+
 }
 
 #message-input {
