@@ -30,7 +30,7 @@ class Message{
   public function getChatRooms($userId){}
 
   public function recentMessages($userId){
-    $this->db->query("SELECT u.UserID, u.Username, u.ProfileImage m.Message, m.CreateAt
+    $this->db->query("SELECT u.UserID, u.Username, u.ProfileImage, m.Message, m.CreateAt
       FROM messages AS m
       INNER JOIN users AS u ON m.SenderID = u.UserID
       INNER JOIN (
