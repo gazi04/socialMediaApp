@@ -26,5 +26,23 @@ class Message{
     return $this->db->execute();
 
   }
+
+  public function getChatRooms($userId){}
+
+  public function recentMessages($userId){
+    $this->db->query("SELECT u.UserID, u.Username, m.Message, m.CreateAt
+      FROM messages AS m
+      INNER JOIN users AS u ON m.SenderID = u.UserID
+      INNER JOIN (
+        SELECT SenderID, MAX(CreateAt) AS LatestMessageTime
+        FROM messages
+        WHERE ReceiverID = :userId
+        GROUP BY SenderID
+      ) AS latest_messages ON m.SenderID = latest_messages.SenderID AND m.CreateAt = latest_messages.LatestMessageTime
+      WHERE m.ReceiverID = :userId and m.Seen = 0
+      ORDER BY m.CreateAt DESC; ");
+    $this->db->bind(":userId", $userId);
+    return $this->db->execute();
+  }
 }
 ?>
