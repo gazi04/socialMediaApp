@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 24, 2024 at 06:36 AM
+-- Generation Time: Oct 27, 2024 at 01:47 PM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.3.12
 
@@ -55,11 +55,23 @@ INSERT INTO `followers` (`FollowerID`, `FollowerUserID`, `FollowingUserID`, `Cre
 
 CREATE TABLE `messages` (
   `MessageID` int(11) NOT NULL,
-  `SenderID` int(11) DEFAULT NULL,
-  `ReceiverID` int(11) DEFAULT NULL,
-  `Message` varchar(255) DEFAULT NULL,
+  `SenderID` int(11) NOT NULL,
+  `ReceiverID` int(11) NOT NULL,
+  `Message` varchar(255) NOT NULL,
+  `Seen` tinyint(1) NOT NULL DEFAULT 0,
   `CreateAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`MessageID`, `SenderID`, `ReceiverID`, `Message`, `Seen`, `CreateAt`) VALUES
+(1, 2, 1, 'hallo', 0, '2024-10-27 12:11:09'),
+(2, 2, 1, 'si jeni', 0, '2024-10-27 12:13:09'),
+(3, 2, 13, 'test mesazh tek nesi id 13', 0, '2024-10-27 12:11:09'),
+(4, 13, 1, 'une jam nesi 13', 0, '2024-10-27 13:13:09'),
+(5, 13, 1, 'kam nje pytje per ju', 0, '2024-10-27 13:15:09');
 
 -- --------------------------------------------------------
 
@@ -127,11 +139,11 @@ INSERT INTO `postlikes` (`LikeID`, `UserID`, `PostID`, `CreateAt`) VALUES
 (19, 17, 9, '2024-07-14 18:01:22'),
 (20, 17, 10, '2024-07-28 13:31:27'),
 (21, 17, 10, '2024-07-28 14:44:54'),
-(123, 1, 7, '2024-10-07 19:02:41'),
 (125, 1, 11, '2024-10-11 19:15:09'),
-(158, 1, 10, '2024-10-13 17:15:16'),
 (162, 1, 2, '2024-10-18 09:08:15'),
-(164, 1, 9, '2024-10-19 15:24:48');
+(166, 1, 8, '2024-10-27 11:16:20'),
+(167, 1, 7, '2024-10-27 11:16:28'),
+(173, 1, 10, '2024-10-27 11:16:53');
 
 -- --------------------------------------------------------
 
@@ -255,13 +267,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `followers`
 --
 ALTER TABLE `followers`
-  MODIFY `FollowerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `FollowerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `MessageID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MessageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `postcomments`
@@ -273,7 +285,7 @@ ALTER TABLE `postcomments`
 -- AUTO_INCREMENT for table `postlikes`
 --
 ALTER TABLE `postlikes`
-  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT for table `posts`
