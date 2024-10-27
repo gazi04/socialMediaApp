@@ -849,7 +849,7 @@ dialog {
 
 #chat-rooms {
   grid-area: chat-rooms;
-  height: 100vh;
+  height: 97vh;
   font-size: large;
 
   .user { margin-right: 1.5em; }
@@ -869,7 +869,7 @@ dialog {
     "messages"
     "message-input"; 
   padding-inline: 1em;
-  height: 100vh;
+  height: 97vh;
 }
 
 #messages {
