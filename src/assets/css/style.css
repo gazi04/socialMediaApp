@@ -856,6 +856,7 @@ dialog {
   .user > img {
     width: 90px;
     height: 90px;
+    padding-block: 0.3em;
   }
 }
 
@@ -874,6 +875,9 @@ dialog {
 
 #messages {
   grid-area: messages;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
   padding: 2em;
   height: 88%;
   overflow: scroll;
