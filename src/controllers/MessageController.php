@@ -47,6 +47,9 @@ class MessageController{
       else{
         $profileImage = "<img src='data:image/jpeg;base64, ".base64_encode($room["ProfileImage"])."' />";
       }
+
+      if($seen == 0){ $messageIndicator = "<span id='unread-message-indicator'></span>"; }
+      else { $messageIndicator = ""; }
       echo '
         <div class="user">
         '.$profileImage.'
@@ -54,6 +57,7 @@ class MessageController{
             <span class="username">'.$username.'</span><br>
             <span style="font-size:small; color:gray;">'.$trimmedString.'</span>
           </div>
+        '.$messageIndicator.'
         </div>';
     }
   }

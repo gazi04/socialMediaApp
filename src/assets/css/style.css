@@ -4,6 +4,7 @@
 :root {
   /* COLORS */
   --accent-color: #1616ca;
+  --blue-dot: #315fe8;
 
   /* VARIABLES FOR BUBBLE MESSAGES */
   --bubble-chat-sended: #1c71d8;
@@ -857,6 +858,14 @@ dialog {
     width: 90px;
     height: 90px;
     padding-block: 0.3em;
+  }
+
+  .user > #unread-message-indicator {
+    height: 10px;
+    width: 10px;
+    margin-left: auto;
+    border-radius: 50%;
+    background-color: var(--blue-dot);
   }
 }
 
