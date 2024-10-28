@@ -41,7 +41,7 @@ class Message{
         ORDER BY m.Seen, m.CreateAt DESC; 
       ");
     $this->db->bind(":userId", $userId);
-    return $this->db->execute();
+    return $this->db->resultSet();
   }
 }
 ?>
