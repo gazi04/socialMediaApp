@@ -1,5 +1,4 @@
 <?php
-require_once "../vendor/autoload.php";
 namespace Controllers;
 use Models\Message;
 use Controllers\UserController;
@@ -30,6 +29,33 @@ class MessageController{
     }
 
     return $this->messageModel->getChatHistory($loggedUserId, $userChatingWithId);
+  }
+
+  public function getChatRooms($loggedUserId){
+    $rooms = $this->messageModel->getChatRooms($loggedUserId);
+
+    foreach($rooms as $room){
+      $userid = htmlspecialchars($room["UserID"]);
+      $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
+      $message = htmlspecialchars($room["Message"]);
+      $seen = $room["Seen"];
+      $trimmedString = (strlen($message) > 10) ? substr($message, 0, 10) . "..." : $message;
+
+      if(empty($room["ProfileImage"])){
+        $profileImage = "<img src='../../assets/images/defaultUser.jpg' />";
+      }
+      else{
+        $profileImage = "<img src='data:image/jpeg;base64, ".base64_encode($room["ProfileImage"])."' />";
+      }
+      echo '
+        <div class="user">
+        '.$profileImage.'
+          <div>
+            <span class="username">'.$username.'</span><br>
+            <span style="font-size:small; color:gray;">'.$trimmedString.'</span>
+          </div>
+        </div>';
+    }
   }
 }
 ?>
