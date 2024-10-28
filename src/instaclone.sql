@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2024 at 01:47 PM
+-- Generation Time: Oct 28, 2024 at 09:31 AM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.3.12
 
@@ -71,7 +71,8 @@ INSERT INTO `messages` (`MessageID`, `SenderID`, `ReceiverID`, `Message`, `Seen`
 (2, 2, 1, 'si jeni', 0, '2024-10-27 12:13:09'),
 (3, 2, 13, 'test mesazh tek nesi id 13', 0, '2024-10-27 12:11:09'),
 (4, 13, 1, 'une jam nesi 13', 0, '2024-10-27 13:13:09'),
-(5, 13, 1, 'kam nje pytje per ju', 0, '2024-10-27 13:15:09');
+(5, 13, 1, 'kam nje pytje per ju', 1, '2024-10-27 13:15:09'),
+(6, 18, 1, 'demo message seen', 1, '2024-10-27 09:13:09');
 
 -- --------------------------------------------------------
 
@@ -143,7 +144,8 @@ INSERT INTO `postlikes` (`LikeID`, `UserID`, `PostID`, `CreateAt`) VALUES
 (162, 1, 2, '2024-10-18 09:08:15'),
 (166, 1, 8, '2024-10-27 11:16:20'),
 (167, 1, 7, '2024-10-27 11:16:28'),
-(173, 1, 10, '2024-10-27 11:16:53');
+(173, 1, 10, '2024-10-27 11:16:53'),
+(176, 1, 9, '2024-10-27 14:44:33');
 
 -- --------------------------------------------------------
 
@@ -267,13 +269,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `followers`
 --
 ALTER TABLE `followers`
-  MODIFY `FollowerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `FollowerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `MessageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MessageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `postcomments`
@@ -285,7 +287,7 @@ ALTER TABLE `postcomments`
 -- AUTO_INCREMENT for table `postlikes`
 --
 ALTER TABLE `postlikes`
-  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT for table `posts`
