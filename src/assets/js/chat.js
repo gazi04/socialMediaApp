@@ -38,6 +38,15 @@ $(document).ready(function() {
   );
 
   $("#searchUser").on("input", function(){
-    console.log($(this).val());
+    $.post("../../components/chatHandler.php", 
+      {
+        searchRooms: true,
+        term: $(this).val()
+      },
+      function(response){
+        // $("#rooms").html(response);
+        console.log(response);
+      }
+    );
   });
 });
