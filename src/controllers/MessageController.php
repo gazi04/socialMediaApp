@@ -31,11 +31,17 @@ class MessageController{
     return $this->messageModel->getChatHistory($loggedUserId, $userChatingWithId);
   }
 
-  public function getChatRooms($loggedUserId){
-    $this->generateHtmlRooms($this->messageModel->getChatRooms($loggedUserId));
+  public function getChatRooms(){
+    session_start();
+    $this->generateHtmlRooms($this->messageModel->getChatRooms($_SESSION["userId"]));
   }
 
-  public function generateHtmlRooms($rooms) {
+  public function searchRooms($username){
+    session_start();
+    $this->generateHtmlRooms($this->messageModel->searchRooms($_SESSION["userId"], $username));
+  }
+
+  public function generateHtmlRooms($rooms){
     foreach($rooms as $room){
       $userid = htmlspecialchars($room["UserID"]);
       $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
