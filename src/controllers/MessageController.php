@@ -38,7 +38,7 @@ class MessageController{
 
   public function searchRooms($username){
     session_start();
-    $this->generateHtmlRooms($this->messageModel->searchRooms($_SESSION["userId"], $username));
+    $this->generateHtmlRooms($this->messageModel->searchRooms($_SESSION["userId"], "%".$username."%"));
   }
 
   public function generateHtmlRooms($rooms){
