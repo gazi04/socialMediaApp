@@ -29,24 +29,26 @@ $(document).ready(function() {
           </div>
         `;
 
+  function fetchRooms(){
+    $.post("../../components/chatHandler.php",
+      { getRooms: true },
+      function(response){ $("#rooms").html(response); }
+    );
+  }
+
   // POPULATE CHAT ROOMS IF PAGE IS LOADED
-  $.post("../../components/chatHandler.php",
-    { getRooms: true },
-    function(response){
-      $("#rooms").html(response);
-    }
-  );
+  fetchRooms();
 
   $("#searchUser").on("input", function(){
-    $.post("../../components/chatHandler.php", 
-      {
-        searchRooms: true,
-        term: $(this).val()
-      },
-      function(response){
-        // $("#rooms").html(response);
-        console.log(response);
-      }
-    );
+    if($(this).val() === ""){ fetchRooms(); }
+    else{
+      $.post("../../components/chatHandler.php", 
+        {
+          searchRooms: true,
+          term: $(this).val()
+        },
+        function(response){ $("#rooms").html(response); }
+      );
+    }
   });
 });
