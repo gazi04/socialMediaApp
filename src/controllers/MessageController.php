@@ -32,8 +32,10 @@ class MessageController{
   }
 
   public function getChatRooms($loggedUserId){
-    $rooms = $this->messageModel->getChatRooms($loggedUserId);
+    $this->generateHtmlRooms($this->messageModel->getChatRooms($loggedUserId));
+  }
 
+  public function generateHtmlRooms($rooms) {
     foreach($rooms as $room){
       $userid = htmlspecialchars($room["UserID"]);
       $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
