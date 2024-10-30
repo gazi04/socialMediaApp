@@ -43,5 +43,23 @@ class Message{
     $this->db->bind(":userId", $userId);
     return $this->db->resultSet();
   }
+
+  public function searchRooms($userId, $username){
+    $this->db->query(" SELECT u.UserID, u.Username, u.ProfileImage, m.Message, m.Seen, m.CreateAt as MessageCreateAt
+        FROM messages AS m
+        INNER JOIN users AS u ON m.SenderID = u.UserID
+        INNER JOIN (
+            SELECT SenderID, MAX(CreateAt) AS LatestMessageTime
+            FROM messages
+            WHERE ReceiverID = :userId
+            GROUP BY SenderID
+        ) AS latest_messages ON m.SenderID = latest_messages.SenderID AND m.CreateAt = latest_messages.LatestMessageTime
+        WHERE m.ReceiverID = :userId AND u.Username LIKE :username
+        ORDER BY m.Seen, m.CreateAt DESC; 
+      ");
+    $this->db->bind(":userId", $userId);
+    $this->db->bind(":username", $username);
+    return $this->db->resultSet();
+  }
 }
 ?>
