@@ -1,14 +1,17 @@
 <?php
 namespace Controllers;
 use Models\Message;
+use Models\User;
 use Controllers\UserController;
 
 class MessageController{
   private $messageModel;
+  private $userModel;
   private $userController;
 
   public function __construct(){
     $this->messageModel = new Message();
+    $this->userModel = new User();
     $this->userController = new UserController();
   }
 
@@ -33,15 +36,23 @@ class MessageController{
 
   public function getChatRooms(){
     session_start();
-    $this->generateHtmlRooms($this->messageModel->getChatRooms($_SESSION["userId"]));
+    $this->updateHtmlRooms($this->messageModel->getChatRooms($_SESSION["userId"]));
   }
 
   public function searchRooms($username){
     session_start();
-    $this->generateHtmlRooms($this->messageModel->searchRooms($_SESSION["userId"], "%".$username."%"));
+    $rooms = $this->messageModel->searchRooms($_SESSION["userId"], "%".$username."%");
+
+    if(count($rooms) != 0){
+      $this->updateHtmlRooms($rooms);
+      exit();
+    }
+
+    $users = $this->userModel->searchUsers($username, $_SESSION["userId"]);
+    $this->generateNewHtmlRooms($users);
   }
 
-  public function generateHtmlRooms($rooms){
+  public function updateHtmlRooms($rooms){
     foreach($rooms as $room){
       $userid = htmlspecialchars($room["UserID"]);
       $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
@@ -66,6 +77,22 @@ class MessageController{
             <span style="font-size:small; color:gray;">'.$trimmedString.'</span>
           </div>
         '.$messageIndicator.'
+        </div>';
+    }
+  }
+
+  public function generateNewHtmlRooms($rooms){
+    foreach($rooms as $room){
+      $userid = htmlspecialchars($room["UserID"]);
+      $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
+      $profileImage = "<img src='data:image/jpeg;base64, ".base64_encode($room["ProfileImage"])."' />";
+
+      echo '
+        <div class="user">
+        '.$profileImage.'
+          <div>
+            <span class="username">'.$username.'</span><br>
+          </div>
         </div>';
     }
   }
