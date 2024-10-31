@@ -22,6 +22,7 @@ $profileUserId = $_SESSION["userId"];
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <script src="../../assets/js/jquery.min.js"></script>
     <script src="../../assets/js/jquery.js"></script>
+    <script src="../../assets/js/navbar.js"></script>
   </head>
   <body>
     <div class="container">

@@ -12,6 +12,7 @@ include \BASE_PATH . "/views/auth/check.php";
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/navbar.js"></script>
     <script src="../../assets/js/chat.js"></script>
   </head>
   <body>

@@ -22,6 +22,7 @@ if (isset($_POST["editAccount"]) && isset($_POST["bio"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/navbar.js"></script>
   </head>
   <body>
     <div class="container-without-leftbar">
