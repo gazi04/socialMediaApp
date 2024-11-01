@@ -20,10 +20,13 @@ class Message{
   }
 
   public function getChatHistory($firstUser, $secondUser){
-    $this->db->query("SELECT `SenderID`, `ReceiverID`, `Message`, `CreateAt` FROM `messages` WHERE `SenderID` == :firstUser AND `ReceiverID` == :secondUser; ORDER BY `CreateAt` ASC");
+    $this->db->query("
+      SELECT * FROM `messages` 
+      WHERE (SenderID = :firstUser AND ReceiverID = :secondUser) OR (SenderID = :secondUser AND ReceiverID = :firstUser)
+      ORDER BY CreateAt");
     $this->db->bind(":firstUser", $firstUser);
     $this->db->bind(":secondUser", $secondUser);
-    return $this->db->execute();
+    return $this->db->resultSet();
   }
 
   public function getChatRooms($userId){
