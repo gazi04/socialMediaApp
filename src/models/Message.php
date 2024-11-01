@@ -24,11 +24,10 @@ class Message{
     $this->db->bind(":firstUser", $firstUser);
     $this->db->bind(":secondUser", $secondUser);
     return $this->db->execute();
-
   }
 
   public function getChatRooms($userId){
-    $this->db->query(" SELECT u.UserID, u.Username, u.ProfileImage, m.Message, m.Seen, m.CreateAt as MessageCreateAt
+    $this->db->query(" SELECT u.UserID, u.Username, u.ProfileImage, m.Seen, m.CreateAt as MessageCreateAt
         FROM messages AS m
         INNER JOIN users AS u ON m.SenderID = u.UserID
         INNER JOIN (
@@ -59,6 +58,26 @@ class Message{
       ");
     $this->db->bind(":userId", $userId);
     $this->db->bind(":username", $username);
+    return $this->db->resultSet();
+  }
+
+  public function getLastMessage($senderId, $receiverId){
+      $this->db->query(" 
+      SELECT m.* FROM messages AS m
+      INNER JOIN (
+        SELECT 
+        MAX(CreateAt) AS LatestMessageTime
+        FROM messages
+        WHERE 
+        (SenderID = :UserID1 AND ReceiverID = :UserID2)
+        OR (SenderID = :UserID2 AND ReceiverID = :UserID1)
+      ) AS latest_message ON m.CreateAt = latest_message.LatestMessageTime
+      WHERE 
+      (m.SenderID = :UserID1 AND m.ReceiverID = :UserID2)
+      OR (m.SenderID = :UserID2 AND m.ReceiverID = :UserID1);
+      ");
+    $this->db->bind(":UserID1", $senderId);
+    $this->db->bind(":UserID2", $receiverId);
     return $this->db->resultSet();
   }
 }
