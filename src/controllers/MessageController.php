@@ -56,7 +56,8 @@ class MessageController{
     foreach($rooms as $room){
       $userid = htmlspecialchars($room["UserID"]);
       $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
-      $message = htmlspecialchars($room["Message"]);
+      $result = $this->messageModel->getLastMessage($_SESSION["userId"], $userid);
+      $message = $result[0]["Message"];
       $seen = $room["Seen"];
       $trimmedString = (strlen($message) > 10) ? substr($message, 0, 10) . "..." : $message;
 
@@ -70,6 +71,7 @@ class MessageController{
       if($seen == 0){ $messageIndicator = "<span id='unread-message-indicator'></span>"; }
       else { $messageIndicator = ""; }
       echo '
+        <a class="room">
         <div class="user">
         '.$profileImage.'
           <div>
@@ -77,7 +79,8 @@ class MessageController{
             <span style="font-size:small; color:gray;">'.$trimmedString.'</span>
           </div>
         '.$messageIndicator.'
-        </div>';
+        </div>
+        </a>';
     }
   }
 

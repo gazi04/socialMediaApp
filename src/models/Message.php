@@ -63,7 +63,7 @@ class Message{
 
   public function getLastMessage($senderId, $receiverId){
       $this->db->query(" 
-      SELECT m.* FROM messages AS m
+      SELECT Message FROM messages AS m
       INNER JOIN (
         SELECT 
         MAX(CreateAt) AS LatestMessageTime
