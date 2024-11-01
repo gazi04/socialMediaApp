@@ -16,22 +16,18 @@ class MessageController{
   }
 
   public function saveMessage($senderId, $receiverId, $message){
-    /* parameter validation  */
-    if(!$this->userController->doesUserIdExists($senderId) && !$this->userController->doesUserIdExists($receiverId)){
+    if($this->userController->doesUserIdExists($senderId) && $this->userController->doesUserIdExists($receiverId)){
       echo "error the sender or the receiver does not exists in the database.";
     }
-
-    /* we sent the msg to the receiver by using the websocket server and we also need to save it in the database */
     return $this->messageModel->saveMessage($senderId, $receiverId, $message);
   }
 
   public function getChatHistory($loggedUserId, $userChatingWithId){
-    /* parameter validation  */
-    if(!$this->userController->doesUserIdExists($loggedUserId) && !$this->userController->doesUserIdExists($userChatingWithId)){
+    if($this->userController->doesUserIdExists($loggedUserId) && $this->userController->doesUserIdExists($userChatingWithId)){
       echo "error the sender or the receiver does not exists in the database.";
     }
-
-    return $this->messageModel->getChatHistory($loggedUserId, $userChatingWithId);
+    $messages = $this->messageModel->getChatHistory($loggedUserId, $userChatingWithId);
+    return $this->turnMessagesToHtmlFormat($messages);
   }
 
   public function getChatRooms(){
@@ -52,7 +48,7 @@ class MessageController{
     $this->generateNewHtmlRooms($users);
   }
 
-  public function updateHtmlRooms($rooms){
+  private function updateHtmlRooms($rooms){
     foreach($rooms as $room){
       $userid = htmlspecialchars($room["UserID"]);
       $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
@@ -84,7 +80,7 @@ class MessageController{
     }
   }
 
-  public function generateNewHtmlRooms($rooms){
+  private function generateNewHtmlRooms($rooms){
     foreach($rooms as $room){
       $userid = htmlspecialchars($room["UserID"]);
       $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
@@ -104,6 +100,39 @@ class MessageController{
           </div>
         </div>';
     }
+  }
+
+  private function turnMessagesToHtmlFormat($messages){
+    $result = "";
+    $currentType = 0;
+
+    foreach ($messages as $messageData) {
+        $senderId = $messageData["SenderID"];
+        $receiverId = $messageData["ReceiverID"];
+        $message = htmlspecialchars($messageData["Message"]);
+
+        // Determine the message type based on sender and receiver
+        $messageType = ($senderId == $_SESSION["userId"]) ? "sended" : "received";
+
+        // If the message type changes, close the previous group and start a new one
+        if ($messageType !== $currentType) {
+            if ($currentType !== "") {
+                $result .= "</div>";  // Close previous group div
+            }
+            $result .= "<div class=\"$messageType\">";  // Start new group div
+            $currentType = $messageType;  // Update current type
+        }
+
+        // Add each message inside the current group div
+        $result .= "<div class=\"message\">$message</div>";
+    }
+
+    // Close the last group div if messages are not empty
+    if ($currentType !== "") {
+        $result .= "</div>";
+    }
+
+    return $result;
   }
 }
 ?>
