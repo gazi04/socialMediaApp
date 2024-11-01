@@ -51,4 +51,15 @@ $(document).ready(function() {
       );
     }
   });
+
+  $("#rooms").on("click", ".room", function(){
+    console.log($(this).find(".username").text());
+    $.post("../../components/chatHandler.php", 
+      { 
+        openRoom: true,
+        username: $(this).find(".username").text() 
+      },
+      function(response){ $("#messages").html(response)}
+    );
+  });
 });
