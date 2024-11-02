@@ -56,7 +56,7 @@ include \BASE_PATH . "/views/auth/check.php";
           </div>
         </div>
         <div id="message-input">
-          <input type="text" placeholder="Message">
+          <input type="text" id="message" placeholder="Message">
           <button>
             <img src="../../assets/icons/send.png"/>
           </button>

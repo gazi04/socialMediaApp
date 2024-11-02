@@ -15,8 +15,7 @@ else if(isset($_POST["searchRooms"]) && isset($_POST["term"]) && !empty($_POST["
 else if(isset($_POST["openRoom"]) && isset($_POST["username"])){
   session_start();
   $user = $userController->getUserByName($_POST["username"]);
-  /* echo $_SESSION["userId"]."  "; */
-  /* echo $user["UserID"]; */
-  echo $messageController->getChatHistory($_SESSION["userId"], $user["UserID"]);
+  $response = ["messages" => $messageController->getChatHistory($_SESSION["userId"], $user["UserID"]), "sentToUserId" => $user["UserID"]];
+  echo json_encode($response);
 }
 ?>

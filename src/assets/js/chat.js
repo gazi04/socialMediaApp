@@ -9,23 +9,23 @@ $(document).ready(function() {
           </div>
           <div class="user">
             <img src="../../assets/images/sunflower.jpg"/>
-            <span class='username'>Test</span>
+            <span class="username">Test</span>
           </div>
           <div class="user">
             <img src="../../assets/images/sunflower.jpg"/>
-            <span class='username'>Test</span>
+            <span class="username">Test</span>
           </div>
           <div class="user">
             <img src="../../assets/images/sunflower.jpg"/>
-            <span class='username'>Test</span>
+            <span class="username">Test</span>
           </div>
           <div class="user">
             <img src="../../assets/images/sunflower.jpg"/>
-            <span class='username'>Test</span>
+            <span class="username">Test</span>
           </div>
           <div class="user">
             <img src="../../assets/images/sunflower.jpg"/>
-            <span class='username'>Test</span>
+            <span class="username">Test</span>
           </div>
         `;
 
@@ -34,6 +34,11 @@ $(document).ready(function() {
       { getRooms: true },
       function(response){ $("#rooms").html(response); }
     );
+  }
+
+  function sendMessage(){
+    console.log($("#message-input #message").val());
+    $("#message-input #message").val("");
   }
 
   // POPULATE CHAT ROOMS IF PAGE IS LOADED
@@ -53,13 +58,24 @@ $(document).ready(function() {
   });
 
   $("#rooms").on("click", ".room", function(){
-    console.log($(this).find(".username").text());
     $.post("../../components/chatHandler.php", 
       { 
         openRoom: true,
         username: $(this).find(".username").text() 
       },
-      function(response){ $("#messages").html(response)}
+      function(response){ 
+        $("#messages").html(response["messages"]);
+        $("#message-input #message").attr("data-sendToUserId", response["sentToUserId"]);
+      },
+      "json"
     );
   });
+
+    $("#message").on("keypress", function(event){
+        if (event.which === 13){ sendMessage(); }
+    });
+
+    $("#message-input button").on("click", function(){
+        sendMessage();
+    });
 });
