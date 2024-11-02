@@ -63,6 +63,7 @@ $(document).ready(function() {
   // POPULATE CHAT ROOMS IF PAGE IS LOADED
   fetchRooms();
 
+  // SEACHES THROUGH EXISTING CHAT ROOMS AND THROUGH NEW USERS TO CREATE NEW CHAT ROOMS
   $("#searchUser").on("input", function(){
     if($(this).val() === ""){ fetchRooms(); }
     else{
@@ -76,6 +77,7 @@ $(document).ready(function() {
     }
   });
 
+  // OPEN CHAT ROOM BASED ON WHICH ROOM THE USER CLICKED
   $("#rooms").on("click", ".room", function(){
     $.post("../../components/chatHandler.php", 
       { 
@@ -85,19 +87,23 @@ $(document).ready(function() {
       function(response){ 
         $("#messages").html(response["messages"]);
         $("#message-input #message").attr("data-sendToUserId", response["sentToUserId"]);
+        $("#message-input").css("display", "flex");
       },
       "json"
     );
   });
 
+  // SEND MESSAGE IF ENTER KEY IS PRESSED
   $("#message").on("keypress", function(event){
     if (event.which === 13){ sendMessage(); }
   });
 
+  // SEND MESSAGE BY CLICKING THE SEND BUTTON
   $("#message-input button").on("click", function(){
     sendMessage();
   });
 
+  // FOCUS MESSAGE INPUT ON PRESSING TAB ON THE KEYBOARD
   $(document).on('keydown', function(e) {
     if (e.key === "Tab" || e.keyCode === 9) {
       e.preventDefault();

@@ -945,7 +945,7 @@ dialog {
 
 #message-input {
   grid-area: message-input;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2em;
@@ -978,6 +978,7 @@ dialog {
       width: 1.6em;
       background-color: transparent;
       rotate: 42deg;
+      cursor: pointer;
     }
   }
 }
