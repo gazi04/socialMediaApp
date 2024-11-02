@@ -19,7 +19,12 @@ class MessageController{
     if($this->userController->doesUserIdExists($senderId) && $this->userController->doesUserIdExists($receiverId)){
       echo "error the sender or the receiver does not exists in the database.";
     }
-    return $this->messageModel->saveMessage($senderId, $receiverId, $message);
+    try{
+      return $this->messageModel->saveMessage($senderId, $receiverId, $message);
+    }
+    catch(\PDOException $ex){
+      return $ex->getMessage();
+    }
   }
 
   public function getChatHistory($loggedUserId, $userChatingWithId){
@@ -31,12 +36,10 @@ class MessageController{
   }
 
   public function getChatRooms(){
-    session_start();
     $this->updateHtmlRooms($this->messageModel->getChatRooms($_SESSION["userId"]));
   }
 
   public function searchRooms($username){
-    session_start();
     $rooms = $this->messageModel->searchRooms($_SESSION["userId"], "%".$username."%");
 
     if(count($rooms) != 0){

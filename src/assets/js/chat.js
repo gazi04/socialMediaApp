@@ -37,7 +37,26 @@ $(document).ready(function() {
   }
 
   function sendMessage(){
-    console.log($("#message-input #message").val());
+    if($("#message-input #message").val() == ""){ return; }
+
+    $.post("../../components/chatHandler.php",
+      {
+        sendMessage: true,
+        message: $("#message-input #message").val(),
+        toId: $("#message-input #message").attr("data-sendToUserId")
+      },
+      function(response){
+        const sendedContainer = $("#messages > div").last().attr("class") == "sended";
+        if(sendedContainer){
+          $("#messages > div").last().append('<div class="message">'+response+'</div>');
+        }
+        else{
+          $("#messages").last().append('<div class="sended"><div class="message">'+response+'</div></div>');
+        }
+        console.log($("#messages > div").last().attr("class"));
+      },
+    )
+
     $("#message-input #message").val("");
   }
 
