@@ -12,7 +12,7 @@ class Message{
   }
 
   public function saveMessage($sender, $receiver, $msg){
-    $this->db->query("INSERT INTO `messages`(`SenderID`, `ReceiverID`, `Message`) VALUES (':sender',':receiver',':message')");
+    $this->db->query("INSERT INTO `messages`(`SenderID`, `ReceiverID`, `Message`) VALUES (:sender,:receiver,:message)");
     $this->db->bind(":sender", $sender);
     $this->db->bind(":receiver", $receiver);
     $this->db->bind(":message", $msg);
