@@ -90,11 +90,18 @@ $(document).ready(function() {
     );
   });
 
-    $("#message").on("keypress", function(event){
-        if (event.which === 13){ sendMessage(); }
-    });
+  $("#message").on("keypress", function(event){
+    if (event.which === 13){ sendMessage(); }
+  });
 
-    $("#message-input button").on("click", function(){
-        sendMessage();
-    });
+  $("#message-input button").on("click", function(){
+    sendMessage();
+  });
+
+  $(document).on('keydown', function(e) {
+    if (e.key === "Tab" || e.keyCode === 9) {
+      e.preventDefault();
+      $('#message').focus();
+    }
+  });
 });
