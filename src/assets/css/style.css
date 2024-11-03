@@ -886,7 +886,6 @@ dialog {
   grid-area: messages;
   display: flex;
   flex-direction: column;
-  justify-content: end;
   padding: 2em;
   height: 88%;
   overflow: scroll;

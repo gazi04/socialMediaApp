@@ -60,6 +60,15 @@ $(document).ready(function() {
     $("#message-input #message").val("");
   }
 
+  function scrollToBottom() {
+    const messagesContainer = $('#messages');
+    messagesContainer.scrollTop(messagesContainer.prop("scrollHeight"));
+  }
+
+  // Call this function whenever a new message is added
+  // Example of usage after adding a new message
+  scrollToBottom();
+
   // POPULATE CHAT ROOMS IF PAGE IS LOADED
   fetchRooms();
 
