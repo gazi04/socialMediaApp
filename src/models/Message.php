@@ -94,5 +94,12 @@ class Message{
     $this->db->bind(":UserID2", $receiverId);
     return $this->db->resultSet();
   }
+
+  public function markLastMessagesAsSeen($senderId, $receiverId){
+    $this->db->query("UPDATE `messages` SET `Seen`= 1 WHERE `SenderID` = :senderId AND `ReceiverID` = :receiverId");
+    $this->db->bind(":senderId", $senderId);
+    $this->db->bind(":receiverId", $receiverId);
+    return $this->db->execute();
+  }
 }
 ?>

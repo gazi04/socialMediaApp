@@ -16,6 +16,7 @@ else if(isset($_POST["searchRooms"]) && isset($_POST["term"]) && !empty($_POST["
 else if(isset($_POST["openRoom"]) && isset($_POST["username"])){
   $user = $userController->getUserByName($_POST["username"]);
   $response = ["messages" => $messageController->getChatHistory($_SESSION["userId"], $user["UserID"]), "sentToUserId" => $user["UserID"]];
+  $messageController->markReceivedMessagesAsSeen($user["UserID"], $_SESSION["userId"]);
   echo json_encode($response);
 }
 else if(isset($_POST["sendMessage"]) && isset($_POST["message"]) && isset($_POST["toId"])){

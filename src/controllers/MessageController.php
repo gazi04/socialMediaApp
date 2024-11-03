@@ -51,6 +51,15 @@ class MessageController{
     $this->generateNewHtmlRooms($users);
   }
 
+  public function markReceivedMessagesAsSeen($senderId, $receiverId){
+    try{
+      return $this->messageModel->markLastMessagesAsSeen($senderId, $receiverId);
+    }
+    catch(\PDOException $ex){
+      return $ex->getMessage();
+    }
+  }
+
   private function updateHtmlRooms($rooms){
     foreach($rooms as $room){
       $userid = htmlspecialchars($room["UserID"]);
@@ -112,30 +121,21 @@ class MessageController{
     $currentType = 0;
 
     foreach ($messages as $messageData) {
-        $senderId = $messageData["SenderID"];
-        $receiverId = $messageData["ReceiverID"];
-        $message = htmlspecialchars($messageData["Message"]);
+      $senderId = $messageData["SenderID"];
+      $receiverId = $messageData["ReceiverID"];
+      $message = htmlspecialchars($messageData["Message"]);
+      $messageType = ($senderId == $_SESSION["userId"]) ? "sended" : "received";
 
-        // Determine the message type based on sender and receiver
-        $messageType = ($senderId == $_SESSION["userId"]) ? "sended" : "received";
+      if ($messageType !== $currentType) {
+        if ($currentType !== "") { $result .= "</div>"; }
 
-        // If the message type changes, close the previous group and start a new one
-        if ($messageType !== $currentType) {
-            if ($currentType !== "") {
-                $result .= "</div>";  // Close previous group div
-            }
-            $result .= "<div class=\"$messageType\">";  // Start new group div
-            $currentType = $messageType;  // Update current type
-        }
-
-        // Add each message inside the current group div
-        $result .= "<div class=\"message\">$message</div>";
+        $result .= "<div class=\"$messageType\">";
+        $currentType = $messageType;
+      }
+      $result .= "<div class=\"message\">$message</div>";
     }
 
-    // Close the last group div if messages are not empty
-    if ($currentType !== "") {
-        $result .= "</div>";
-    }
+    if ($currentType !== "") { $result .= "</div>"; }
 
     return $result;
   }
