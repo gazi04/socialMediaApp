@@ -57,7 +57,7 @@ class MessageController{
       $username = htmlspecialchars($room["Username"], ENT_QUOTES, "UTF-8");
       $result = $this->messageModel->getLastMessage($_SESSION["userId"], $userid);
       $message = $result[0]["Message"];
-      $seen = $room["Seen"];
+      $seen = $result[0]["SenderID"] == $_SESSION["userId"] ? 1 : $result[0]["Seen"];
       $trimmedString = (strlen($message) > 10) ? substr($message, 0, 10) . "..." : $message;
 
       if(empty($room["ProfileImage"])){
