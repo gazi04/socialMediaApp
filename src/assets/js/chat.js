@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  scrollToBottom();
+  fetchRooms();
+
   const data = `
           <div class="user">
             <img src="../../assets/images/sunflower.jpg"/>
@@ -53,6 +56,7 @@ $(document).ready(function() {
         else{
           $("#messages").last().append('<div class="sended"><div class="message">'+response+'</div></div>');
         }
+        fetchRooms();
         console.log($("#messages > div").last().attr("class"));
       },
     )
@@ -65,12 +69,6 @@ $(document).ready(function() {
     messagesContainer.scrollTop(messagesContainer.prop("scrollHeight"));
   }
 
-  // Call this function whenever a new message is added
-  // Example of usage after adding a new message
-  scrollToBottom();
-
-  // POPULATE CHAT ROOMS IF PAGE IS LOADED
-  fetchRooms();
 
   // SEACHES THROUGH EXISTING CHAT ROOMS AND THROUGH NEW USERS TO CREATE NEW CHAT ROOMS
   $("#searchUser").on("input", function(){
@@ -97,6 +95,8 @@ $(document).ready(function() {
         $("#messages").html(response["messages"]);
         $("#message-input #message").attr("data-sendToUserId", response["sentToUserId"]);
         $("#message-input").css("display", "flex");
+        $("#unread-message-indicator").hide();
+        fetchRooms();
       },
       "json"
     );
