@@ -96,12 +96,14 @@ class MessageController{
       }
 
       echo '
+        <a class="room">
         <div class="user">
         '.$profileImage.'
           <div>
             <span class="username">'.$username.'</span><br>
           </div>
-        </div>';
+        </div>
+        </a>';
     }
   }
 
