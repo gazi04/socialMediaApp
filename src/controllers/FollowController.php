@@ -37,7 +37,7 @@ class FollowController{
       if($user["ProfileImage"] == null){ $profileImage = "../../assets/images/defaultUser.jpg"; }
       else{ $profileImage = "data:image/jped;base64, ".base64_encode($user["ProfileImage"]); }
       echo "
-      <div class='user'>
+      <div class='user' onclick='redirectToProfile(".$user["UserID"].")'>
       <img src='".$profileImage."' />
       <span class='username'>".$username."</span>
       </div> ";
@@ -52,7 +52,7 @@ class FollowController{
       if($user["ProfileImage"] == null){ $profileImage = "../../assets/images/defaultUser.jpg"; }
       else{ $profileImage = "data:image/jped;base64, ".base64_encode($user["ProfileImage"]); }
       echo "
-      <div class='user'>
+      <div class='user' onclick='redirectToProfile(".$user["UserID"].")'>
       <img src='".$profileImage."' />
       <span class='username'>".$username."</span>
       </div> ";
