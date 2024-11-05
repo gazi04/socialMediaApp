@@ -1,41 +1,37 @@
 $(document).ready(function() {
+  // IT OPENS THE CHAT MESSAGES IF CLICKS THE MESSAGE BUTTON IN THE PROFILE OF A USER
+  const username = getQueryParams();
+  if(username){ fetchMessages(username); }
+
   scrollToBottom();
   fetchRooms();
 
-  const data = `
-          <div class="user">
-            <img src="../../assets/images/sunflower.jpg"/>
-            <div>
-              <span class="username">Test</span><br>
-              <span style="font-size:small; color:gray;">helasdfjasl;dfjsalo</span>
-            </div>
-          </div>
-          <div class="user">
-            <img src="../../assets/images/sunflower.jpg"/>
-            <span class="username">Test</span>
-          </div>
-          <div class="user">
-            <img src="../../assets/images/sunflower.jpg"/>
-            <span class="username">Test</span>
-          </div>
-          <div class="user">
-            <img src="../../assets/images/sunflower.jpg"/>
-            <span class="username">Test</span>
-          </div>
-          <div class="user">
-            <img src="../../assets/images/sunflower.jpg"/>
-            <span class="username">Test</span>
-          </div>
-          <div class="user">
-            <img src="../../assets/images/sunflower.jpg"/>
-            <span class="username">Test</span>
-          </div>
-        `;
+  function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("username");
+  }
 
   function fetchRooms(){
     $.post("../../components/chatHandler.php",
       { getRooms: true },
       function(response){ $("#rooms").html(response); }
+    );
+  }
+
+  function fetchMessages(username){
+    $.post("../../components/chatHandler.php", 
+      { 
+        openRoom: true,
+        username: username 
+      },
+      function(response){ 
+        $("#messages").html(response["messages"]);
+        $("#message-input #message").attr("data-sendToUserId", response["sentToUserId"]);
+        $("#message-input").css("display", "flex");
+        $("#unread-message-indicator").hide();
+        fetchRooms();
+      },
+      "json"
     );
   }
 
@@ -86,20 +82,7 @@ $(document).ready(function() {
 
   // OPEN CHAT ROOM BASED ON WHICH ROOM THE USER CLICKED
   $("#rooms").on("click", ".room", function(){
-    $.post("../../components/chatHandler.php", 
-      { 
-        openRoom: true,
-        username: $(this).find(".username").text() 
-      },
-      function(response){ 
-        $("#messages").html(response["messages"]);
-        $("#message-input #message").attr("data-sendToUserId", response["sentToUserId"]);
-        $("#message-input").css("display", "flex");
-        $("#unread-message-indicator").hide();
-        fetchRooms();
-      },
-      "json"
-    );
+    fetchMessages($(this).find(".username").text());
   });
 
   // SEND MESSAGE IF ENTER KEY IS PRESSED
