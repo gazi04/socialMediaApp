@@ -551,9 +551,7 @@ body {
 
     .name { font-weight: 600; }
 
-    .options { padding-inline: 1.3em;}
-
-    .options > .editProfile {
+    .options > a {
       padding: 0.3em 1.2em;
       margin-right: 5px;
 
@@ -569,7 +567,7 @@ body {
       outline: none;
     }
 
-    .options > .editProfile:hover {
+    .options > a:hover {
       background-color: #dfddddf2;
     }
   }
