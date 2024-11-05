@@ -315,6 +315,13 @@ $(document).ready(function() {
       }, "json");
   });
 
+  $("#openChat").on("click", function(){
+    console.log("open chat");
+    const username = encodeURIComponent($(".username .name").html());
+    const chatUrl = "../chat/index.php?username=${"+username+"}";
+    window.location.href = chatUrl;
+  });
+
   // SETTING FUNCTIONS TO BE USED GLOBALLY
   window.openModal = openmodal;
   window.openFollowListModal = openFollowListModal;
