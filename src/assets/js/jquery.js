@@ -315,10 +315,11 @@ $(document).ready(function() {
       }, "json");
   });
 
+  // OPENS CHAT BY CLICKING THE MESSAGE BUTTON IN THE PROFILE OF A USER
   $("#openChat").on("click", function(){
     console.log("open chat");
     const username = encodeURIComponent($(".username .name").html());
-    const chatUrl = "../chat/index.php?username=${"+username+"}";
+    const chatUrl = "../chat/index.php?username="+username;
     window.location.href = chatUrl;
   });
 
