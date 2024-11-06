@@ -37,7 +37,6 @@ body {
     ". login-form ."
     ". login-form ."
     ". . .";
-
   height: 100vh;
 }
 
@@ -56,7 +55,6 @@ body {
   fieldset {
     padding-inline: 1em;
     padding-block: 3em;
-
     border-width: 1px;
     border-color: #8f8f8f;
   }
@@ -85,26 +83,20 @@ body {
       padding: 5px 10px;
       width: 95%;
       height: 1.4em;
-
       background: #F2F2FB;
       border: 1px solid #C4D1EB;
-
       font-size: 18px;
       color: #000000;
-
       outline: none;
     }
 
     .submit_button {
       height: 40px;
       width: 100%;
-
       background-color: var(--accent-color);
-
       font-size: 1.3em;
       font-weight: 600;
       color: #ffffff;
-
       border-radius: 10px;
       cursor: pointer;
     }
@@ -132,9 +124,7 @@ body {
   }
 }
 
-.login-with {
-  grid-area: logOrsign-with;
-}
+.login-with { grid-area: logOrsign-with; }
 
 /* MAIN TEMPLATE */
 .container {  
@@ -153,7 +143,6 @@ body {
   grid-area: navbar; 
   padding-left: 0.5em;
 }
-
 
 .menu {
   padding: 0;
@@ -176,13 +165,10 @@ body {
   gap: 0px 0px; 
   grid-template-areas: 
     "icon page";
-
   align-items: center;
   padding-inline: 1em;
   padding-block: 0.6em; 
-
   color: #000; 
-
   text-decoration: none;
   transition: 0.3s;
   border-radius: 8px;
@@ -206,9 +192,7 @@ body {
   }
 }
 
-.icon {
-  grid-area: icon;
-}
+.icon { grid-area: icon; }
 
 .page {
   grid-area: page;
@@ -269,9 +253,7 @@ body {
     transition: .3s ease;
   }
 
-  .input::placeholder {
-    color: #9e9ea7;
-  }
+  .input::placeholder { color: #9e9ea7; }
 
   .input:focus, input:hover {
     outline: none;
@@ -288,6 +270,7 @@ body {
     height: 1rem;
   }
 }
+
 #closeContainer {
   display: flex;
   justify-content: flex-end;
@@ -300,9 +283,7 @@ body {
 }
 
 /* MAIN CONTENT */
-.content { 
-  grid-area: content;
-}
+.content { grid-area: content; }
 
 .content > .post {
   display: grid; 
@@ -342,9 +323,7 @@ body {
 
   .username {
     grid-area: username;
-
     padding-block: 1em;
-
     font-weight: 500;
     font-size: large;
   }
@@ -363,25 +342,19 @@ body {
 
 .content > .post > .caption {
   grid-area: caption;
-
   padding-inline: 3em;
 
   .intercation > a > img {
     width: 1.5em;
     padding-right: 0.4em;
-
     cursor: pointer;
     transition: opacity 0.3s ease-in-out,
       color 0.3s ease-in-out;
   }
 
-  .intercation > a > img:hover {
-    opacity: 0.3;
-  }
+  .intercation > a > img:hover { opacity: 0.3; }
 
-  .intercation > .like-counts {
-    font-weight: 400;
-  }
+  .intercation > .like-counts { font-weight: 400; }
 }
 
 .container-without-leftbar {
@@ -398,7 +371,6 @@ body {
   grid-area: content;
   display: flex;
   flex-direction: column;
-
   padding-inline: 20em;
   padding-block: 5em;
 
@@ -429,15 +401,12 @@ body {
       background-color: #1652F0;
       border: 1px solid #1652F0;
       border-radius: 8px;
-
       line-height: 1.15;
       padding: 12px 16px;
       margin-block: 1em;
       text-align: center;
-
       font-size: 14px;
       color: #FFFFFF;
-
       cursor: pointer;
       transition: all 80ms ease-in-out;
     }
@@ -456,10 +425,8 @@ body {
   .edit-bio > textarea {
     width: 100%;
     max-height: 133px;
-
     resize: none;
   }
-
 
   .submit-button {
     display: flex;
@@ -470,14 +437,11 @@ body {
       background-color: #14a7f0;
       border: 1px solid #14a7f0;
       border-radius: 8px;
-
       line-height: 1.15;
       padding: 12px 16px;
-
       color: #FFFFFF;
       font-size: 14px;
       text-align: center;
-
       cursor: not-allowed;
     }
 
@@ -509,13 +473,11 @@ body {
   grid-template-areas:
     "profile"
     "posts";
-
   padding-inline: 10em;
 }
 
 .profile { 
   grid-area: profile;
-
   display: grid; 
   grid-template-columns: 0.7fr 1.3fr; 
   grid-template-rows: 1fr; 
@@ -571,15 +533,15 @@ body {
       background-color: #dfddddf2;
     }
   }
+
   .stats {
     display: flex;
     justify-content: space-between;
     padding-block: 1em;
     width: 45%;
   }
-  .bio {
-    width: 65%;
-  }
+
+  .bio { width: 65%; }
 }
 
 #posts { 
@@ -751,9 +713,7 @@ dialog {
       color: #3125d4;
     }
 
-    #postCommentButton.enable:hover {
-      color: black;
-    }
+    #postCommentButton.enable:hover { color: black; }
   }
 }
 
@@ -920,24 +880,12 @@ dialog {
     .message {
       margin-block: 0.2em;
       max-width: 28ch;
+      padding: 1em;
       text-align: center;
       color: #fff;
       font-size: 18px;
     }
-    .message {
-
-      padding: 1em;
-      clip-path: polygon(
-        100% 100%,
-        0 100%,
-        0 0,
-        100% 0,
-        100% max(0%, var(--p) - var(--b)/2),
-        calc(100% + var(--h)) var(--p),
-        100% min(100%,var(--p) + var(--b)/2));
-    }
   }
-
 }
 
 #message-input {
@@ -1003,28 +951,28 @@ dialog {
   animation-fill-mode: both;
 }
 @-webkit-keyframes fadeInLeft {
-0% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
-100% {
-  opacity: 1;
-  -webkit-transform: none;
-  transform: none;
-}
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }
 @keyframes fadeInLeft {
-0% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
-100% {
-  opacity: 1;
-  -webkit-transform: none;
-  transform: none;
-}
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }
 
 .fadeOutLeft {
@@ -1036,23 +984,23 @@ dialog {
   animation-fill-mode: both;
 }
 @-webkit-keyframes fadeOutLeft {
-0% {
-  opacity: 1;
-}
-100% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
 }
 @keyframes fadeOutLeft {
-0% {
-  opacity: 1;
-}
-100% {
-  opacity: 0;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
 } 
 
