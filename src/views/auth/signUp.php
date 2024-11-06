@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <script src="../../assets/js/jquery.min.js"></script>
-    <script src="../../assets/js/script.js"></script>
   </head>
   <body>
     <div class="authentication-container">
