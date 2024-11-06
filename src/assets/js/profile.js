@@ -2,7 +2,7 @@ $(document).ready(function() {
   let postsArray = [];
   let currentIndex = 0;
 
-  function openmodal(postelement) {
+  function openmodal(postelement){
     const postid = $(postelement).data('post-id');
     const post = getPostFromArray(postid);
 
@@ -56,12 +56,8 @@ $(document).ready(function() {
         userId: userId
       }, 
       function(response) {
-        if(response.isLiked){ 
-          $("#likeIcon").prop("src", "../../assets/icons/redHeart.png");
-        }
-        else { 
-          $("#likeIcon").prop("src", "../../assets/icons/heart.png");
-        }
+        if(response.isLiked){ $("#likeIcon").prop("src", "../../assets/icons/redHeart.png"); }
+        else { $("#likeIcon").prop("src", "../../assets/icons/heart.png"); }
 
         $("#likes").empty();
         $("#likes").text(response.likes);
@@ -76,7 +72,7 @@ $(document).ready(function() {
         getComments: true,
         postId: postId
       },
-      function(response){ $("#comments").html(response) }
+      function(response){ $("#comments").html(response); }
     );
   }
 
@@ -86,7 +82,7 @@ $(document).ready(function() {
         getUsersThatIFollow: true,
         userId: $myUserId
       },
-      function(response){$("#followers-following-list").html(response);}
+      function(response){ $("#followers-following-list").html(response); }
     );
   }
   
@@ -96,17 +92,13 @@ $(document).ready(function() {
         getUsersThatFollowMe: true,
         userId: $myUserId
       },
-      function(response){$("#followers-following-list").html(response);}
+      function(response){ $("#followers-following-list").html(response); }
     );
   }
 
   function openFollowListModal(element, userId, option){
-    if (option === "followers"){
-      fetchUsersThatIFollow(userId);
-    }
-    else if (option === "followings"){
-      fetchUsersThatFollowMe(userId);
-    }
+    if (option === "followers"){ fetchUsersThatIFollow(userId); }
+    else if (option === "followings"){ fetchUsersThatFollowMe(userId); }
     $("#userListModal")[0].showModal();
   }
 
@@ -148,9 +140,7 @@ $(document).ready(function() {
         postId: $(this).attr("data-postid"),
         comment: comment.val()
       },
-      function(response){
-        console.log(response);
-      }
+      function(response){ console.log("Comment send with success"); }
     );
 
     fetchComments($(this).data("postid"));
@@ -164,9 +154,7 @@ $(document).ready(function() {
       $("#inputField").val("");
       $("#postModal")[0].close();
     }
-    else if ($(e.target).is("#userListModal")){
-      $("#userListModal")[0].close();
-    }
+    else if ($(e.target).is("#userListModal")){ $("#userListModal")[0].close(); }
   });
 
   // ENABLE AND DISABLE THE POST BUTTON FOR COMMENTS IN THE POST MODAL ACCORDING IF THERE IS ANY INPUT
@@ -271,14 +259,17 @@ $(document).ready(function() {
       {
         followOrUnfollowUser: true,
         userid: $(this).attr("data-userid")
-      }, function(response){
+      },
+      function(response){
         const text = response["followersCount"] + " follower";
         $("#followOrUnFollowUser").text(response["status"]);
         $("#number-of-followers").text(text);
 
         console.log($("#followOrUnFollowUser").text());
         console.log($("#number-of-followers").text());
-      }, "json");
+      },
+      "json"
+    );
   });
 
   // OPENS CHAT BY CLICKING THE MESSAGE BUTTON IN THE PROFILE OF A USER
