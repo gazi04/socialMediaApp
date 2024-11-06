@@ -4,6 +4,10 @@ $(document).ready(function() {
     window.location.href = "../profile/index.php?"+$.param(data);
   }
 
+  function openModalForCreatingPosts(){ 
+    $("#createPost")[0].showModal();
+  }
+
   // HANDLES LIKES IN THE FEED VIEW
   $(".likeButton").on("click", function(){
     const postid = $(this).data("postid");
@@ -31,6 +35,14 @@ $(document).ready(function() {
       });
   });
 
+  // CLOSE MODAL IF USER CLICKS OUTSIDE THE MODAL
+  $(window).on("click", function(e){
+    if ($(e.target).is("#createPost")){
+      $("#createPost")[0].close();
+    }
+  });
+
   // SETTING FUNCTIONS TO BE USED GLOBALLY
   window.redirectToProfile = redirectToProfile;
+  window.openModalForCreatingPosts = openModalForCreatingPosts;
 });

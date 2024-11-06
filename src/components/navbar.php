@@ -41,7 +41,7 @@ $chatRoomPath = "../chat";
       </a>
     </li>
     <li>
-      <a href="#" class="menuOption">
+      <a href="#" class="menuOption" onClick="openModalForCreatingPosts()">
         <div class="icon"><img id="menuIcon" src="../../assets/icons/create.png" data-original-icon="../../assets/icons/create.png" data-highlighted-icon="../../assets/icons/highlightedCreate.png" /></div>
         <div class="page"><span>Create</span></div>
       </a>
@@ -71,3 +71,4 @@ $chatRoomPath = "../chat";
   
   <div class="vertical-line"></div>
 </nav>
+<?php include(BASE_PATH."/components/createPost.php"); ?>
