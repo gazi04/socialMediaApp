@@ -35,6 +35,11 @@ $(document).ready(function() {
       });
   });
 
+  $("#uploadImage").on("click", function(e) {
+    e.preventDefault();
+    $("#imageInput").click();
+  });
+
   // CLOSE MODAL IF USER CLICKS OUTSIDE THE MODAL
   $(window).on("click", function(e){
     if ($(e.target).is("#createPost")){
