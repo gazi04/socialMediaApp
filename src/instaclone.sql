@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 28, 2024 at 09:31 AM
+-- Generation Time: Nov 07, 2024 at 10:28 AM
 -- Server version: 11.5.2-MariaDB
--- PHP Version: 8.3.12
+-- PHP Version: 8.3.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,12 +67,19 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`MessageID`, `SenderID`, `ReceiverID`, `Message`, `Seen`, `CreateAt`) VALUES
-(1, 2, 1, 'hallo', 0, '2024-10-27 12:11:09'),
-(2, 2, 1, 'si jeni', 0, '2024-10-27 12:13:09'),
-(3, 2, 13, 'test mesazh tek nesi id 13', 0, '2024-10-27 12:11:09'),
-(4, 13, 1, 'une jam nesi 13', 0, '2024-10-27 13:13:09'),
+(1, 2, 1, 'hallo', 1, '2024-10-27 12:11:09'),
+(2, 2, 1, 'si jeni', 1, '2024-10-27 12:13:09'),
+(3, 2, 13, 'test mesazh tek nesi id 13', 1, '2024-10-27 12:11:09'),
+(4, 13, 1, 'une jam nesi 13', 1, '2024-10-27 13:13:09'),
 (5, 13, 1, 'kam nje pytje per ju', 1, '2024-10-27 13:15:09'),
-(6, 18, 1, 'demo message seen', 1, '2024-10-27 09:13:09');
+(6, 18, 1, 'demo message seen', 1, '2024-10-27 09:13:09'),
+(7, 1, 2, 'mire por ju si jeni', 0, '2024-10-31 12:13:09'),
+(8, 1, 13, 'testi pare', 1, '2024-11-02 17:17:36'),
+(9, 1, 13, 'test dyte', 1, '2024-11-02 17:34:00'),
+(10, 13, 1, 'jjjj', 1, '2024-11-02 19:34:36'),
+(11, 1, 17, 'hi', 0, '2024-11-03 11:37:04'),
+(12, 1, 13, 'aasddfasd', 1, '2024-11-03 13:36:14'),
+(13, 1, 13, 'halllo', 1, '2024-11-03 13:39:13');
 
 -- --------------------------------------------------------
 
@@ -142,10 +149,12 @@ INSERT INTO `postlikes` (`LikeID`, `UserID`, `PostID`, `CreateAt`) VALUES
 (21, 17, 10, '2024-07-28 14:44:54'),
 (125, 1, 11, '2024-10-11 19:15:09'),
 (162, 1, 2, '2024-10-18 09:08:15'),
-(166, 1, 8, '2024-10-27 11:16:20'),
 (167, 1, 7, '2024-10-27 11:16:28'),
-(173, 1, 10, '2024-10-27 11:16:53'),
-(176, 1, 9, '2024-10-27 14:44:33');
+(176, 1, 9, '2024-10-27 14:44:33'),
+(180, 13, 2, '2024-11-02 19:38:54'),
+(181, 13, 7, '2024-11-02 19:39:00'),
+(183, 13, 10, '2024-11-02 19:40:02'),
+(184, 1, 8, '2024-11-06 16:05:48');
 
 -- --------------------------------------------------------
 
@@ -275,7 +284,7 @@ ALTER TABLE `followers`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `MessageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MessageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `postcomments`
@@ -287,7 +296,7 @@ ALTER TABLE `postcomments`
 -- AUTO_INCREMENT for table `postlikes`
 --
 ALTER TABLE `postlikes`
-  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT for table `posts`
