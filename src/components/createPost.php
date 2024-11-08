@@ -1,7 +1,7 @@
 <dialog data-model id="createPost" style="width: 50%; height: 70vh;">
   <div id="uploadNewPost"> 
     <div class="image-preview" id="uploadImage">
-      <img class="preview"/>
+      <img id="preview-image"/>
       <div class="upload-icon"><img src="../../assets/icons/upload.png" /></div>
     </div>
 

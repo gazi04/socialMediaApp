@@ -40,6 +40,18 @@ $(document).ready(function() {
     $("#imageInput").click();
   });
 
+  $("#imageInput").on("change", function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        $("#preview-image").attr("src", e.target.result);
+      }
+      reader.readAsDataURL(file);
+      $(".upload-icon").css("display", "none");
+    }
+  });
+
   // CLOSE MODAL IF USER CLICKS OUTSIDE THE MODAL
   $(window).on("click", function(e){
     if ($(e.target).is("#createPost")){
