@@ -49,6 +49,7 @@ $(document).ready(function() {
       }
       reader.readAsDataURL(file);
       $(".upload-icon").css("display", "none");
+      $("#submit-button").addClass("enable");
     }
   });
 
@@ -56,6 +57,9 @@ $(document).ready(function() {
   $(window).on("click", function(e){
     if ($(e.target).is("#createPost")){
       $("#createPost")[0].close();
+      $("#preview-image").attr("src", "");
+      $("#caption").val("");
+      $(".upload-icon").css("display", "block");
     }
   });
 
