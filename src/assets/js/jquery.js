@@ -49,8 +49,30 @@ $(document).ready(function() {
       }
       reader.readAsDataURL(file);
       $(".upload-icon").css("display", "none");
-      $("#submit-button").addClass("enable");
+      $("#create-post").addClass("enable");
     }
+  });
+
+  // MAKES A POST REQUEST BY SENDING THE UPLOADED IMAGE TO CREATE A NEW POST
+  $("#create-post").on("click", function() {
+    const imageCaption = $("#caption").val();
+    const imageFile = $("#imageInput")[0].files[0];
+
+    const formData = new FormData();
+    formData.append("createPost", true);
+    formData.append("caption", imageCaption);
+    formData.append("imagefile", imageFile);
+
+    $.ajax({
+      url: "../../components/uploadPost.php",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log(response);
+      },
+    });
   });
 
   // CLOSE MODAL IF USER CLICKS OUTSIDE THE MODAL
