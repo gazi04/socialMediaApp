@@ -69,9 +69,16 @@ $(document).ready(function() {
       data: formData,
       processData: false,
       contentType: false,
-      success: function (response) {
+      dataType: "json",
+      success: function(response) {
         console.log(response);
       },
+      error: function(xhr, status, error) {
+        console.error("AJAX request failed");
+        console.log("Status:", status);
+        console.log("Error:", error);
+        console.log("Response Text:", xhr.responseText);
+      }
     });
   });
 
