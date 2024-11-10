@@ -2,6 +2,8 @@
 require "../vendor/autoload.php";
 use Controllers\PostController;
 
+header('Content-Type: application/json');
+
 if(isset($_POST["createPost"])){
   $postController = new PostController();
   if($_POST["caption"] == null) {
@@ -9,9 +11,9 @@ if(isset($_POST["createPost"])){
     exit();
   }
 
-  echo json_encode(["test" => "asdlfjasldfalskd"]);
-  exit();
-  $result = $postController->createPost($_SESSION["userId"], $_POST["imagefile"], $_POST["caption"]);
-  echo $result;
+  /* echo json_encode(["test" => "asdlfjasldfalskd"]); */
+  session_start();
+  $result = $postController->createPost($_SESSION["userId"], $_FILES["imagefile"], $_POST["caption"]);
+  echo json_encode(["result" => $result]);
 }
 ?>
