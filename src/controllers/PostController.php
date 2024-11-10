@@ -11,20 +11,16 @@ class PostController{
 
   public function createPost($userId, $image, $caption){
     if($image["size"] > 500000){
-      echo "Sorry, your file is too large.";
-      return false;
+      return "Sorry, your file is too large.";
     }
 
     $imageData = file_get_contents($image["tmp_name"]);
 
     if($this->postModel->create($userId, $imageData, $caption)){
-      echo "The file " . htmlspecialchars(basename($image["name"])) . " has been uploaded.";
-      return true;
+      return "The file " . htmlspecialchars(basename($image["name"])) . " has been uploaded.";
     } else{
-      echo "Sorry, there was an error saving your post.";
+      return "Sorry, there was an error saving your post.";
     }
-
-    return false;
   }
 
   public function deletePost($postId){
