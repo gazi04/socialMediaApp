@@ -37,10 +37,10 @@ $(document).ready(function() {
 
   $("#uploadImage").on("click", function(e) {
     e.preventDefault();
-    $("#imageInput").click();
+    $("#image-input").click();
   });
 
-  $("#imageInput").on("change", function() {
+  $("#image-input").on("change", function() {
     const file = this.files[0];
     if (file) {
       const reader = new FileReader();
@@ -71,7 +71,7 @@ $(document).ready(function() {
       contentType: false,
       dataType: "json",
       success: function(response) {
-        console.log(response);
+        console.log(response["result"]);
       },
       error: function(xhr, status, error) {
         console.error("AJAX request failed");
