@@ -295,7 +295,6 @@ body {
     "account"
     "image"
     "caption";
-  padding-inline: 5em;
 }
 
 .content > .post > .account {
@@ -1018,6 +1017,32 @@ dialog {
   nav > .vertical-line { left: 75px; }
 }
 
+@media (max-width: 650px) {
+  .container {
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1.8fr 0.2fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "content"
+      "navbar"; 
+  }
+
+  nav > .vertical-line { display: none; }
+
+  .navbar {
+    position: fixed;
+    bottom: 0;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-around;
+    padding-block: 0px;
+    background-color: white;
+  }
+}
+
 /* ANIMATIONS */
 .fadeInLeft {
   -webkit-animation-name: fadeInLeft;
@@ -1080,4 +1105,3 @@ dialog {
     transform: translate3d(-100%, 0, 0);
   }
 } 
-
